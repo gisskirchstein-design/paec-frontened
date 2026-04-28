@@ -6,18 +6,18 @@
 </head>
 <body>
   <h1>Holaaa</h1>
-  <ul id="lista"></ul>
+  <ul id="paec"></ul>
 
   <script>
-    fetch(' https://paec-backend.onrender.com/paec')
+    fetch('https://paec-backend.onrender.com/paec')
       .then(res => res.json())
       .then(data => {
-        const lista = document.getElementById('lista');
+        const paec = document.getElementById('paec');
 
         data.forEach(item => {
           const li = document.createElement('li');
           li.textContent = item.paec;
-          lista.appendChild(li);
+          paec.appendChild(li);
         });
       })
       .catch(err => console.error(err));
