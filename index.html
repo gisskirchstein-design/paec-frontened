@@ -9,18 +9,25 @@
   <ul id="paec"></ul>
 
   <script>
-    fetch('https://paec-backend.onrender.com/paec')
-      .then(res => res.json())
-      .then(data => {
-        const paec = document.getElementById('paec');
+   const url = 'https://paec-backend.onrender.com/paec';
 
-        data.forEach(item => {
-          const li = document.createElement('li');
-          li.textContent = item.paec;
-          paec.appendChild(li);
-        });
-      })
-      .catch(err => console.error(err));
+// 2. We make the call
+fetch(url)
+  .then(response => {
+    // Check if the connection was successful
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json(); // Convert the data to JSON
+  })
+  .then(data => {
+    // THIS IS WHAT YOUR TEACHER WANTS TO SEE IN THE CONSOLE
+    console.log("Data successfully received:", data);
+
+  })
+  .catch(error => {
+    console.error("There was an error fetching the data:", error);
+  });
   </script>
 </body>
 </html>
