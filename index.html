@@ -6,28 +6,28 @@
 </head>
 <body>
   <h1>Holaaa</h1>
-  <ul id="paec"></ul>
+  <div id="paec"></div>
 
   <script>
-   const url = 'https://siuu.onrender.com/paec';
+    const url = 'https://siuu.onrender.com/paec';
 
-// 2. We make the call
-fetch(url)
-  .then(response => {
-    // Check if the connection was successful
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json(); // Convert the data to JSON
-  })
-  .then(data => {
-    // THIS IS WHAT YOUR TEACHER WANTS TO SEE IN THE CONSOLE
-    console.log("Data successfully received:", data);
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        console.log("Datos:", data);
 
-  })
-  .catch(error => {
-    console.error("There was an error fetching the data:", error);
-  });
+        const contenedor = document.getElementById('paec');
+
+        if (data.length > 0) {
+          // ⚠️ cambia "mensaje" si tu columna se llama diferente
+          contenedor.textContent = data[0].mensaje;
+        } else {
+          contenedor.textContent = "No hay datos";
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
   </script>
 </body>
 </html>
