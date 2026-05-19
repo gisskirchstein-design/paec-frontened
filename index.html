@@ -22,7 +22,6 @@ body{
   font-family:Arial, sans-serif;
   background:#1b1b2f;
   color:white;
-  overflow:hidden;
 }
 
 /* PANTALLAS */
@@ -30,18 +29,16 @@ body{
 .pantalla{
   display:none;
   width:100%;
-  height:100vh;
+  min-height:100vh;
 }
 
 .activa{
   display:flex;
 }
 
-/* LOGIN / INICIO */
+/* INICIO Y LOGIN */
 
 .centerBox{
-  width:100%;
-  display:flex;
   justify-content:center;
   align-items:center;
   padding:30px;
@@ -63,8 +60,8 @@ h1{
 
 h2{
   color:#fffacd;
-  margin-bottom:20px;
-  margin-top:20px;
+  margin-top:25px;
+  margin-bottom:15px;
 }
 
 p{
@@ -115,7 +112,7 @@ textarea{
 .layout{
   display:flex;
   width:100%;
-  height:100vh;
+  min-height:100vh;
 }
 
 /* SIDEBAR */
@@ -127,7 +124,6 @@ textarea{
   display:flex;
   flex-direction:column;
   justify-content:space-between;
-  border-right:1px solid rgba(255,255,255,0.08);
 }
 
 .logo{
@@ -160,7 +156,6 @@ textarea{
 .content{
   flex:1;
   padding:40px;
-  overflow-y:auto;
 }
 
 .panel{
@@ -184,7 +179,6 @@ ul{
 .imagenes img{
   width:250px;
   border-radius:15px;
-  object-fit:cover;
 }
 
 </style>
@@ -194,7 +188,7 @@ ul{
 <body>
 
 <!-- ====================================== -->
-<!-- PANTALLA INICIAL -->
+<!-- INICIO -->
 <!-- ====================================== -->
 
 <div id="inicio" class="pantalla activa centerBox">
@@ -202,7 +196,7 @@ ul{
   <div class="card">
 
     <h1>
-      Vida Sana y Crecimiento de Lavanda
+      🌱 Vida Sana y Crecimiento de Lavanda
     </h1>
 
     <h2 style="text-align:center;">
@@ -217,11 +211,11 @@ ul{
     <div class="botones">
 
       <button onclick="entrarUsuario()">
-        Usuario
+        👀 Usuario
       </button>
 
       <button onclick="mostrarLoginAdmin()">
-        Admin
+        👑 Admin
       </button>
 
     </div>
@@ -239,7 +233,7 @@ ul{
   <div class="card">
 
     <h1>
-      Acceso Administrador
+      👑 Acceso Administrador
     </h1>
 
     <input
@@ -279,21 +273,21 @@ ul{
       <div>
 
         <div class="logo">
-          ADMIN
+          👑 ADMIN
         </div>
 
         <div class="menu">
 
           <button>
-            Editar contenido
+            📝 Editar contenido
           </button>
 
           <button>
-            Imágenes
+            📸 Imágenes
           </button>
 
           <button>
-            Configuración
+            ⚙️ Configuración
           </button>
 
         </div>
@@ -301,7 +295,7 @@ ul{
       </div>
 
       <button onclick="volverInicio()">
-        Cerrar sesión
+        🚪 Cerrar sesión
       </button>
 
     </div>
@@ -327,13 +321,13 @@ ul{
         <input type="text" id="tituloInput">
 
         <label>
-          Objetivo
+          Objetivo del proyecto
         </label>
 
         <textarea id="objetivoInput"></textarea>
 
         <label>
-          Opinión vida sana
+          Opinión sobre vida sana
         </label>
 
         <textarea id="opinionInput"></textarea>
@@ -342,10 +336,10 @@ ul{
           Guardar cambios
         </button>
 
-        <hr style="margin:30px 0; opacity:0.2;">
+        <hr style="margin:30px 0;">
 
         <h2>
-          Subir imágenes
+          📸 Subir imágenes
         </h2>
 
         <input
@@ -358,10 +352,7 @@ ul{
           Agregar imagen
         </button>
 
-        <div
-          class="imagenes"
-          id="galeriaAdmin"
-        ></div>
+        <div class="imagenes" id="galeriaAdmin"></div>
 
       </div>
 
@@ -386,29 +377,29 @@ ul{
       <div>
 
         <div class="logo">
-          PAEC
+          🌱 PAEC
         </div>
 
         <div class="menu">
 
           <button>
-            Inicio
+            🏠 Inicio
           </button>
 
           <button>
-            Lavanda
+            🌿 Lavanda
           </button>
 
           <button>
-            Cronograma
+            📅 Cronograma
           </button>
 
           <button>
-            Vida Sana
+            💚 Vida Sana
           </button>
 
           <button>
-            Galería
+            📸 Galería
           </button>
 
         </div>
@@ -416,7 +407,7 @@ ul{
       </div>
 
       <button onclick="volverInicio()">
-        Cerrar sesión
+        🚪 Cerrar sesión
       </button>
 
     </div>
@@ -441,14 +432,11 @@ ul{
         </p>
 
         <p id="objetivoUsuario">
-
-          Promover hábitos saludables y analizar
-          el crecimiento de la lavanda.
-
+          Promover hábitos saludables y analizar el crecimiento de la lavanda.
         </p>
 
         <h2>
-          Registro de la Lavanda
+          🌱 Registro de la Lavanda
         </h2>
 
         <ul>
@@ -474,7 +462,7 @@ ul{
         <div class="imagenes" id="galeriaUsuario"></div>
 
         <h2>
-          Vida Sana
+          💚 Vida Sana
         </h2>
 
         <ul>
@@ -531,13 +519,13 @@ supabase.createClient(
 );
 
 // ============================================
-// CONTRASEÑA ADMIN
+// PASSWORD ADMIN
 // ============================================
 
 const PASSWORD_ADMIN = "holiwispiwis";
 
 // ============================================
-// CAMBIAR PANTALLAS
+// OCULTAR TODO
 // ============================================
 
 function ocultarTodo(){
@@ -551,6 +539,10 @@ function ocultarTodo(){
   });
 }
 
+// ============================================
+// VOLVER INICIO
+// ============================================
+
 function volverInicio(){
 
   ocultarTodo();
@@ -559,6 +551,10 @@ function volverInicio(){
   .getElementById('inicio')
   .classList.add('activa');
 }
+
+// ============================================
+// LOGIN ADMIN
+// ============================================
 
 function mostrarLoginAdmin(){
 
@@ -570,7 +566,7 @@ function mostrarLoginAdmin(){
 }
 
 // ============================================
-// ENTRAR COMO USUARIO
+// ENTRAR USUARIO
 // ============================================
 
 async function entrarUsuario(){
@@ -585,7 +581,7 @@ async function entrarUsuario(){
 }
 
 // ============================================
-// LOGIN ADMIN
+// VERIFICAR ADMIN
 // ============================================
 
 async function verificarAdmin(){
@@ -593,7 +589,8 @@ async function verificarAdmin(){
   const pass =
   document
   .getElementById('passwordAdmin')
-  .value;
+  .value
+  .trim();
 
   if(pass === PASSWORD_ADMIN){
 
@@ -629,7 +626,6 @@ async function cargarDatos(){
 
     console.error(error);
     return;
-
   }
 
   // USUARIO
@@ -709,7 +705,7 @@ async function guardarCambios(){
 }
 
 // ============================================
-// SUBIR IMÁGENES
+// SUBIR IMAGEN
 // ============================================
 
 function subirImagen(){
