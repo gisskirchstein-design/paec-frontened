@@ -138,7 +138,6 @@
       margin-bottom: 10px;
     }
 
-    /* Checkbox simple estilizado */
     .switch {
       position: relative;
       display: inline-block;
@@ -166,19 +165,19 @@
 
   <div id="inicio" class="pantalla activa centerBox">
     <div class="card">
-      <h1>🌱 Proyecto PAEC</h1>
+      <h1>Proyecto PAEC</h1>
       <h2 style="text-align:center; color:#fffacd;">Vida Sana y Lavanda</h2>
       <p style="text-align:center;"><strong>Equipo:</strong> Chavas Insanas</p>
       <div class="botones">
-        <button onclick="entrarUsuario()" style="flex: 1;">👀 Ver Proyecto</button>
-        <button onclick="mostrarLoginEquipo()" class="secundario" style="flex: 1;">🔐 Gestión / Equipo</button>
+        <button onclick="entrarUsuario()" style="flex: 1;">Ver Proyecto</button>
+        <button onclick="mostrarLoginEquipo()" class="secundario" style="flex: 1;">Gestión / Equipo</button>
       </div>
     </div>
   </div>
 
   <div id="loginEquipo" class="pantalla centerBox">
     <div class="card">
-      <h1>🔐 Acceso al Sistema</h1>
+      <h1>Acceso al Sistema</h1>
       <p>Introduce la contraseña de tu nivel de usuario para gestionar las fracciones o la ejecución.</p>
       <input type="password" id="passwordRol" placeholder="Ingresa la credencial de acceso">
       <div class="botones">
@@ -192,22 +191,22 @@
     <div class="layout">
       <div class="sidebar">
         <div>
-          <div class="logo">🛠️ GESTIÓN</div>
+          <div class="logo">GESTIÓN</div>
           <p>Nivel asignado:</p>
           <div id="badgeRolActual" class="badge-rol">Cargando...</div>
           <hr style="margin: 20px 0; border-color: #23233a;">
           <div class="menu">
-            <button id="btnMenuEditar" class="active" onclick="cambiarVistaGestion('editar')">📝 Editar Fracciones</button>
-            <button id="btnMenuCorrer" onclick="cambiarVistaGestion('correr')">⚙️ Configurar Ejecución</button>
+            <button id="btnMenuEditar" class="active" onclick="cambiarVistaGestion('editar')">Editar Fracciones</button>
+            <button id="btnMenuCorrer" onclick="cambiarVistaGestion('correr')">Configurar Ejecución</button>
           </div>
         </div>
-        <button onclick="volverInicio()" class="secundario">🚪 Salir del Panel</button>
+        <button onclick="volverInicio()" class="secundario">Salir del Panel</button>
       </div>
 
       <div class="content">
         <div id="subVistaEditar" class="sub-vista-gestion">
           <div class="panel">
-            <h1>📝 Editor de Fracciones del API</h1>
+            <h1>Editor de Fracciones del API</h1>
             <p>Modifica el contenido específico de las secciones asignadas a tu nivel jerárquico.</p>
             <div id="contenedorEditoresFracciones"></div>
           </div>
@@ -215,10 +214,19 @@
 
         <div id="subVistaCorrer" class="sub-vista-gestion" style="display: none;">
           <div class="panel">
-            <h1>⚙️ Control de Ejecución (Módulos API)</h1>
+            <h1>Control de Ejecución (Módulos API)</h1>
             <p>Activa o desactiva qué fracciones del proyecto se van a procesar y renderizar en la vista pública de usuario.</p>
             <div id="contenedorConfiguracionCorrer"></div>
-            <button onclick="guardarConfiguracionEjecucion()" style="margin-top: 20px; background-color: #fffacd;">💾 Guardar Configuración de Ejecución</button>
+            
+            <hr style="margin:30px 0; border-color: #2f2f4f;">
+            
+            <h2>Cargar Imagen a la Fracción de Lavanda</h2>
+            <input type="file" id="imagenInput" accept="image/*" style="margin-top: 10px;">
+            <button onclick="subirImagen()">Subir Imagen al API</button>
+            
+            <hr style="margin:30px 0; border-color: #2f2f4f;">
+            
+            <button onclick="guardarConfiguracionEjecucion()" style="background-color: #fffacd; color: black; width: 100%;">Guardar Configuración de Ejecución</button>
           </div>
         </div>
       </div>
@@ -229,14 +237,12 @@
     <div class="layout">
       <div class="sidebar">
         <div>
-          <div class="logo">🌱 PAEC</div>
-          <div class="menu" id="menuNavegacionUsuario">
-            </div>
+          <div class="logo">PAEC</div>
+          <div class="menu" id="menuNavegacionUsuario"></div>
         </div>
-        <button onclick="volverInicio()" class="secundario">🚪 Regresar</button>
+        <button onclick="volverInicio()" class="secundario">Regresar</button>
       </div>
-      <div class="content" id="contenedorContenidoUsuario">
-        </div>
+      <div class="content" id="contenedorContenidoUsuario"></div>
     </div>
   </div>
 
@@ -246,17 +252,16 @@
     const SUPABASE_KEY = "sb_publishable_oT-eHukloJjn98GloN4rfA_Gt7O03kO";
     const TABLA = "paec";
 
-    // Contraseñas de Roles Estructuradas
+    // Contraseñas de Roles
     const CREDENCIALES = {
-      "admin": "admin123",       // Administrador Total
-      "moderador": "team2026"   // Usuario menor / Colaborador
+      "admin": "admin123",       
+      "moderador": "team2026"   
     };
 
     let supabaseClient = null;
-    let rolSesionActual = "usuario"; // Por defecto, lector público
-    let datosLocalesFracciones = []; // Caché en tiempo de ejecución de las filas del API
+    let rolSesionActual = "usuario"; 
+    let datosLocalesFracciones = []; 
 
-    // Inicializar Supabase al cargar el DOM
     document.addEventListener("DOMContentLoaded", () => {
       try {
         if (typeof supabase !== 'undefined') {
@@ -270,7 +275,6 @@
       }
     });
 
-    // --- Navegación de Pantallas Global ---
     function ocultarTodo() {
       document.querySelectorAll('.pantalla').forEach(p => p.classList.remove('activa'));
     }
@@ -286,7 +290,6 @@
       document.getElementById('loginEquipo').classList.add('activa');
     }
 
-    // Cambiar entre Pestañas Internas del Panel de Control
     function cambiarVistaGestion(vista) {
       document.querySelectorAll('.sub-vista-gestion').forEach(v => v.style.display = 'none');
       document.getElementById('btnMenuEditar').classList.remove('active');
@@ -301,7 +304,6 @@
       }
     }
 
-    // --- Lógica de Control de Accesos por Rol ---
     async function verificarAccesoEquipo() {
       const entrada = document.getElementById('passwordRol').value.trim();
 
@@ -330,7 +332,6 @@
       await jalarDatosDesdeAPI(false);
     }
 
-    // --- Sincronización del API (Supabase) ---
     async function jalarDatosDesdeAPI(esModoGestion = false) {
       if (!supabaseClient) return;
 
@@ -356,12 +357,10 @@
       }
     }
 
-    // --- Constructor Dinámico: Editores de Fracciones ---
     function construirPanelEdicionEstructural() {
       const contenedor = document.getElementById('contenedorEditoresFracciones');
       contenedor.innerHTML = "";
 
-      // Jerarquía numérica para comparar permisos de forma sencilla
       const jerarquia = { "usuario": 1, "moderador": 2, "admin": 3 };
       const nivelPermisoUsuario = jerarquia[rolSesionActual];
 
@@ -383,7 +382,7 @@
           <textarea id="txt_cont_${fraccion.clave_seccion}" ${tienePermisoDenegado ? 'disabled' : ''}>${fraccion.contenido || ''}</textarea>
           
           ${tienePermisoDenegado 
-            ? `<p style="color:#ff4757; font-weight:bold; font-size:0.9rem;">⚠️ Tu rol menor no tiene autorización para modificar esta sección.</p>`
+            ? `<p style="color:#ff4757; font-weight:bold; font-size:0.9rem;">Tu rol menor no tiene autorización para modificar esta sección.</p>`
             : `<button onclick="actualizarFraccionEspecifica('${fraccion.clave_seccion}')">Guardar Fracción</button>`
           }
         `;
@@ -391,7 +390,6 @@
       });
     }
 
-    // --- Constructor de la Segunda Vista (Configurar qué correr) ---
     function construirSegundaVistaControlCorrer() {
       const contenedor = document.getElementById('contenedorConfiguracionCorrer');
       contenedor.innerHTML = "";
@@ -413,7 +411,6 @@
       });
     }
 
-    // --- Persistencia: Guardar una Fracción Individual ---
     async function actualizarFraccionEspecifica(clave) {
       const nuevoTitulo = document.getElementById(`input_tit_${clave}`).value;
       const nuevoContenido = document.getElementById(`txt_cont_${clave}`).value;
@@ -433,16 +430,13 @@
       }
     }
 
-    // --- Persistencia: Guardar Segunda Vista (Qué Correr en la Aplicación) ---
     async function guardarConfiguracionEjecucion() {
-      // Regla de negocio: Solo el Admin principal puede correr/detener el backend de visualización
       if (rolSesionActual !== 'admin') {
         alert("Acceso Denegado: Los usuarios menores solo editan contenido, no alteran las secciones activas a ejecutar.");
         return;
       }
 
       try {
-        // Ejecutamos promesas en paralelo para actualizar el estado 'activa' de cada fila
         const promesasActualizacion = datosLocalesFracciones.map(fraccion => {
           const estaActivo = document.getElementById(`switch_run_${fraccion.clave_seccion}`).checked;
           return supabaseClient
@@ -460,7 +454,6 @@
       }
     }
 
-    // --- Constructor Dinámico: Vista del Usuario General (Filtrado por 'activa') ---
     function construirVistaUsuarioPublico() {
       const menuNavegacion = document.getElementById('menuNavegacionUsuario');
       const contenedorContenido = document.getElementById('contenedorContenidoUsuario');
@@ -468,24 +461,21 @@
       menuNavegacion.innerHTML = "";
       contenedorContenido.innerHTML = "";
 
-      // FILTRAR FRACCIONES: Solo pasan las que están configuradas para "correr" (activa === true)
       const fraccionesCorriendo = datosLocalesFracciones.filter(f => f.activa === true);
 
       if (fraccionesCorriendo.length === 0) {
-        contenedorContenido.innerHTML = "<h1>🌱 Próximamente</h1><p>El administrador no ha desplegado ninguna sección para ejecución en este momento.</p>";
+        contenedorContenido.innerHTML = "<h1>Próximamente</h1><p>El administrador no ha desplegado ninguna sección para ejecución en este momento.</p>";
         return;
       }
 
-      fraccionesCorriendo.forEach((fraccion, index) => {
-        // 1. Añadir botón de acceso rápido al menú de navegación lateral izquierdo
+      fraccionesCorriendo.forEach((fraccion) => {
         const btnMenu = document.createElement('button');
-        btnMenu.innerText = fraccion.titulo.split(" ")[0] + " " + fraccion.clave_seccion.toUpperCase(); // Formato dinámico corto
+        btnMenu.innerText = fraccion.titulo.split(" ")[0] + " " + fraccion.clave_seccion.toUpperCase();
         btnMenu.onclick = () => {
           document.getElementById(`render_sec_${fraccion.clave_seccion}`).scrollIntoView({ behavior: 'smooth' });
         };
         menuNavegacion.appendChild(btnMenu);
 
-        // 2. Construir e inyectar el contenedor visual de la sección
         const panelSeccion = document.createElement('div');
         panelSeccion.className = "panel";
         panelSeccion.id = `render_sec_${fraccion.clave_seccion}`;
@@ -496,18 +486,63 @@
           <p style="white-space: pre-wrap;">${fraccion.contenido || 'Sin descripción asignada por el equipo.'}</p>
         `;
 
-        // Si es la sección de lavanda, integramos por defecto un marcador de imágenes estético
-        if (fraccion.clave_seccion === 'lavanda') {
+        if (fraccion.url_imagen) {
           panelSeccion.innerHTML += `
-            <h3>📸 Galería de Desarrollo Integrada</h3>
-            <div class="imagenes" id="galeriaUsuarioEstatica">
-              <p style="color:#fffacd; font-size:0.9rem;">Sube imágenes desde el panel de gestión local para poblar los módulos visuales.</p>
+            <h3 style="margin-top:20px;">Registro Visual Guardado</h3>
+            <div class="imagenes">
+              <img src="${fraccion.url_imagen}" alt="Progreso" style="max-width:100%; width:350px; border-radius:15px; border: 2px solid #ffb6c1;">
             </div>
+          `;
+        } else if (fraccion.clave_seccion === 'lavanda') {
+          panelSeccion.innerHTML += `
+            <h3 style="margin-top:20px;">Registro Visual</h3>
+            <p style="color:#fffacd; font-size:0.9rem;">No se ha subido ninguna foto para esta fracción aún.</p>
           `;
         }
 
         contenedorContenido.appendChild(panelSeccion);
       });
+    }
+
+    function subirImagen() {
+      const input = document.getElementById('imagenInput');
+      const archivo = input.files[0];
+
+      if (!archivo) {
+        alert("Por favor, selecciona una imagen primero.");
+        return;
+      }
+
+      if (archivo.size > 1.5 * 1024 * 1024) {
+        alert("La imagen es muy pesada. Intenta con una de menos de 1.5 MB.");
+        return;
+      }
+
+      const lector = new FileReader();
+      lector.onload = async function (e) {
+        const base64Image = e.target.result;
+
+        if (!supabaseClient) {
+          alert("No hay conexión con el API para guardar la foto.");
+          return;
+        }
+
+        try {
+          const { error } = await supabaseClient
+            .from(TABLA)
+            .update({ url_imagen: base64Image })
+            .eq('clave_seccion', 'lavanda');
+
+          if (error) throw error;
+
+          alert("Imagen guardada permanentemente en el API.");
+          await jalarDatosDesdeAPI(true); 
+
+        } catch (err) {
+          alert("Error al subir al API: " + err.message);
+        }
+      }
+      lector.readAsDataURL(archivo);
     }
   </script>
 </body>
