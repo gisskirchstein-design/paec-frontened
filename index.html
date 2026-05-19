@@ -3,15 +3,14 @@
 
 <head>
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>PAEC - Vida Sana y Lavanda</title>
+<title>PAEC - Vida Sana y Lavanda</title>
 
-  <!-- SUPABASE -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
-  <style>
+<style>
 
 *{
   margin:0;
@@ -198,12 +197,12 @@ ul{
 <!-- PANTALLA INICIAL -->
 <!-- ====================================== -->
 
-<div id="inicio" class="pantalla activa">
+<div id="inicio" class="pantalla activa centerBox">
 
   <div class="card">
 
     <h1>
-       Vida Sana y Crecimiento de Lavanda
+      Vida Sana y Crecimiento de Lavanda
     </h1>
 
     <h2 style="text-align:center;">
@@ -211,20 +210,18 @@ ul{
     </h2>
 
     <p style="text-align:center;">
-
       <strong>Equipo:</strong>
       Chavas Insanas
-
     </p>
 
     <div class="botones">
 
       <button onclick="entrarUsuario()">
-         Usuario
+        Usuario
       </button>
 
       <button onclick="mostrarLoginAdmin()">
-         Admin
+        Admin
       </button>
 
     </div>
@@ -237,12 +234,12 @@ ul{
 <!-- LOGIN ADMIN -->
 <!-- ====================================== -->
 
-<div id="loginAdmin" class="pantalla">
+<div id="loginAdmin" class="pantalla centerBox">
 
   <div class="card">
 
     <h1>
-       Acceso Administrador
+      Acceso Administrador
     </h1>
 
     <input
@@ -282,21 +279,21 @@ ul{
       <div>
 
         <div class="logo">
-           ADMIN
+          ADMIN
         </div>
 
         <div class="menu">
 
           <button>
-             Editar contenido
+            Editar contenido
           </button>
 
           <button>
-             Imágenes
+            Imágenes
           </button>
 
           <button>
-             Configuración
+            Configuración
           </button>
 
         </div>
@@ -304,7 +301,7 @@ ul{
       </div>
 
       <button onclick="volverInicio()">
-         Cerrar sesión
+        Cerrar sesión
       </button>
 
     </div>
@@ -389,29 +386,29 @@ ul{
       <div>
 
         <div class="logo">
-           PAEC
+          PAEC
         </div>
 
         <div class="menu">
 
           <button>
-             Inicio
+            Inicio
           </button>
 
           <button>
-             Lavanda
+            Lavanda
           </button>
 
           <button>
-             Cronograma
+            Cronograma
           </button>
 
           <button>
-             Vida Sana
+            Vida Sana
           </button>
 
           <button>
-             Galería
+            Galería
           </button>
 
         </div>
@@ -419,7 +416,7 @@ ul{
       </div>
 
       <button onclick="volverInicio()">
-         Cerrar sesión
+        Cerrar sesión
       </button>
 
     </div>
@@ -477,7 +474,7 @@ ul{
         <div class="imagenes" id="galeriaUsuario"></div>
 
         <h2>
-           Vida Sana
+          Vida Sana
         </h2>
 
         <ul>
@@ -508,106 +505,6 @@ ul{
 
 </div>
 
-    <!-- ========================== -->
-    <!-- REGISTRO LAVANDA -->
-    <!-- ========================== -->
-
-    <h2>
-       Registro de la Lavanda
-    </h2>
-
-    <ul>
-
-      <li>
-        <strong>Cronograma:</strong>
-        Seguimiento semanal del crecimiento.
-      </li>
-
-      <li>
-        <strong>Evidencia del crecimiento:</strong>
-        Fotografías del crecimiento de la lavanda.
-      </li>
-
-      <li>
-        <strong>Cuidados necesarios:</strong>
-        Riego moderado, luz solar y tierra drenada.
-      </li>
-
-      <li>
-        <strong>Problemas detectados:</strong>
-        Exceso de agua o falta de luz.
-      </li>
-
-    </ul>
-
-    <div class="imagenes" id="galeriaUsuario"></div>
-
-    <!-- ========================== -->
-    <!-- VIDA SANA -->
-    <!-- ========================== -->
-
-    <h2>
-       ¿Qué es la vida sana? opiniones
-    </h2>
-
-    <ul>
-
-      <li>
-
-        <strong>Definición:</strong>
-
-        Tener hábitos saludables físicos y mentales.
-
-      </li>
-
-      <li id="opinionUsuario">
-
-        La vida sana ayuda a mejorar nuestra calidad de vida.
-
-      </li>
-
-    </ul>
-
-    <!-- ========================== -->
-    <!-- COMO LLEVAR VIDA SANA -->
-    <!-- ========================== -->
-
-    <h2>
-       ¿Cómo llevar una vida sana?
-    </h2>
-
-    <ul>
-
-      <li>
-
-        <strong>Alimentación sana:</strong>
-
-        Comer frutas, verduras y tomar agua.
-
-      </li>
-
-      <li>
-
-        <strong>Hobbies:</strong>
-
-        Bailar, caminar, correr o practicar deportes.
-
-      </li>
-
-      <li>
-
-        <strong>Hábitos:</strong>
-
-        Dormir bien y reducir el estrés.
-
-      </li>
-
-    </ul>
-
-  </div>
-
-</div>
-
 <script>
 
 // ============================================
@@ -633,6 +530,9 @@ supabase.createClient(
   SUPABASE_KEY
 );
 
+// ============================================
+// CONTRASEÑA ADMIN
+// ============================================
 
 const PASSWORD_ADMIN = "holiwispiwis";
 
@@ -707,7 +607,7 @@ async function verificarAdmin(){
 
   }else{
 
-    alert("Contraseña incorrecta :,V");
+    alert("Contraseña incorrecta");
 
   }
 }
