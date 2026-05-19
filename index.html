@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PAEC - Vida Sana y Lavanda</title>
+  <title>PAEC - Vida Sana y Lavanda (Modular)</title>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.8/dist/umd/supabase.js"></script>
 
@@ -16,12 +16,11 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Arial, sans-serif;
       background: #1b1b2f;
       color: white;
     }
 
-    /* PANTALLAS */
     .pantalla {
       display: none;
       width: 100%;
@@ -32,7 +31,6 @@
       display: flex;
     }
 
-    /* INICIO Y LOGIN */
     .centerBox {
       justify-content: center;
       align-items: center;
@@ -48,26 +46,15 @@
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     }
 
-    h1 {
-      color: #ffb6c1;
-      margin-bottom: 15px;
-    }
-
-    h2 {
-      color: #fffacd;
-      margin-top: 25px;
-      margin-bottom: 15px;
-    }
-
-    p {
-      line-height: 1.7;
-    }
+    h1 { color: #ffb6c1; margin-bottom: 15px; }
+    h2 { color: #fffacd; margin-top: 25px; margin-bottom: 15px; }
+    p { line-height: 1.7; margin-bottom: 10px; }
 
     button {
       background: #ffb6c1;
       color: black;
       border: none;
-      padding: 14px 20px;
+      padding: 12px 20px;
       border-radius: 12px;
       cursor: pointer;
       font-weight: bold;
@@ -79,6 +66,12 @@
       background: white;
     }
 
+    button.secundario {
+      background: #2f2f4f;
+      color: white;
+      border: 1px solid #ffb6c1;
+    }
+
     .botones {
       display: flex;
       gap: 15px;
@@ -86,7 +79,7 @@
       flex-wrap: wrap;
     }
 
-    input, textarea {
+    input, textarea, select {
       width: 100%;
       padding: 14px;
       border: none;
@@ -97,21 +90,13 @@
       color: white;
     }
 
-    textarea {
-      resize: none;
-      height: 120px;
-    }
+    textarea { resize: none; height: 100px; }
 
-    /* DASHBOARD */
-    .layout {
-      display: flex;
-      width: 100%;
-      min-height: 100vh;
-    }
+    /* DASHBOARD LAYOUT */
+    .layout { display: flex; width: 100%; min-height: 100vh; }
 
-    /* SIDEBAR */
     .sidebar {
-      width: 260px;
+      width: 280px;
       background: #151521;
       padding: 30px 20px;
       display: flex;
@@ -119,59 +104,61 @@
       justify-content: space-between;
     }
 
-    .logo {
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: #ffb6c1;
-      margin-bottom: 40px;
-    }
+    .logo { font-size: 1.6rem; font-weight: bold; color: #ffb6c1; margin-bottom: 40px; }
+    .badge-rol { font-size: 0.9rem; color: #fffacd; background: #23233a; padding: 5px 10px; border-radius: 8px; margin-top: 5px; display: inline-block; }
 
-    .menu {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
+    .menu { display: flex; flex-direction: column; gap: 12px; }
+    .menu button { width: 100%; text-align: left; background: #23233a; color: white; }
+    .menu button:hover, .menu button.active { background: #ffb6c1; color: black; }
 
-    .menu button {
-      width: 100%;
-      text-align: left;
-      background: #23233a;
-      color: white;
-    }
+    .content { flex: 1; padding: 40px; overflow-y: auto; }
+    .panel { background: #23233a; padding: 30px; border-radius: 25px; margin-bottom: 25px; }
 
-    .menu button:hover {
-      background: #ffb6c1;
-      color: black;
-    }
-
-    /* CONTENIDO */
-    .content {
-      flex: 1;
-      padding: 40px;
-    }
-
-    .panel {
-      background: #23233a;
-      padding: 30px;
-      border-radius: 25px;
-    }
-
-    ul {
-      margin-left: 25px;
-      line-height: 2;
-    }
-
-    .imagenes {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin-top: 20px;
-    }
-
-    .imagenes img {
-      width: 250px;
+    /* FRACCIONES Y CONFIGURACIÓN */
+    .fraccion-card {
+      background: #2f2f4f;
+      padding: 20px;
       border-radius: 15px;
+      margin-bottom: 20px;
+      border-left: 5px solid #ffb6c1;
     }
+    
+    .bloqueado {
+      border-left: 5px solid #ff4757 !important;
+      opacity: 0.6;
+    }
+
+    .switch-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #2f2f4f;
+      padding: 15px 20px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+    }
+
+    /* Checkbox simple estilizado */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 26px;
+    }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #ccc; transition: .4s; border-radius: 34px;
+    }
+    .slider:before {
+      position: absolute; content: ""; height: 18px; width: 18px; left: 4px; bottom: 4px;
+      background-color: white; transition: .4s; border-radius: 50%;
+    }
+    input:checked + .slider { background-color: #ffb6c1; }
+    input:checked + .slider:before { transform: translateX(24px); }
+
+    .imagenes { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; }
+    .imagenes img { width: 200px; border-radius: 15px; object-fit: cover; }
   </style>
 </head>
 
@@ -179,56 +166,60 @@
 
   <div id="inicio" class="pantalla activa centerBox">
     <div class="card">
-      <h1> Vida Sana y Crecimiento de Lavanda</h1>
-      <h2 style="text-align:center;">Proyecto PAEC</h2>
+      <h1>🌱 Proyecto PAEC</h1>
+      <h2 style="text-align:center; color:#fffacd;">Vida Sana y Lavanda</h2>
       <p style="text-align:center;"><strong>Equipo:</strong> Chavas Insanas</p>
       <div class="botones">
-        <button onclick="entrarUsuario()"> Usuario</button>
-        <button onclick="mostrarLoginAdmin()"> Admin</button>
+        <button onclick="entrarUsuario()" style="flex: 1;">👀 Ver Proyecto</button>
+        <button onclick="mostrarLoginEquipo()" class="secundario" style="flex: 1;">🔐 Gestión / Equipo</button>
       </div>
     </div>
   </div>
 
-  <div id="loginAdmin" class="pantalla centerBox">
+  <div id="loginEquipo" class="pantalla centerBox">
     <div class="card">
-      <h1>👑 Acceso Administrador</h1>
-      <input type="password" id="passwordAdmin" placeholder="Ingresa la contraseña">
+      <h1>🔐 Acceso al Sistema</h1>
+      <p>Introduce la contraseña de tu nivel de usuario para gestionar las fracciones o la ejecución.</p>
+      <input type="password" id="passwordRol" placeholder="Ingresa la credencial de acceso">
       <div class="botones">
-        <button onclick="verificarAdmin()">Entrar</button>
-        <button onclick="volverInicio()">Regresar</button>
+        <button onclick="verificarAccesoEquipo()" style="flex: 1;">Entrar</button>
+        <button onclick="volverInicio()" class="secundario" style="flex: 1;">Regresar</button>
       </div>
     </div>
   </div>
 
-  <div id="panelAdmin" class="pantalla">
+  <div id="panelGestion" class="pantalla">
     <div class="layout">
       <div class="sidebar">
         <div>
-          <div class="logo"> ADMIN</div>
+          <div class="logo">🛠️ GESTIÓN</div>
+          <p>Nivel asignado:</p>
+          <div id="badgeRolActual" class="badge-rol">Cargando...</div>
+          <hr style="margin: 20px 0; border-color: #23233a;">
           <div class="menu">
-            <button> Editar contenido</button>
-            <button> Imágenes</button>
-            <button> Configuración</button>
+            <button id="btnMenuEditar" class="active" onclick="cambiarVistaGestion('editar')">📝 Editar Fracciones</button>
+            <button id="btnMenuCorrer" onclick="cambiarVistaGestion('correr')">⚙️ Configurar Ejecución</button>
           </div>
         </div>
-        <button onclick="volverInicio()"> Cerrar sesión</button>
+        <button onclick="volverInicio()" class="secundario">🚪 Salir del Panel</button>
       </div>
+
       <div class="content">
-        <div class="panel">
-          <h1>Panel Administrador</h1>
-          <h2>Modificar contenido</h2>
-          <label>Título principal</label>
-          <input type="text" id="tituloInput">
-          <label>Objetivo del proyecto</label>
-          <textarea id="objetivoInput"></textarea>
-          <label>Opinión sobre vida sana</label>
-          <textarea id="opinionInput"></textarea>
-          <button onclick="guardarCambios()">Guardar cambios</button>
-          <hr style="margin:30px 0;">
-          <h2> Subir imágenes</h2>
-          <input type="file" id="imagenInput" accept="image/*">
-          <button onclick="subirImagen()">Agregar imagen</button>
-          <div class="imagenes" id="galeriaAdmin"></div>
+        <div id="subVistaEditar" class="sub-vista-gestion">
+          <div class="panel">
+            <h1>📝 Editor de Fracciones del API</h1>
+            <p>Modifica el contenido específico de las secciones asignadas a tu nivel jerárquico.</p>
+            <div id="contenedorEditoresFracciones"></div>
+          </div>
+        </div>
+
+        <div id="subVistaCorrer" class="sub-vista-gestion" style="display: none;">
+          <div class="panel">
+            <h1>⚙️ Control de Ejecución (Módulos API)</h1>
+            <p>Activa o desactiva qué fracciones del proyecto se van a procesar y renderizar en la vista pública de usuario.</p>
+            <div id="contenedorConfiguracionCorrer"></div>
+            <button onclick="guardarConfiguracionEjecucion()" style="margin-top: 20px; background-color: #fffacd;">💾 Guardar Configuración de Ejecución</button>
+          </div>
         </div>
       </div>
     </div>
@@ -238,71 +229,48 @@
     <div class="layout">
       <div class="sidebar">
         <div>
-          <div class="logo"> PAEC</div>
-          <div class="menu">
-            <button> Inicio</button>
-            <button> Lavanda</button>
-            <button> Cronograma</button>
-            <button> Vida Sana</button>
-            <button> Galería</button>
-          </div>
+          <div class="logo">🌱 PAEC</div>
+          <div class="menu" id="menuNavegacionUsuario">
+            </div>
         </div>
-        <button onclick="volverInicio()"> Cerrar sesión</button>
+        <button onclick="volverInicio()" class="secundario">🚪 Regresar</button>
       </div>
-      <div class="content">
-        <div class="panel">
-          <h1 id="tituloUsuario">Vida Sana y Crecimiento de Lavanda</h1>
-          <h2>Proyecto PAEC</h2>
-          <p><strong>Equipo:</strong> Chavas Insanas</p>
-          <p id="objetivoUsuario">Promover hábitos saludables y analizar el crecimiento de la lavanda.</p>
-          <h2> Registro de la Lavanda</h2>
-          <ul>
-            <li>Seguimiento semanal del crecimiento.</li>
-            <li>Fotografías del crecimiento.</li>
-            <li>Riego moderado y luz solar.</li>
-            <li>Problemas detectados.</li>
-          </ul>
-          <div class="imagenes" id="galeriaUsuario"></div>
-          <h2> Vida Sana</h2>
-          <ul>
-            <li>La vida sana mejora nuestra calidad de vida.</li>
-            <li>Comer saludable.</li>
-            <li>Dormir bien.</li>
-            <li>Reducir estrés.</li>
-          </ul>
+      <div class="content" id="contenedorContenidoUsuario">
         </div>
-      </div>
     </div>
   </div>
 
   <script>
-    // ============================================
-    // CONFIGURACIÓN SUPABASE
-    // ============================================
+    // Configuración Base de Datos
     const SUPABASE_URL = "https://tdpzbyouoxnxuzngikin.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_oT-eHukloJjn98GloN4rfA_Gt7O03kO"; // Asegúrate de que esta clave sea la correcta
+    const SUPABASE_KEY = "sb_publishable_oT-eHukloJjn98GloN4rfA_Gt7O03kO";
     const TABLA = "paec";
-    const PASSWORD_ADMIN = "holiwispiwis";
+
+    // Contraseñas de Roles Estructuradas
+    const CREDENCIALES = {
+      "admin": "admin123",       // Administrador Total
+      "moderador": "team2026"   // Usuario menor / Colaborador
+    };
 
     let supabaseClient = null;
+    let rolSesionActual = "usuario"; // Por defecto, lector público
+    let datosLocalesFracciones = []; // Caché en tiempo de ejecución de las filas del API
 
-    // CORRECCIÓN 2: Inicialización segura una vez cargado el DOM
+    // Inicializar Supabase al cargar el DOM
     document.addEventListener("DOMContentLoaded", () => {
       try {
         if (typeof supabase !== 'undefined') {
           supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-          console.log("Supabase inicializado correctamente.");
+          console.log("Conectado exitosamente al ecosistema modular de Supabase.");
         } else {
-          console.error("La librería Supabase no se cargó correctamente desde el CDN.");
+          alert("Error crítico: No se pudo enlazar el script del API.");
         }
-      } catch (e) {
-        console.error("Error al conectar con Supabase:", e);
+      } catch (err) {
+        console.error("Error en bootstrap:", err);
       }
     });
 
-    // ============================================
-    // NAVEGACIÓN
-    // ============================================
+    // --- Navegación de Pantallas Global ---
     function ocultarTodo() {
       document.querySelectorAll('.pantalla').forEach(p => p.classList.remove('activa'));
     }
@@ -312,125 +280,236 @@
       document.getElementById('inicio').classList.add('activa');
     }
 
-    function mostrarLoginAdmin() {
+    function mostrarLoginEquipo() {
       ocultarTodo();
-      document.getElementById('loginAdmin').classList.add('activa');
+      document.getElementById('passwordRol').value = "";
+      document.getElementById('loginEquipo').classList.add('activa');
+    }
+
+    // Cambiar entre Pestañas Internas del Panel de Control
+    function cambiarVistaGestion(vista) {
+      document.querySelectorAll('.sub-vista-gestion').forEach(v => v.style.display = 'none');
+      document.getElementById('btnMenuEditar').classList.remove('active');
+      document.getElementById('btnMenuCorrer').classList.remove('active');
+
+      if (vista === 'editar') {
+        document.getElementById('subVistaEditar').style.display = 'block';
+        document.getElementById('btnMenuEditar').classList.add('active');
+      } else if (vista === 'correr') {
+        document.getElementById('subVistaCorrer').style.display = 'block';
+        document.getElementById('btnMenuCorrer').classList.add('active');
+      }
+    }
+
+    // --- Lógica de Control de Accesos por Rol ---
+    async function verificarAccesoEquipo() {
+      const entrada = document.getElementById('passwordRol').value.trim();
+
+      if (entrada === CREDENCIALES.admin) {
+        rolSesionActual = "admin";
+      } else if (entrada === CREDENCIALES.moderador) {
+        rolSesionActual = "moderador";
+      } else {
+        alert("Credencial inválida para el equipo de desarrollo.");
+        return;
+      }
+
+      document.getElementById('badgeRolActual').innerText = rolSesionActual.toUpperCase();
+      
+      ocultarTodo();
+      document.getElementById('panelGestion').classList.add('activa');
+      cambiarVistaGestion('editar');
+      
+      await jalarDatosDesdeAPI(true);
     }
 
     async function entrarUsuario() {
+      rolSesionActual = "usuario";
       ocultarTodo();
       document.getElementById('panelUsuario').classList.add('activa');
-      await cargarDatos(); // Si falla, al menos el usuario ya ve la pantalla
+      await jalarDatosDesdeAPI(false);
     }
 
-    async function verificarAdmin() {
-      const pass = document.getElementById('passwordAdmin').value.trim();
-      if (pass === PASSWORD_ADMIN) {
-        ocultarTodo();
-        document.getElementById('panelAdmin').classList.add('activa');
-        await cargarDatos();
-      } else {
-        alert("Contraseña incorrecta");
-      }
-    }
-
-    // ============================================
-    // CARGAR DATOS (CON SEGURIDAD TRY/CATCH)
-    // ============================================
-    async function cargarDatos() {
-      if (!supabaseClient) {
-        console.warn("Supabase no está disponible, usando datos locales por defecto.");
-        return;
-      }
+    // --- Sincronización del API (Supabase) ---
+    async function jalarDatosDesdeAPI(esModoGestion = false) {
+      if (!supabaseClient) return;
 
       try {
         const { data, error } = await supabaseClient
           .from(TABLA)
           .select('*')
-          .eq('id', 1)
-          .maybeSingle(); // CORRECCIÓN: maybeSingle evita errores si la fila '1' aún no existe
+          .order('id', { ascending: true });
 
-        if (error) {
-          console.error("Error en Supabase:", error.message);
-          return;
+        if (error) throw error;
+
+        datosLocalesFracciones = data || [];
+
+        if (esModoGestion) {
+          construirPanelEdicionEstructural();
+          construirSegundaVistaControlCorrer();
+        } else {
+          construirVistaUsuarioPublico();
         }
 
-        if (data) {
-          // Actualizar interfaz de Usuario
-          if (document.getElementById('tituloUsuario')) document.getElementById('tituloUsuario').innerText = data.titulo || '';
-          if (document.getElementById('objetivoUsuario')) document.getElementById('objetivoUsuario').innerText = data.objetivo || '';
-          
-          // Si tu HTML usa un <li> con id 'opinionUsuario', asegúrate de actualizarlo correctamente
-          const opUser = document.getElementById('opinionUsuario');
-          if (opUser) opUser.innerText = data.opinion || '';
-
-          // Actualizar interfaz de Admin (Inputs)
-          if (document.getElementById('tituloInput')) document.getElementById('tituloInput').value = data.titulo || '';
-          if (document.getElementById('objetivoInput')) document.getElementById('objetivoInput').value = data.objetivo || '';
-          if (document.getElementById('opinionInput')) document.getElementById('opinionInput').value = data.opinion || '';
-        }
       } catch (err) {
-        console.error("Error crítico al cargar datos:", err);
+        console.error("Fallo al jalar fracciones del API:", err.message);
       }
     }
 
-    // ============================================
-    // GUARDAR CAMBIOS
-    // ============================================
-    async function guardarCambios() {
-      if (!supabaseClient) {
-        alert("No hay conexión con la base de datos.");
-        return;
-      }
+    // --- Constructor Dinámico: Editores de Fracciones ---
+    function construirPanelEdicionEstructural() {
+      const contenedor = document.getElementById('contenedorEditoresFracciones');
+      contenedor.innerHTML = "";
 
-      const titulo = document.getElementById('tituloInput').value;
-      const objetivo = document.getElementById('objetivoInput').value;
-      const opinion = document.getElementById('opinionInput').value;
+      // Jerarquía numérica para comparar permisos de forma sencilla
+      const jerarquia = { "usuario": 1, "moderador": 2, "admin": 3 };
+      const nivelPermisoUsuario = jerarquia[rolSesionActual];
+
+      datosLocalesFracciones.forEach(fraccion => {
+        const nivelPermisoRequerido = jerarquia[fraccion.rol_minimo] || 1;
+        const tienePermisoDenegado = nivelPermisoUsuario < nivelPermisoRequerido;
+
+        const div = document.createElement('div');
+        div.className = `fraccion-card ${tienePermisoDenegado ? 'bloqueado' : ''}`;
+
+        div.innerHTML = `
+          <h3>${fraccion.titulo} <span style="font-size:0.8rem; color:#ffb6c1;">[Clave: ${fraccion.clave_seccion}]</span></h3>
+          <p style="font-size:0.85rem; color:#fffacd;">Nivel mínimo requerido: <strong>${fraccion.rol_minimo.toUpperCase()}</strong></p>
+          
+          <label>Título de la Sección</label>
+          <input type="text" id="input_tit_${fraccion.clave_seccion}" value="${fraccion.titulo}" ${tienePermisoDenegado ? 'disabled' : ''}>
+          
+          <label>Contenido / Texto Fraccionado</label>
+          <textarea id="txt_cont_${fraccion.clave_seccion}" ${tienePermisoDenegado ? 'disabled' : ''}>${fraccion.contenido || ''}</textarea>
+          
+          ${tienePermisoDenegado 
+            ? `<p style="color:#ff4757; font-weight:bold; font-size:0.9rem;">⚠️ Tu rol menor no tiene autorización para modificar esta sección.</p>`
+            : `<button onclick="actualizarFraccionEspecifica('${fraccion.clave_seccion}')">Guardar Fracción</button>`
+          }
+        `;
+        contenedor.appendChild(div);
+      });
+    }
+
+    // --- Constructor de la Segunda Vista (Configurar qué correr) ---
+    function construirSegundaVistaControlCorrer() {
+      const contenedor = document.getElementById('contenedorConfiguracionCorrer');
+      contenedor.innerHTML = "";
+
+      datosLocalesFracciones.forEach(fraccion => {
+        const div = document.createElement('div');
+        div.className = "switch-container";
+        div.innerHTML = `
+          <div>
+            <strong>${fraccion.titulo}</strong>
+            <div style="font-size:0.8rem; color:#ffb6c1;">Segmento: ${fraccion.clave_seccion}</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="switch_run_${fraccion.clave_seccion}" ${fraccion.activa ? 'checked' : ''}>
+            <span class="slider"></span>
+          </label>
+        `;
+        contenedor.appendChild(div);
+      });
+    }
+
+    // --- Persistencia: Guardar una Fracción Individual ---
+    async function actualizarFraccionEspecifica(clave) {
+      const nuevoTitulo = document.getElementById(`input_tit_${clave}`).value;
+      const nuevoContenido = document.getElementById(`txt_cont_${clave}`).value;
 
       try {
         const { error } = await supabaseClient
           .from(TABLA)
-          .update({ titulo, objetivo, opinion })
-          .eq('id', 1);
+          .update({ titulo: nuevoTitulo, contenido: nuevoContenido })
+          .eq('clave_seccion', clave);
 
-        if (error) {
-          console.error(error);
-          alert("Error al guardar: " + error.message);
-        } else {
-          alert("Cambios guardados con éxito.");
-          cargarDatos();
-        }
+        if (error) throw error;
+
+        alert(`Fracción [${clave}] actualizada exitosamente en el API.`);
+        await jalarDatosDesdeAPI(true);
       } catch (err) {
-        alert("Ocurrió un problema al procesar la actualización.");
+        alert("Error al actualizar la fracción: " + err.message);
       }
     }
 
-    // ============================================
-    // SUBIR IMAGEN (VISTA LOCAL)
-    // ============================================
-    function subirImagen() {
-      const input = document.getElementById('imagenInput');
-      const archivo = input.files[0];
-
-      if (!archivo) {
-        alert("Selecciona una imagen");
+    // --- Persistencia: Guardar Segunda Vista (Qué Correr en la Aplicación) ---
+    async function guardarConfiguracionEjecucion() {
+      // Regla de negocio: Solo el Admin principal puede correr/detener el backend de visualización
+      if (rolSesionActual !== 'admin') {
+        alert("Acceso Denegado: Los usuarios menores solo editan contenido, no alteran las secciones activas a ejecutar.");
         return;
       }
 
-      const lector = new FileReader();
-      lector.onload = function (e) {
-        // Renderizar en Admin
-        const imgAdmin = document.createElement('img');
-        imgAdmin.src = e.target.result;
-        document.getElementById('galeriaAdmin').appendChild(imgAdmin);
+      try {
+        // Ejecutamos promesas en paralelo para actualizar el estado 'activa' de cada fila
+        const promesasActualizacion = datosLocalesFracciones.map(fraccion => {
+          const estaActivo = document.getElementById(`switch_run_${fraccion.clave_seccion}`).checked;
+          return supabaseClient
+            .from(TABLA)
+            .update({ activa: estaActivo })
+            .eq('clave_seccion', fraccion.clave_seccion);
+        });
 
-        // Renderizar en Usuario
-        const imgUsuario = document.createElement('img');
-        imgUsuario.src = e.target.result;
-        document.getElementById('galeriaUsuario').appendChild(imgUsuario);
+        await Promise.all(promesasActualizacion);
+        alert("Configuración de ejecución guardada. El flujo del usuario ha sido recalculado.");
+        await jalarDatosDesdeAPI(true);
+
+      } catch (err) {
+        alert("Error al inyectar cambios de ejecución: " + err.message);
       }
-      lector.readAsDataURL(archivo);
+    }
+
+    // --- Constructor Dinámico: Vista del Usuario General (Filtrado por 'activa') ---
+    function construirVistaUsuarioPublico() {
+      const menuNavegacion = document.getElementById('menuNavegacionUsuario');
+      const contenedorContenido = document.getElementById('contenedorContenidoUsuario');
+
+      menuNavegacion.innerHTML = "";
+      contenedorContenido.innerHTML = "";
+
+      // FILTRAR FRACCIONES: Solo pasan las que están configuradas para "correr" (activa === true)
+      const fraccionesCorriendo = datosLocalesFracciones.filter(f => f.activa === true);
+
+      if (fraccionesCorriendo.length === 0) {
+        contenedorContenido.innerHTML = "<h1>🌱 Próximamente</h1><p>El administrador no ha desplegado ninguna sección para ejecución en este momento.</p>";
+        return;
+      }
+
+      fraccionesCorriendo.forEach((fraccion, index) => {
+        // 1. Añadir botón de acceso rápido al menú de navegación lateral izquierdo
+        const btnMenu = document.createElement('button');
+        btnMenu.innerText = fraccion.titulo.split(" ")[0] + " " + fraccion.clave_seccion.toUpperCase(); // Formato dinámico corto
+        btnMenu.onclick = () => {
+          document.getElementById(`render_sec_${fraccion.clave_seccion}`).scrollIntoView({ behavior: 'smooth' });
+        };
+        menuNavegacion.appendChild(btnMenu);
+
+        // 2. Construir e inyectar el contenedor visual de la sección
+        const panelSeccion = document.createElement('div');
+        panelSeccion.className = "panel";
+        panelSeccion.id = `render_sec_${fraccion.clave_seccion}`;
+        
+        panelSeccion.innerHTML = `
+          <h1>${fraccion.titulo}</h1>
+          <hr style="margin: 15px 0; border-color: #2f2f4f;">
+          <p style="white-space: pre-wrap;">${fraccion.contenido || 'Sin descripción asignada por el equipo.'}</p>
+        `;
+
+        // Si es la sección de lavanda, integramos por defecto un marcador de imágenes estético
+        if (fraccion.clave_seccion === 'lavanda') {
+          panelSeccion.innerHTML += `
+            <h3>📸 Galería de Desarrollo Integrada</h3>
+            <div class="imagenes" id="galeriaUsuarioEstatica">
+              <p style="color:#fffacd; font-size:0.9rem;">Sube imágenes desde el panel de gestión local para poblar los módulos visuales.</p>
+            </div>
+          `;
+        }
+
+        contenedorContenido.appendChild(panelSeccion);
+      });
     }
   </script>
 </body>
+
 </html>
