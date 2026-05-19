@@ -2,760 +2,435 @@
 <html lang="es">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PAEC - Vida Sana y Lavanda</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.8/dist/umd/supabase.js"></script>
 
-<title>PAEC - Vida Sana y Lavanda</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    body {
+      font-family: Arial, sans-serif;
+      background: #1b1b2f;
+      color: white;
+    }
 
-<style>
+    /* PANTALLAS */
+    .pantalla {
+      display: none;
+      width: 100%;
+      min-height: 100vh;
+    }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+    .activa {
+      display: flex;
+    }
 
-body{
-  font-family:Arial, sans-serif;
-  background:#1b1b2f;
-  color:white;
-}
+    /* INICIO Y LOGIN */
+    .centerBox {
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+    }
 
-/* PANTALLAS */
+    .card {
+      background: #23233a;
+      width: 100%;
+      max-width: 500px;
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    }
 
-.pantalla{
-  display:none;
-  width:100%;
-  min-height:100vh;
-}
+    h1 {
+      color: #ffb6c1;
+      margin-bottom: 15px;
+    }
 
-.activa{
-  display:flex;
-}
+    h2 {
+      color: #fffacd;
+      margin-top: 25px;
+      margin-bottom: 15px;
+    }
 
-/* INICIO Y LOGIN */
+    p {
+      line-height: 1.7;
+    }
 
-.centerBox{
-  justify-content:center;
-  align-items:center;
-  padding:30px;
-}
+    button {
+      background: #ffb6c1;
+      color: black;
+      border: none;
+      padding: 14px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
 
-.card{
-  background:#23233a;
-  width:100%;
-  max-width:500px;
-  padding:40px;
-  border-radius:25px;
-  box-shadow:0 0 20px rgba(0,0,0,0.3);
-}
+    button:hover {
+      transform: scale(1.05);
+      background: white;
+    }
 
-h1{
-  color:#ffb6c1;
-  margin-bottom:15px;
-}
+    .botones {
+      display: flex;
+      gap: 15px;
+      margin-top: 25px;
+      flex-wrap: wrap;
+    }
 
-h2{
-  color:#fffacd;
-  margin-top:25px;
-  margin-bottom:15px;
-}
+    input, textarea {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      background: #2f2f4f;
+      color: white;
+    }
 
-p{
-  line-height:1.7;
-}
+    textarea {
+      resize: none;
+      height: 120px;
+    }
 
-button{
-  background:#ffb6c1;
-  color:black;
-  border:none;
-  padding:14px 20px;
-  border-radius:12px;
-  cursor:pointer;
-  font-weight:bold;
-  transition:0.3s;
-}
+    /* DASHBOARD */
+    .layout {
+      display: flex;
+      width: 100%;
+      min-height: 100vh;
+    }
 
-button:hover{
-  transform:scale(1.05);
-  background:white;
-}
+    /* SIDEBAR */
+    .sidebar {
+      width: 260px;
+      background: #151521;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
 
-.botones{
-  display:flex;
-  gap:15px;
-  margin-top:25px;
-  flex-wrap:wrap;
-}
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #ffb6c1;
+      margin-bottom: 40px;
+    }
 
-input, textarea{
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:12px;
-  margin-top:10px;
-  margin-bottom:20px;
-  background:#2f2f4f;
-  color:white;
-}
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
 
-textarea{
-  resize:none;
-  height:120px;
-}
+    .menu button {
+      width: 100%;
+      text-align: left;
+      background: #23233a;
+      color: white;
+    }
 
-/* DASHBOARD */
+    .menu button:hover {
+      background: #ffb6c1;
+      color: black;
+    }
 
-.layout{
-  display:flex;
-  width:100%;
-  min-height:100vh;
-}
+    /* CONTENIDO */
+    .content {
+      flex: 1;
+      padding: 40px;
+    }
 
-/* SIDEBAR */
+    .panel {
+      background: #23233a;
+      padding: 30px;
+      border-radius: 25px;
+    }
 
-.sidebar{
-  width:260px;
-  background:#151521;
-  padding:30px 20px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-}
+    ul {
+      margin-left: 25px;
+      line-height: 2;
+    }
 
-.logo{
-  font-size:1.8rem;
-  font-weight:bold;
-  color:#ffb6c1;
-  margin-bottom:40px;
-}
+    .imagenes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 20px;
+    }
 
-.menu{
-  display:flex;
-  flex-direction:column;
-  gap:15px;
-}
-
-.menu button{
-  width:100%;
-  text-align:left;
-  background:#23233a;
-  color:white;
-}
-
-.menu button:hover{
-  background:#ffb6c1;
-  color:black;
-}
-
-/* CONTENIDO */
-
-.content{
-  flex:1;
-  padding:40px;
-}
-
-.panel{
-  background:#23233a;
-  padding:30px;
-  border-radius:25px;
-}
-
-ul{
-  margin-left:25px;
-  line-height:2;
-}
-
-.imagenes{
-  display:flex;
-  flex-wrap:wrap;
-  gap:15px;
-  margin-top:20px;
-}
-
-.imagenes img{
-  width:250px;
-  border-radius:15px;
-}
-
-</style>
-
+    .imagenes img {
+      width: 250px;
+      border-radius: 15px;
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- ====================================== -->
-<!-- INICIO -->
-<!-- ====================================== -->
-
-<div id="inicio" class="pantalla activa centerBox">
-
-  <div class="card">
-
-    <h1>
-      🌱 Vida Sana y Crecimiento de Lavanda
-    </h1>
-
-    <h2 style="text-align:center;">
-      Proyecto PAEC
-    </h2>
-
-    <p style="text-align:center;">
-      <strong>Equipo:</strong>
-      Chavas Insanas
-    </p>
-
-    <div class="botones">
-
-      <button onclick="entrarUsuario()">
-        👀 Usuario
-      </button>
-
-      <button onclick="mostrarLoginAdmin()">
-        👑 Admin
-      </button>
-
+  <div id="inicio" class="pantalla activa centerBox">
+    <div class="card">
+      <h1> Vida Sana y Crecimiento de Lavanda</h1>
+      <h2 style="text-align:center;">Proyecto PAEC</h2>
+      <p style="text-align:center;"><strong>Equipo:</strong> Chavas Insanas</p>
+      <div class="botones">
+        <button onclick="entrarUsuario()"> Usuario</button>
+        <button onclick="mostrarLoginAdmin()"> Admin</button>
+      </div>
     </div>
-
   </div>
 
-</div>
-
-<!-- ====================================== -->
-<!-- LOGIN ADMIN -->
-<!-- ====================================== -->
-
-<div id="loginAdmin" class="pantalla centerBox">
-
-  <div class="card">
-
-    <h1>
-      👑 Acceso Administrador
-    </h1>
-
-    <input
-      type="password"
-      id="passwordAdmin"
-      placeholder="Ingresa la contraseña"
-    >
-
-    <div class="botones">
-
-      <button onclick="verificarAdmin()">
-        Entrar
-      </button>
-
-      <button onclick="volverInicio()">
-        Regresar
-      </button>
-
+  <div id="loginAdmin" class="pantalla centerBox">
+    <div class="card">
+      <h1>👑 Acceso Administrador</h1>
+      <input type="password" id="passwordAdmin" placeholder="Ingresa la contraseña">
+      <div class="botones">
+        <button onclick="verificarAdmin()">Entrar</button>
+        <button onclick="volverInicio()">Regresar</button>
+      </div>
     </div>
-
   </div>
 
-</div>
-
-<!-- ====================================== -->
-<!-- PANEL ADMIN -->
-<!-- ====================================== -->
-
-<div id="panelAdmin" class="pantalla">
-
-  <div class="layout">
-
-    <!-- SIDEBAR -->
-
-    <div class="sidebar">
-
-      <div>
-
-        <div class="logo">
-          👑 ADMIN
+  <div id="panelAdmin" class="pantalla">
+    <div class="layout">
+      <div class="sidebar">
+        <div>
+          <div class="logo"> ADMIN</div>
+          <div class="menu">
+            <button> Editar contenido</button>
+            <button> Imágenes</button>
+            <button> Configuración</button>
+          </div>
         </div>
-
-        <div class="menu">
-
-          <button>
-            📝 Editar contenido
-          </button>
-
-          <button>
-            📸 Imágenes
-          </button>
-
-          <button>
-            ⚙️ Configuración
-          </button>
-
+        <button onclick="volverInicio()"> Cerrar sesión</button>
+      </div>
+      <div class="content">
+        <div class="panel">
+          <h1>Panel Administrador</h1>
+          <h2>Modificar contenido</h2>
+          <label>Título principal</label>
+          <input type="text" id="tituloInput">
+          <label>Objetivo del proyecto</label>
+          <textarea id="objetivoInput"></textarea>
+          <label>Opinión sobre vida sana</label>
+          <textarea id="opinionInput"></textarea>
+          <button onclick="guardarCambios()">Guardar cambios</button>
+          <hr style="margin:30px 0;">
+          <h2> Subir imágenes</h2>
+          <input type="file" id="imagenInput" accept="image/*">
+          <button onclick="subirImagen()">Agregar imagen</button>
+          <div class="imagenes" id="galeriaAdmin"></div>
         </div>
-
       </div>
-
-      <button onclick="volverInicio()">
-        🚪 Cerrar sesión
-      </button>
-
     </div>
-
-    <!-- CONTENIDO -->
-
-    <div class="content">
-
-      <div class="panel">
-
-        <h1>
-          Panel Administrador
-        </h1>
-
-        <h2>
-          Modificar contenido
-        </h2>
-
-        <label>
-          Título principal
-        </label>
-
-        <input type="text" id="tituloInput">
-
-        <label>
-          Objetivo del proyecto
-        </label>
-
-        <textarea id="objetivoInput"></textarea>
-
-        <label>
-          Opinión sobre vida sana
-        </label>
-
-        <textarea id="opinionInput"></textarea>
-
-        <button onclick="guardarCambios()">
-          Guardar cambios
-        </button>
-
-        <hr style="margin:30px 0;">
-
-        <h2>
-          📸 Subir imágenes
-        </h2>
-
-        <input
-          type="file"
-          id="imagenInput"
-          accept="image/*"
-        >
-
-        <button onclick="subirImagen()">
-          Agregar imagen
-        </button>
-
-        <div class="imagenes" id="galeriaAdmin"></div>
-
-      </div>
-
-    </div>
-
   </div>
 
-</div>
-
-<!-- ====================================== -->
-<!-- PANEL USUARIO -->
-<!-- ====================================== -->
-
-<div id="panelUsuario" class="pantalla">
-
-  <div class="layout">
-
-    <!-- SIDEBAR -->
-
-    <div class="sidebar">
-
-      <div>
-
-        <div class="logo">
-          🌱 PAEC
+  <div id="panelUsuario" class="pantalla">
+    <div class="layout">
+      <div class="sidebar">
+        <div>
+          <div class="logo"> PAEC</div>
+          <div class="menu">
+            <button> Inicio</button>
+            <button> Lavanda</button>
+            <button> Cronograma</button>
+            <button> Vida Sana</button>
+            <button> Galería</button>
+          </div>
         </div>
-
-        <div class="menu">
-
-          <button>
-            🏠 Inicio
-          </button>
-
-          <button>
-            🌿 Lavanda
-          </button>
-
-          <button>
-            📅 Cronograma
-          </button>
-
-          <button>
-            💚 Vida Sana
-          </button>
-
-          <button>
-            📸 Galería
-          </button>
-
+        <button onclick="volverInicio()"> Cerrar sesión</button>
+      </div>
+      <div class="content">
+        <div class="panel">
+          <h1 id="tituloUsuario">Vida Sana y Crecimiento de Lavanda</h1>
+          <h2>Proyecto PAEC</h2>
+          <p><strong>Equipo:</strong> Chavas Insanas</p>
+          <p id="objetivoUsuario">Promover hábitos saludables y analizar el crecimiento de la lavanda.</p>
+          <h2> Registro de la Lavanda</h2>
+          <ul>
+            <li>Seguimiento semanal del crecimiento.</li>
+            <li>Fotografías del crecimiento.</li>
+            <li>Riego moderado y luz solar.</li>
+            <li>Problemas detectados.</li>
+          </ul>
+          <div class="imagenes" id="galeriaUsuario"></div>
+          <h2> Vida Sana</h2>
+          <ul>
+            <li>La vida sana mejora nuestra calidad de vida.</li>
+            <li>Comer saludable.</li>
+            <li>Dormir bien.</li>
+            <li>Reducir estrés.</li>
+          </ul>
         </div>
-
       </div>
-
-      <button onclick="volverInicio()">
-        🚪 Cerrar sesión
-      </button>
-
     </div>
-
-    <!-- CONTENIDO -->
-
-    <div class="content">
-
-      <div class="panel">
-
-        <h1 id="tituloUsuario">
-          Vida Sana y Crecimiento de Lavanda
-        </h1>
-
-        <h2>
-          Proyecto PAEC
-        </h2>
-
-        <p>
-          <strong>Equipo:</strong>
-          Chavas Insanas
-        </p>
-
-        <p id="objetivoUsuario">
-          Promover hábitos saludables y analizar el crecimiento de la lavanda.
-        </p>
-
-        <h2>
-          🌱 Registro de la Lavanda
-        </h2>
-
-        <ul>
-
-          <li>
-            Seguimiento semanal del crecimiento.
-          </li>
-
-          <li>
-            Fotografías del crecimiento.
-          </li>
-
-          <li>
-            Riego moderado y luz solar.
-          </li>
-
-          <li>
-            Problemas detectados.
-          </li>
-
-        </ul>
-
-        <div class="imagenes" id="galeriaUsuario"></div>
-
-        <h2>
-          💚 Vida Sana
-        </h2>
-
-        <ul>
-
-          <li id="opinionUsuario">
-            La vida sana mejora nuestra calidad de vida.
-          </li>
-
-          <li>
-            Comer saludable.
-          </li>
-
-          <li>
-            Dormir bien.
-          </li>
-
-          <li>
-            Reducir estrés.
-          </li>
-
-        </ul>
-
-      </div>
-
-    </div>
-
   </div>
 
-</div>
-
-<script>
-
-// ============================================
-// CONFIGURACIÓN SUPABASE
-// ============================================
-
-const SUPABASE_URL =
-"https://tdpzbyouoxnxuzngikin.supabase.co";
-
-const SUPABASE_KEY =
-"sb_publishable_oT-eHukloJjn98GloN4rfA_Gt7O03kO";
-
-const TABLA =
-"paec";
-
-// ============================================
-// CONEXIÓN
-// ============================================
-
-const supabaseClient =
-supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
-
-// ============================================
-// PASSWORD ADMIN
-// ============================================
-
-const PASSWORD_ADMIN = "holiwispiwis";
-
-// ============================================
-// OCULTAR TODO
-// ============================================
-
-function ocultarTodo(){
-
-  document
-  .querySelectorAll('.pantalla')
-  .forEach(p => {
-
-    p.classList.remove('activa');
-
-  });
-}
-
-// ============================================
-// VOLVER INICIO
-// ============================================
-
-function volverInicio(){
-
-  ocultarTodo();
-
-  document
-  .getElementById('inicio')
-  .classList.add('activa');
-}
-
-// ============================================
-// LOGIN ADMIN
-// ============================================
-
-function mostrarLoginAdmin(){
-
-  ocultarTodo();
-
-  document
-  .getElementById('loginAdmin')
-  .classList.add('activa');
-}
-
-// ============================================
-// ENTRAR USUARIO
-// ============================================
-
-async function entrarUsuario(){
-
-  ocultarTodo();
-
-  document
-  .getElementById('panelUsuario')
-  .classList.add('activa');
-
-  await cargarDatos();
-}
-
-// ============================================
-// VERIFICAR ADMIN
-// ============================================
-
-async function verificarAdmin(){
-
-  const pass =
-  document
-  .getElementById('passwordAdmin')
-  .value
-  .trim();
-
-  if(pass === PASSWORD_ADMIN){
-
-    ocultarTodo();
-
-    document
-    .getElementById('panelAdmin')
-    .classList.add('activa');
-
-    await cargarDatos();
-
-  }else{
-
-    alert("Contraseña incorrecta");
-
-  }
-}
-
-// ============================================
-// CARGAR DATOS
-// ============================================
-
-async function cargarDatos(){
-
-  const { data, error } =
-  await supabaseClient
-  .from(TABLA)
-  .select('*')
-  .eq('id',1)
-  .single();
-
-  if(error){
-
-    console.error(error);
-    return;
-  }
-
-  // USUARIO
-
-  document
-  .getElementById('tituloUsuario')
-  .innerText = data.titulo;
-
-  document
-  .getElementById('objetivoUsuario')
-  .innerText = data.objetivo;
-
-  document
-  .getElementById('opinionUsuario')
-  .innerText = data.opinion;
-
-  // ADMIN
-
-  document
-  .getElementById('tituloInput')
-  .value = data.titulo;
-
-  document
-  .getElementById('objetivoInput')
-  .value = data.objetivo;
-
-  document
-  .getElementById('opinionInput')
-  .value = data.opinion;
-}
-
-// ============================================
-// GUARDAR CAMBIOS
-// ============================================
-
-async function guardarCambios(){
-
-  const titulo =
-  document
-  .getElementById('tituloInput')
-  .value;
-
-  const objetivo =
-  document
-  .getElementById('objetivoInput')
-  .value;
-
-  const opinion =
-  document
-  .getElementById('opinionInput')
-  .value;
-
-  const { error } =
-  await supabaseClient
-  .from(TABLA)
-  .update({
-
-    titulo:titulo,
-    objetivo:objetivo,
-    opinion:opinion
-
-  })
-  .eq('id',1);
-
-  if(error){
-
-    console.error(error);
-
-    alert("Error al guardar");
-
-  }else{
-
-    alert("Cambios guardados");
-
-    cargarDatos();
-  }
-}
-
-// ============================================
-// SUBIR IMAGEN
-// ============================================
-
-function subirImagen(){
-
-  const input =
-  document
-  .getElementById('imagenInput');
-
-  const archivo = input.files[0];
-
-  if(!archivo){
-
-    alert("Selecciona una imagen");
-
-    return;
-  }
-
-  const lector = new FileReader();
-
-  lector.onload = function(e){
-
-    // ADMIN
-
-    const imgAdmin =
-    document.createElement('img');
-
-    imgAdmin.src =
-    e.target.result;
-
-    document
-    .getElementById('galeriaAdmin')
-    .appendChild(imgAdmin);
-
-    // USUARIO
-
-    const imgUsuario =
-    document.createElement('img');
-
-    imgUsuario.src =
-    e.target.result;
-
-    document
-    .getElementById('galeriaUsuario')
-    .appendChild(imgUsuario);
-  }
-
-  lector.readAsDataURL(archivo);
-}
-
-</script>
-
+  <script>
+    // ============================================
+    // CONFIGURACIÓN SUPABASE
+    // ============================================
+    const SUPABASE_URL = "https://tdpzbyouoxnxuzngikin.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_oT-eHukloJjn98GloN4rfA_Gt7O03kO"; // Asegúrate de que esta clave sea la correcta
+    const TABLA = "paec";
+    const PASSWORD_ADMIN = "holiwispiwis";
+
+    let supabaseClient = null;
+
+    // CORRECCIÓN 2: Inicialización segura una vez cargado el DOM
+    document.addEventListener("DOMContentLoaded", () => {
+      try {
+        if (typeof supabase !== 'undefined') {
+          supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+          console.log("Supabase inicializado correctamente.");
+        } else {
+          console.error("La librería Supabase no se cargó correctamente desde el CDN.");
+        }
+      } catch (e) {
+        console.error("Error al conectar con Supabase:", e);
+      }
+    });
+
+    // ============================================
+    // NAVEGACIÓN
+    // ============================================
+    function ocultarTodo() {
+      document.querySelectorAll('.pantalla').forEach(p => p.classList.remove('activa'));
+    }
+
+    function volverInicio() {
+      ocultarTodo();
+      document.getElementById('inicio').classList.add('activa');
+    }
+
+    function mostrarLoginAdmin() {
+      ocultarTodo();
+      document.getElementById('loginAdmin').classList.add('activa');
+    }
+
+    async function entrarUsuario() {
+      ocultarTodo();
+      document.getElementById('panelUsuario').classList.add('activa');
+      await cargarDatos(); // Si falla, al menos el usuario ya ve la pantalla
+    }
+
+    async function verificarAdmin() {
+      const pass = document.getElementById('passwordAdmin').value.trim();
+      if (pass === PASSWORD_ADMIN) {
+        ocultarTodo();
+        document.getElementById('panelAdmin').classList.add('activa');
+        await cargarDatos();
+      } else {
+        alert("Contraseña incorrecta");
+      }
+    }
+
+    // ============================================
+    // CARGAR DATOS (CON SEGURIDAD TRY/CATCH)
+    // ============================================
+    async function cargarDatos() {
+      if (!supabaseClient) {
+        console.warn("Supabase no está disponible, usando datos locales por defecto.");
+        return;
+      }
+
+      try {
+        const { data, error } = await supabaseClient
+          .from(TABLA)
+          .select('*')
+          .eq('id', 1)
+          .maybeSingle(); // CORRECCIÓN: maybeSingle evita errores si la fila '1' aún no existe
+
+        if (error) {
+          console.error("Error en Supabase:", error.message);
+          return;
+        }
+
+        if (data) {
+          // Actualizar interfaz de Usuario
+          if (document.getElementById('tituloUsuario')) document.getElementById('tituloUsuario').innerText = data.titulo || '';
+          if (document.getElementById('objetivoUsuario')) document.getElementById('objetivoUsuario').innerText = data.objetivo || '';
+          
+          // Si tu HTML usa un <li> con id 'opinionUsuario', asegúrate de actualizarlo correctamente
+          const opUser = document.getElementById('opinionUsuario');
+          if (opUser) opUser.innerText = data.opinion || '';
+
+          // Actualizar interfaz de Admin (Inputs)
+          if (document.getElementById('tituloInput')) document.getElementById('tituloInput').value = data.titulo || '';
+          if (document.getElementById('objetivoInput')) document.getElementById('objetivoInput').value = data.objetivo || '';
+          if (document.getElementById('opinionInput')) document.getElementById('opinionInput').value = data.opinion || '';
+        }
+      } catch (err) {
+        console.error("Error crítico al cargar datos:", err);
+      }
+    }
+
+    // ============================================
+    // GUARDAR CAMBIOS
+    // ============================================
+    async function guardarCambios() {
+      if (!supabaseClient) {
+        alert("No hay conexión con la base de datos.");
+        return;
+      }
+
+      const titulo = document.getElementById('tituloInput').value;
+      const objetivo = document.getElementById('objetivoInput').value;
+      const opinion = document.getElementById('opinionInput').value;
+
+      try {
+        const { error } = await supabaseClient
+          .from(TABLA)
+          .update({ titulo, objetivo, opinion })
+          .eq('id', 1);
+
+        if (error) {
+          console.error(error);
+          alert("Error al guardar: " + error.message);
+        } else {
+          alert("Cambios guardados con éxito.");
+          cargarDatos();
+        }
+      } catch (err) {
+        alert("Ocurrió un problema al procesar la actualización.");
+      }
+    }
+
+    // ============================================
+    // SUBIR IMAGEN (VISTA LOCAL)
+    // ============================================
+    function subirImagen() {
+      const input = document.getElementById('imagenInput');
+      const archivo = input.files[0];
+
+      if (!archivo) {
+        alert("Selecciona una imagen");
+        return;
+      }
+
+      const lector = new FileReader();
+      lector.onload = function (e) {
+        // Renderizar en Admin
+        const imgAdmin = document.createElement('img');
+        imgAdmin.src = e.target.result;
+        document.getElementById('galeriaAdmin').appendChild(imgAdmin);
+
+        // Renderizar en Usuario
+        const imgUsuario = document.createElement('img');
+        imgUsuario.src = e.target.result;
+        document.getElementById('galeriaUsuario').appendChild(imgUsuario);
+      }
+      lector.readAsDataURL(archivo);
+    }
+  </script>
 </body>
 </html>
