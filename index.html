@@ -13,123 +13,182 @@
 
   <style>
 
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    body{
-      font-family:Arial, sans-serif;
-      background:linear-gradient(135deg,#8968cd,#b19cd9);
-      color:white;
-      min-height:100vh;
-    }
+body{
+  font-family:Arial, sans-serif;
+  background:#1b1b2f;
+  color:white;
+  overflow:hidden;
+}
 
-    .pantalla{
-      display:none;
-      justify-content:center;
-      align-items:center;
-      min-height:100vh;
-      padding:30px;
-    }
+/* PANTALLAS */
 
-    .activa{
-      display:flex;
-    }
+.pantalla{
+  display:none;
+  width:100%;
+  height:100vh;
+}
 
-    .card{
-      background:rgba(255,255,255,0.12);
-      width:100%;
-      max-width:1000px;
-      padding:35px;
-      border-radius:25px;
-      backdrop-filter:blur(10px);
-      box-shadow:0 0 15px rgba(0,0,0,0.3);
-    }
+.activa{
+  display:flex;
+}
 
-    h1{
-      color:#fffacd;
-      margin-bottom:15px;
-      text-align:center;
-    }
+/* LOGIN / INICIO */
 
-    h2{
-      color:#ffd1dc;
-      margin-top:25px;
-      margin-bottom:15px;
-    }
+.centerBox{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:30px;
+}
 
-    h3{
-      color:#fffacd;
-      margin-top:20px;
-      margin-bottom:10px;
-    }
+.card{
+  background:#23233a;
+  width:100%;
+  max-width:500px;
+  padding:40px;
+  border-radius:25px;
+  box-shadow:0 0 20px rgba(0,0,0,0.3);
+}
 
-    p{
-      line-height:1.7;
-    }
+h1{
+  color:#ffb6c1;
+  margin-bottom:15px;
+}
 
-    ul{
-      margin-left:25px;
-      line-height:1.9;
-    }
+h2{
+  color:#fffacd;
+  margin-bottom:20px;
+  margin-top:20px;
+}
 
-    button{
-      background:#ffb6c1;
-      color:black;
-      border:none;
-      padding:14px 24px;
-      border-radius:12px;
-      cursor:pointer;
-      font-weight:bold;
-      transition:0.3s;
-      margin-top:10px;
-    }
+p{
+  line-height:1.7;
+}
 
-    button:hover{
-      background:white;
-      transform:scale(1.05);
-    }
+button{
+  background:#ffb6c1;
+  color:black;
+  border:none;
+  padding:14px 20px;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:0.3s;
+}
 
-    .botones{
-      display:flex;
-      gap:15px;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin-top:25px;
-    }
+button:hover{
+  transform:scale(1.05);
+  background:white;
+}
 
-    input, textarea{
-      width:100%;
-      padding:12px;
-      margin-top:10px;
-      margin-bottom:20px;
-      border:none;
-      border-radius:10px;
-      font-size:1rem;
-    }
+.botones{
+  display:flex;
+  gap:15px;
+  margin-top:25px;
+  flex-wrap:wrap;
+}
 
-    textarea{
-      resize:none;
-      height:120px;
-    }
+input, textarea{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  margin-top:10px;
+  margin-bottom:20px;
+  background:#2f2f4f;
+  color:white;
+}
 
-    .imagenes{
-      display:flex;
-      flex-wrap:wrap;
-      gap:15px;
-      margin-top:20px;
-    }
+textarea{
+  resize:none;
+  height:120px;
+}
 
-    .imagenes img{
-      width:250px;
-      border-radius:15px;
-      border:3px solid white;
-      object-fit:cover;
-    }
+/* DASHBOARD */
 
-  </style>
+.layout{
+  display:flex;
+  width:100%;
+  height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+  width:260px;
+  background:#151521;
+  padding:30px 20px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  border-right:1px solid rgba(255,255,255,0.08);
+}
+
+.logo{
+  font-size:1.8rem;
+  font-weight:bold;
+  color:#ffb6c1;
+  margin-bottom:40px;
+}
+
+.menu{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+.menu button{
+  width:100%;
+  text-align:left;
+  background:#23233a;
+  color:white;
+}
+
+.menu button:hover{
+  background:#ffb6c1;
+  color:black;
+}
+
+/* CONTENIDO */
+
+.content{
+  flex:1;
+  padding:40px;
+  overflow-y:auto;
+}
+
+.panel{
+  background:#23233a;
+  padding:30px;
+  border-radius:25px;
+}
+
+ul{
+  margin-left:25px;
+  line-height:2;
+}
+
+.imagenes{
+  display:flex;
+  flex-wrap:wrap;
+  gap:15px;
+  margin-top:20px;
+}
+
+.imagenes img{
+  width:250px;
+  border-radius:15px;
+  object-fit:cover;
+}
+
+</style>
 
 </head>
 
@@ -214,55 +273,102 @@
 
 <div id="panelAdmin" class="pantalla">
 
-  <div class="card">
+  <div class="layout">
 
-    <h1>
-      👑 Panel Administrador
-    </h1>
+    <!-- SIDEBAR -->
 
-    <h2>
-      Modificar contenido
-    </h2>
+    <div class="sidebar">
 
-    <label>
-      Título principal
-    </label>
+      <div>
 
-    <input type="text" id="tituloInput">
+        <div class="logo">
+           ADMIN
+        </div>
 
-    <label>
-      Objetivo del proyecto
-    </label>
+        <div class="menu">
 
-    <textarea id="objetivoInput"></textarea>
+          <button>
+             Editar contenido
+          </button>
 
-    <label>
-      Opinión sobre vida sana
-    </label>
+          <button>
+             Imágenes
+          </button>
 
-    <textarea id="opinionInput"></textarea>
+          <button>
+             Configuración
+          </button>
 
-    <button onclick="guardarCambios()">
-      Guardar cambios
-    </button>
+        </div>
 
-    <hr style="margin:30px 0;">
+      </div>
 
-    <h2>
-      📸 Subir imágenes
-    </h2>
+      <button onclick="volverInicio()">
+         Cerrar sesión
+      </button>
 
-    <input
-      type="file"
-      id="imagenInput"
-      accept="image/*"
-    >
+    </div>
 
-    <button onclick="subirImagen()">
-      Agregar imagen
-    </button>
+    <!-- CONTENIDO -->
 
-    <div class="imagenes" id="galeriaAdmin"></div>
+    <div class="content">
+
+      <div class="panel">
+
+        <h1>
+          Panel Administrador
+        </h1>
+
+        <h2>
+          Modificar contenido
+        </h2>
+
+        <label>
+          Título principal
+        </label>
+
+        <input type="text" id="tituloInput">
+
+        <label>
+          Objetivo
+        </label>
+
+        <textarea id="objetivoInput"></textarea>
+
+        <label>
+          Opinión vida sana
+        </label>
+
+        <textarea id="opinionInput"></textarea>
+
+        <button onclick="guardarCambios()">
+          Guardar cambios
+        </button>
+
+        <hr style="margin:30px 0; opacity:0.2;">
+
+        <h2>
+          Subir imágenes
+        </h2>
+
+        <input
+          type="file"
+          id="imagenInput"
+          accept="image/*"
+        >
+
+        <button onclick="subirImagen()">
+          Agregar imagen
+        </button>
+
+        <div
+          class="imagenes"
+          id="galeriaAdmin"
+        ></div>
+
+      </div>
+
+    </div>
 
   </div>
 
@@ -274,27 +380,133 @@
 
 <div id="panelUsuario" class="pantalla">
 
-  <div class="card">
+  <div class="layout">
 
-    <h1 id="tituloUsuario">
-      Vida Sana y Crecimiento de Lavanda
-    </h1>
+    <!-- SIDEBAR -->
 
-    <h2>
-      Proyecto PAEC
-    </h2>
+    <div class="sidebar">
 
-    <p>
-      <strong>Equipo:</strong>
-      Chavas Insanas
-    </p>
+      <div>
 
-    <p id="objetivoUsuario">
+        <div class="logo">
+           PAEC
+        </div>
 
-      Promover hábitos saludables y analizar
-      el crecimiento de la lavanda.
+        <div class="menu">
 
-    </p>
+          <button>
+             Inicio
+          </button>
+
+          <button>
+             Lavanda
+          </button>
+
+          <button>
+             Cronograma
+          </button>
+
+          <button>
+             Vida Sana
+          </button>
+
+          <button>
+             Galería
+          </button>
+
+        </div>
+
+      </div>
+
+      <button onclick="volverInicio()">
+         Cerrar sesión
+      </button>
+
+    </div>
+
+    <!-- CONTENIDO -->
+
+    <div class="content">
+
+      <div class="panel">
+
+        <h1 id="tituloUsuario">
+          Vida Sana y Crecimiento de Lavanda
+        </h1>
+
+        <h2>
+          Proyecto PAEC
+        </h2>
+
+        <p>
+          <strong>Equipo:</strong>
+          Chavas Insanas
+        </p>
+
+        <p id="objetivoUsuario">
+
+          Promover hábitos saludables y analizar
+          el crecimiento de la lavanda.
+
+        </p>
+
+        <h2>
+          Registro de la Lavanda
+        </h2>
+
+        <ul>
+
+          <li>
+            Seguimiento semanal del crecimiento.
+          </li>
+
+          <li>
+            Fotografías del crecimiento.
+          </li>
+
+          <li>
+            Riego moderado y luz solar.
+          </li>
+
+          <li>
+            Problemas detectados.
+          </li>
+
+        </ul>
+
+        <div class="imagenes" id="galeriaUsuario"></div>
+
+        <h2>
+           Vida Sana
+        </h2>
+
+        <ul>
+
+          <li id="opinionUsuario">
+            La vida sana mejora nuestra calidad de vida.
+          </li>
+
+          <li>
+            Comer saludable.
+          </li>
+
+          <li>
+            Dormir bien.
+          </li>
+
+          <li>
+            Reducir estrés.
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
 
     <!-- ========================== -->
     <!-- REGISTRO LAVANDA -->
@@ -399,16 +611,14 @@
 <script>
 
 // ============================================
-// 🔥 CONFIGURACIÓN SUPABASE
+// CONFIGURACIÓN SUPABASE
 // ============================================
 
-// 🔥 MODIFICA ESTA PARTE
 const SUPABASE_URL =
-"AQUI_TU_SUPABASE_URL";
+"https://tdpzbyouoxnxuzngikin.supabase.co";
 
-// 🔥 MODIFICA ESTA PARTE
 const SUPABASE_KEY =
-"AQUI_TU_SUPABASE_ANON_KEY";
+"sb_publishable_oT-eHukloJjn98GloN4rfA_Gt7O03kO";
 
 // 🔥 MODIFICA ESTA PARTE
 const TABLA =
