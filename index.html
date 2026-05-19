@@ -2,43 +2,254 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>PAEC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PAEC - Vida Sana y Lavanda</title>
 
   <style>
-  h1 {
-    color: #8f56d4;       
-    text-align: center;  
-    font-size: 3rem;      
-    font-family: Arial, sans-serif; 
-    margin-top: 50px;     
-  }
-</style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #8968cd, #b19cd9);
+      color: white;
+    }
 
+    header {
+      text-align: center;
+      padding: 30px;
+      background-color: rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin: 10px;
+      color: #eee8aa;
+    }
+
+    header h2 {
+      color: #ffd1dc;
+    }
+
+    .contenedor {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .botones {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    button {
+      background-color: #ffb6c1;
+      border: none;
+      padding: 15px 25px;
+      border-radius: 12px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #fff;
+      color: #8968cd;
+      transform: scale(1.05);
+    }
+
+    .vista {
+      display: none;
+      margin-top: 30px;
+      background-color: rgba(255,255,255,0.1);
+      padding: 25px;
+      border-radius: 15px;
+    }
+
+    .activa {
+      display: block;
+    }
+
+    h3 {
+      color: #fffacd;
+    }
+
+    ul {
+      line-height: 1.8;
+    }
+
+    .admin-panel {
+      margin-top: 20px;
+      padding: 20px;
+      background: rgba(0,0,0,0.25);
+      border-radius: 10px;
+    }
+
+    .admin-panel textarea {
+      width: 100%;
+      height: 100px;
+      border-radius: 10px;
+      padding: 10px;
+      border: none;
+      resize: none;
+    }
+
+    .admin-panel button {
+      margin-top: 10px;
+    }
+
+    #mensajeAdmin {
+      margin-top: 15px;
+      color: #fffacd;
+      font-size: 1.1rem;
+    }
+
+  </style>
 </head>
+
 <body>
-  <h1>Vida sana y crecimiento de lavanda</h1>
-  <div id="paec"></div>
+
+  <header>
+    <h1>Vida Sana y Crecimiento de Lavanda</h1>
+
+    <h2>Proyecto PAEC</h2>
+
+    <p><strong>Equipo:</strong> Tu equipo aquí</p>
+
+    <p>
+      <strong>Objetivo:</strong>
+      Promover una vida sana mediante el estudio del crecimiento de la lavanda
+      y la importancia de los hábitos saludables.
+    </p>
+  </header>
+
+  <div class="contenedor">
+
+    <!-- BOTONES -->
+    <div class="botones">
+
+      <button onclick="mostrarVista('admin')">
+        👑 Admin
+      </button>
+
+      <button onclick="mostrarVista('vista2')">
+        🌱 Registro de la Lavanda
+      </button>
+
+      <button onclick="mostrarVista('vista3')">
+        💚 Vida Sana
+      </button>
+
+    </div>
+
+    <!-- ADMIN -->
+    <div id="admin" class="vista activa">
+
+      <h3>👑 Panel de Administrador</h3>
+
+      <p>
+        Desde aquí puedes escribir anuncios o información importante.
+      </p>
+
+      <div class="admin-panel">
+
+        <textarea id="textoAdmin"
+          placeholder="Escribe algo para mostrar en la página..."></textarea>
+
+        <button onclick="guardarMensaje()">
+          Guardar mensaje
+        </button>
+
+      </div>
+
+      <div id="mensajeAdmin"></div>
+
+    </div>
+
+    <!-- VISTA 2 -->
+    <div id="vista2" class="vista">
+
+      <h3>🌱 Registro de la Lavanda</h3>
+
+      <ul>
+        <li><strong>Cronograma:</strong> Seguimiento semanal del crecimiento.</li>
+
+        <li><strong>Evidencia:</strong> Fotografías del desarrollo de la lavanda.</li>
+
+        <li><strong>Cuidados necesarios:</strong>
+          Riego moderado, exposición al sol y tierra bien drenada.
+        </li>
+
+        <li><strong>Problemas detectados:</strong>
+          Hojas secas, exceso de agua o falta de luz.
+        </li>
+      </ul>
+
+    </div>
+
+    <!-- VISTA 3 -->
+    <div id="vista3" class="vista">
+
+      <h3>💚 Opinión de la Vida Sana</h3>
+
+      <p>
+        Una vida sana consiste en mantener hábitos positivos
+        para cuidar el cuerpo y la mente.
+      </p>
+
+      <ul>
+        <li>
+          <strong>Definición:</strong>
+          Tener buena alimentación, ejercicio y descanso adecuado.
+        </li>
+
+        <li>
+          <strong>Opinión del equipo:</strong>
+          La vida sana ayuda a sentirse mejor física y emocionalmente.
+        </li>
+      </ul>
+
+      <h3>🥗 ¿Cómo llevar una vida sana?</h3>
+
+      <ul>
+        <li><strong>Alimentación sana:</strong> Consumir frutas, verduras y agua.</li>
+
+        <li><strong>Hobbies:</strong> Caminar, correr, bailar o practicar deportes.</li>
+
+        <li><strong>Hábitos:</strong> Dormir bien y evitar el estrés.</li>
+      </ul>
+
+    </div>
+
+  </div>
 
   <script>
-    const url = 'https://siuuu-1x0c.onrender.com/paec';
 
-    fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        console.log("Datos:", data);
+    // CAMBIAR VISTAS
+    function mostrarVista(id) {
 
-        const contenedor = document.getElementById('paec');
+      const vistas = document.querySelectorAll('.vista');
 
-        if (data.length > 0) {
-          // ⚠️ cambia "mensaje" si tu columna se llama diferente
-          contenedor.textContent = data[0].paec;
-        } else {
-          contenedor.textContent = "No hay datos";
-        }
-      })
-      .catch(err => {
-        console.error(err);
+      vistas.forEach(v => {
+        v.classList.remove('activa');
       });
+
+      document.getElementById(id).classList.add('activa');
+    }
+
+    // GUARDAR MENSAJE ADMIN
+    function guardarMensaje() {
+
+      const texto = document.getElementById('textoAdmin').value;
+
+      document.getElementById('mensajeAdmin').innerText =
+        "📢 Mensaje del administrador: " + texto;
+    }
+
   </script>
+
 </body>
 </html>
