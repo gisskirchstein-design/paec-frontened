@@ -1,85 +1,118 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>PAEC - Vida Sana y Lavanda</title>
 
+  <!-- SUPABASE -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
   <style>
-    body{
+
+    *{
       margin:0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg,#8968cd,#b19cd9);
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:Arial, sans-serif;
+      background:linear-gradient(135deg,#8968cd,#b19cd9);
       color:white;
+      min-height:100vh;
     }
 
-    header{
-      text-align:center;
-      padding:30px;
-      background:rgba(0,0,0,0.2);
-    }
-
-    header h1{
-      font-size:3rem;
-      color:#eee8aa;
-    }
-
-    header h2{
-      color:#ffd1dc;
-    }
-
-    .contenedor{
-      width:90%;
-      max-width:1200px;
-      margin:auto;
-      padding:20px;
-    }
-
-    .roles{
-      display:flex;
-      justify-content:center;
-      gap:15px;
-      flex-wrap:wrap;
-      margin-bottom:25px;
-    }
-
-    button{
-      padding:15px 25px;
-      border:none;
-      border-radius:12px;
-      background:#ffb6c1;
-      font-weight:bold;
-      cursor:pointer;
-      transition:0.3s;
-    }
-
-    button:hover{
-      background:white;
-      color:#8968cd;
-      transform:scale(1.05);
-    }
-
-    .vista{
+    .pantalla{
       display:none;
-      background:rgba(255,255,255,0.1);
-      padding:25px;
-      border-radius:15px;
+      justify-content:center;
+      align-items:center;
+      min-height:100vh;
+      padding:30px;
     }
 
     .activa{
-      display:block;
+      display:flex;
+    }
+
+    .card{
+      background:rgba(255,255,255,0.12);
+      width:100%;
+      max-width:1000px;
+      padding:35px;
+      border-radius:25px;
+      backdrop-filter:blur(10px);
+      box-shadow:0 0 15px rgba(0,0,0,0.3);
+    }
+
+    h1{
+      color:#fffacd;
+      margin-bottom:15px;
+      text-align:center;
+    }
+
+    h2{
+      color:#ffd1dc;
+      margin-top:25px;
+      margin-bottom:15px;
     }
 
     h3{
       color:#fffacd;
+      margin-top:20px;
+      margin-bottom:10px;
     }
 
-    textarea, input{
-      width:100%;
-      margin-top:10px;
-      padding:10px;
-      border-radius:10px;
+    p{
+      line-height:1.7;
+    }
+
+    ul{
+      margin-left:25px;
+      line-height:1.9;
+    }
+
+    button{
+      background:#ffb6c1;
+      color:black;
       border:none;
+      padding:14px 24px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:bold;
+      transition:0.3s;
+      margin-top:10px;
+    }
+
+    button:hover{
+      background:white;
+      transform:scale(1.05);
+    }
+
+    .botones{
+      display:flex;
+      gap:15px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top:25px;
+    }
+
+    input, textarea{
+      width:100%;
+      padding:12px;
+      margin-top:10px;
+      margin-bottom:20px;
+      border:none;
+      border-radius:10px;
+      font-size:1rem;
+    }
+
+    textarea{
+      resize:none;
+      height:120px;
     }
 
     .imagenes{
@@ -91,267 +124,536 @@
 
     .imagenes img{
       width:250px;
-      border-radius:12px;
+      border-radius:15px;
       border:3px solid white;
-    }
-
-    ul{
-      line-height:1.8;
-    }
-
-    .mensaje{
-      margin-top:20px;
-      background:rgba(0,0,0,0.2);
-      padding:15px;
-      border-radius:10px;
+      object-fit:cover;
     }
 
   </style>
+
 </head>
 
 <body>
 
-  <header>
+<!-- ====================================== -->
+<!-- PANTALLA INICIAL -->
+<!-- ====================================== -->
 
-    <h1 id="titulo">
+<div id="inicio" class="pantalla activa">
+
+  <div class="card">
+
+    <h1>
+      🌱 Vida Sana y Crecimiento de Lavanda
+    </h1>
+
+    <h2 style="text-align:center;">
+      Proyecto PAEC
+    </h2>
+
+    <p style="text-align:center;">
+
+      <strong>Equipo:</strong>
+      Chavas Insanas
+
+    </p>
+
+    <div class="botones">
+
+      <button onclick="entrarUsuario()">
+        👀 Usuario
+      </button>
+
+      <button onclick="mostrarLoginAdmin()">
+        👑 Admin
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ====================================== -->
+<!-- LOGIN ADMIN -->
+<!-- ====================================== -->
+
+<div id="loginAdmin" class="pantalla">
+
+  <div class="card">
+
+    <h1>
+      👑 Acceso Administrador
+    </h1>
+
+    <input
+      type="password"
+      id="passwordAdmin"
+      placeholder="Ingresa la contraseña"
+    >
+
+    <div class="botones">
+
+      <button onclick="verificarAdmin()">
+        Entrar
+      </button>
+
+      <button onclick="volverInicio()">
+        Regresar
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ====================================== -->
+<!-- PANEL ADMIN -->
+<!-- ====================================== -->
+
+<div id="panelAdmin" class="pantalla">
+
+  <div class="card">
+
+    <h1>
+      👑 Panel Administrador
+    </h1>
+
+    <h2>
+      Modificar contenido
+    </h2>
+
+    <label>
+      Título principal
+    </label>
+
+    <input type="text" id="tituloInput">
+
+    <label>
+      Objetivo del proyecto
+    </label>
+
+    <textarea id="objetivoInput"></textarea>
+
+    <label>
+      Opinión sobre vida sana
+    </label>
+
+    <textarea id="opinionInput"></textarea>
+
+    <button onclick="guardarCambios()">
+      Guardar cambios
+    </button>
+
+    <hr style="margin:30px 0;">
+
+    <h2>
+      📸 Subir imágenes
+    </h2>
+
+    <input
+      type="file"
+      id="imagenInput"
+      accept="image/*"
+    >
+
+    <button onclick="subirImagen()">
+      Agregar imagen
+    </button>
+
+    <div class="imagenes" id="galeriaAdmin"></div>
+
+  </div>
+
+</div>
+
+<!-- ====================================== -->
+<!-- PANEL USUARIO -->
+<!-- ====================================== -->
+
+<div id="panelUsuario" class="pantalla">
+
+  <div class="card">
+
+    <h1 id="tituloUsuario">
       Vida Sana y Crecimiento de Lavanda
     </h1>
 
-    <h2>Proyecto PAEC</h2>
+    <h2>
+      Proyecto PAEC
+    </h2>
 
     <p>
       <strong>Equipo:</strong>
       Chavas Insanas
     </p>
 
-    <p id="objetivo">
-      <strong>Objetivo:</strong>
-      Promover una vida sana mediante el estudio del crecimiento
-      de la lavanda y fomentar hábitos saludables.
+    <p id="objetivoUsuario">
+
+      Promover hábitos saludables y analizar
+      el crecimiento de la lavanda.
+
     </p>
 
-  </header>
+    <!-- ========================== -->
+    <!-- REGISTRO LAVANDA -->
+    <!-- ========================== -->
 
-  <div class="contenedor">
+    <h2>
+      🌱 Registro de la Lavanda
+    </h2>
 
-    <!-- BOTONES DE ROLES -->
-    <div class="roles">
+    <ul>
 
-      <button onclick="mostrarVista('admin')">
-        👑 Admin
-      </button>
+      <li>
+        <strong>Cronograma:</strong>
+        Seguimiento semanal del crecimiento.
+      </li>
 
-      <button onclick="mostrarVista('editor')">
-        📸 Segunda Vista
-      </button>
+      <li>
+        <strong>Evidencia del crecimiento:</strong>
+        Fotografías del crecimiento de la lavanda.
+      </li>
 
-      <button onclick="mostrarVista('consumidor')">
-        👀 Tercera Vista
-      </button>
+      <li>
+        <strong>Cuidados necesarios:</strong>
+        Riego moderado, luz solar y tierra drenada.
+      </li>
 
-    </div>
+      <li>
+        <strong>Problemas detectados:</strong>
+        Exceso de agua o falta de luz.
+      </li>
 
-    <!-- ADMIN -->
-    <div id="admin" class="vista activa">
+    </ul>
 
-      <h3>👑 Rol Admin</h3>
+    <div class="imagenes" id="galeriaUsuario"></div>
 
-      <p>
-        El administrador puede modificar la página.
-      </p>
+    <!-- ========================== -->
+    <!-- VIDA SANA -->
+    <!-- ========================== -->
 
-      <label>
-        Cambiar título:
-      </label>
+    <h2>
+      💚 Opinión de la Vida Sana
+    </h2>
 
-      <input type="text" id="nuevoTitulo"
-        placeholder="Nuevo título">
+    <ul>
 
-      <label>
-        Cambiar objetivo:
-      </label>
+      <li>
 
-      <textarea id="nuevoObjetivo"
-        placeholder="Nuevo objetivo"></textarea>
+        <strong>Definición:</strong>
 
-      <button onclick="guardarCambios()">
-        Guardar cambios
-      </button>
+        Tener hábitos saludables físicos y mentales.
 
-    </div>
+      </li>
 
-    <!-- SEGUNDA VISTA -->
-    <div id="editor" class="vista">
+      <li id="opinionUsuario">
 
-      <h3>📸 Segunda Vista</h3>
+        La vida sana ayuda a mejorar nuestra calidad de vida.
 
-      <p>
-        Esta vista SOLO puede agregar imágenes.
-      </p>
+      </li>
 
-      <input type="file" id="inputImagen"
-        accept="image/*">
+    </ul>
 
-      <button onclick="agregarImagen()">
-        Subir imagen
-      </button>
+    <!-- ========================== -->
+    <!-- COMO LLEVAR VIDA SANA -->
+    <!-- ========================== -->
 
-      <div class="imagenes" id="galeria"></div>
+    <h2>
+      🥗 ¿Cómo llevar una vida sana?
+    </h2>
 
-    </div>
+    <ul>
 
-    <!-- TERCERA VISTA -->
-    <div id="consumidor" class="vista">
+      <li>
 
-      <h3>👀 Tercera Vista</h3>
+        <strong>Alimentación sana:</strong>
 
-      <p>
-        Esta vista únicamente puede consumir información.
-      </p>
+        Comer frutas, verduras y tomar agua.
 
-      <div class="mensaje">
+      </li>
 
-        <h3>🌱 Registro de la Lavanda</h3>
+      <li>
 
-        <ul>
-          <li>
-            <strong>Cronograma:</strong>
-            Seguimiento semanal del crecimiento.
-          </li>
+        <strong>Hobbies:</strong>
 
-          <li>
-            <strong>Evidencia:</strong>
-            Fotografías del desarrollo de la lavanda.
-          </li>
+        Bailar, caminar, correr o practicar deportes.
 
-          <li>
-            <strong>Cuidados necesarios:</strong>
-            Riego moderado, exposición al sol y tierra drenada.
-          </li>
+      </li>
 
-          <li>
-            <strong>Problemas detectados:</strong>
-            Exceso de agua o falta de luz solar.
-          </li>
-        </ul>
+      <li>
 
-      </div>
+        <strong>Hábitos:</strong>
 
-      <div class="mensaje">
+        Dormir bien y reducir el estrés.
 
-        <h3>💚 Opinión de Vida Sana</h3>
+      </li>
 
-        <ul>
-
-          <li>
-            <strong>Definición:</strong>
-            Tener hábitos saludables física y mentalmente.
-          </li>
-
-          <li>
-            <strong>Opinión del equipo:</strong>
-            La vida sana ayuda a sentirse mejor y vivir con energía.
-          </li>
-
-        </ul>
-
-      </div>
-
-      <div class="mensaje">
-
-        <h3>🥗 ¿Cómo llevar una vida sana?</h3>
-
-        <ul>
-
-          <li>
-            <strong>Alimentación sana:</strong>
-            Comer frutas, verduras y tomar agua.
-          </li>
-
-          <li>
-            <strong>Hobbies:</strong>
-            Caminar, correr, bailar o practicar deportes.
-          </li>
-
-          <li>
-            <strong>Hábitos:</strong>
-            Dormir bien y reducir el estrés.
-          </li>
-
-        </ul>
-
-      </div>
-
-    </div>
+    </ul>
 
   </div>
 
-  <script>
+</div>
 
-    // CAMBIAR VISTA
-    function mostrarVista(id){
+<script>
 
-      const vistas = document.querySelectorAll('.vista');
+// ============================================
+// 🔥 CONFIGURACIÓN SUPABASE
+// ============================================
 
-      vistas.forEach(v => {
-        v.classList.remove('activa');
-      });
+// 🔥 MODIFICA ESTA PARTE
+const SUPABASE_URL =
+"AQUI_TU_SUPABASE_URL";
 
-      document.getElementById(id).classList.add('activa');
-    }
+// 🔥 MODIFICA ESTA PARTE
+const SUPABASE_KEY =
+"AQUI_TU_SUPABASE_ANON_KEY";
 
-    // ADMIN MODIFICA PÁGINA
-    function guardarCambios(){
+// 🔥 MODIFICA ESTA PARTE
+const TABLA =
+"paec";
 
-      const titulo =
-        document.getElementById('nuevoTitulo').value;
+// ============================================
+// CONEXIÓN
+// ============================================
 
-      const objetivo =
-        document.getElementById('nuevoObjetivo').value;
+const supabaseClient =
+supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
-      if(titulo !== ""){
-        document.getElementById('titulo').innerText = titulo;
-      }
+// ============================================
+// 🔥 MODIFICA ESTA CONTRASEÑA
+// ============================================
 
-      if(objetivo !== ""){
-        document.getElementById('objetivo').innerHTML =
-          "<strong>Objetivo:</strong> " + objetivo;
-      }
+const PASSWORD_ADMIN = "1234";
 
-      alert("Cambios guardados correctamente");
-    }
+// ============================================
+// CAMBIAR PANTALLAS
+// ============================================
 
-    // SEGUNDA VISTA AGREGA IMÁGENES
-    function agregarImagen(){
+function ocultarTodo(){
 
-      const input =
-        document.getElementById('inputImagen');
+  document
+  .querySelectorAll('.pantalla')
+  .forEach(p => {
 
-      const galeria =
-        document.getElementById('galeria');
+    p.classList.remove('activa');
 
-      const archivo = input.files[0];
+  });
+}
 
-      if(!archivo){
-        alert("Selecciona una imagen");
-        return;
-      }
+function volverInicio(){
 
-      const lector = new FileReader();
+  ocultarTodo();
 
-      lector.onload = function(e){
+  document
+  .getElementById('inicio')
+  .classList.add('activa');
+}
 
-        const img = document.createElement('img');
+function mostrarLoginAdmin(){
 
-        img.src = e.target.result;
+  ocultarTodo();
 
-        galeria.appendChild(img);
-      }
+  document
+  .getElementById('loginAdmin')
+  .classList.add('activa');
+}
 
-      lector.readAsDataURL(archivo);
-    }
+// ============================================
+// ENTRAR COMO USUARIO
+// ============================================
 
-  </script>
+async function entrarUsuario(){
+
+  ocultarTodo();
+
+  document
+  .getElementById('panelUsuario')
+  .classList.add('activa');
+
+  await cargarDatos();
+}
+
+// ============================================
+// LOGIN ADMIN
+// ============================================
+
+async function verificarAdmin(){
+
+  const pass =
+  document
+  .getElementById('passwordAdmin')
+  .value;
+
+  if(pass === PASSWORD_ADMIN){
+
+    ocultarTodo();
+
+    document
+    .getElementById('panelAdmin')
+    .classList.add('activa');
+
+    await cargarDatos();
+
+  }else{
+
+    alert("Contraseña incorrecta");
+
+  }
+}
+
+// ============================================
+// CARGAR DATOS
+// ============================================
+
+async function cargarDatos(){
+
+  const { data, error } =
+  await supabaseClient
+  .from(TABLA)
+  .select('*')
+  .eq('id',1)
+  .single();
+
+  if(error){
+
+    console.error(error);
+    return;
+
+  }
+
+  // USUARIO
+
+  document
+  .getElementById('tituloUsuario')
+  .innerText = data.titulo;
+
+  document
+  .getElementById('objetivoUsuario')
+  .innerText = data.objetivo;
+
+  document
+  .getElementById('opinionUsuario')
+  .innerText = data.opinion;
+
+  // ADMIN
+
+  document
+  .getElementById('tituloInput')
+  .value = data.titulo;
+
+  document
+  .getElementById('objetivoInput')
+  .value = data.objetivo;
+
+  document
+  .getElementById('opinionInput')
+  .value = data.opinion;
+}
+
+// ============================================
+// GUARDAR CAMBIOS
+// ============================================
+
+async function guardarCambios(){
+
+  const titulo =
+  document
+  .getElementById('tituloInput')
+  .value;
+
+  const objetivo =
+  document
+  .getElementById('objetivoInput')
+  .value;
+
+  const opinion =
+  document
+  .getElementById('opinionInput')
+  .value;
+
+  const { error } =
+  await supabaseClient
+  .from(TABLA)
+  .update({
+
+    titulo:titulo,
+    objetivo:objetivo,
+    opinion:opinion
+
+  })
+  .eq('id',1);
+
+  if(error){
+
+    console.error(error);
+
+    alert("Error al guardar");
+
+  }else{
+
+    alert("Cambios guardados");
+
+    cargarDatos();
+  }
+}
+
+// ============================================
+// SUBIR IMÁGENES
+// ============================================
+
+function subirImagen(){
+
+  const input =
+  document
+  .getElementById('imagenInput');
+
+  const archivo = input.files[0];
+
+  if(!archivo){
+
+    alert("Selecciona una imagen");
+
+    return;
+  }
+
+  const lector = new FileReader();
+
+  lector.onload = function(e){
+
+    // ADMIN
+
+    const imgAdmin =
+    document.createElement('img');
+
+    imgAdmin.src =
+    e.target.result;
+
+    document
+    .getElementById('galeriaAdmin')
+    .appendChild(imgAdmin);
+
+    // USUARIO
+
+    const imgUsuario =
+    document.createElement('img');
+
+    imgUsuario.src =
+    e.target.result;
+
+    document
+    .getElementById('galeriaUsuario')
+    .appendChild(imgUsuario);
+  }
+
+  lector.readAsDataURL(archivo);
+}
+
+</script>
 
 </body>
 </html>
