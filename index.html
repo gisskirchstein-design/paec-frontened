@@ -197,7 +197,7 @@
           <hr style="margin: 20px 0; border-color: #23233a;">
           <div class="menu">
             <button id="btnMenuEditar" class="active" onclick="cambiarVistaGestion('editar')">Editar Fracciones</button>
-            <button id="btnMenuCorrer" onclick="cambiarVistaGestion('correr')">Configurar Ejecución</button>
+            <button id="btnMenuCorrer" onclick="cannotViewConfig() ? this.style.display='none' : cambiarVistaGestion('correr')">Configurar Ejecución</button>
           </div>
         </div>
         <button onclick="volverInicio()" class="secundario">Salir del Panel</button>
@@ -251,12 +251,7 @@
     const SUPABASE_URL = "https://tdpzbyouoxnxuzngikin.supabase.co";
     const SUPABASE_KEY = "sb_publishable_oT-eHukloJjn98GloN4rfA_Gt7O03kO";
     const TABLA = "paec";
-
-    // Contraseñas de Roles
-    const CREDENCIALES = {
-      "admin": "admin123",       
-      "moderador": "team2026"   
-    };
+    const TABLA_CREDENCIALES = "credenciales_paec";
 
     let supabaseClient = null;
     let rolSesionActual = "usuario"; 
@@ -290,6 +285,10 @@
       document.getElementById('loginEquipo').classList.add('activa');
     }
 
+    function cannotViewConfig() {
+      return rolSesionActual !== 'admin';
+    }
+
     function cambiarVistaGestion(vista) {
       document.querySelectorAll('.sub-vista-gestion').forEach(v => v.style.display = 'none');
       document.getElementById('btnMenuEditar').classList.remove('active');
@@ -299,30 +298,62 @@
         document.getElementById('subVistaEditar').style.display = 'block';
         document.getElementById('btnMenuEditar').classList.add('active');
       } else if (vista === 'correr') {
+        if (cannotViewConfig()) {
+          alert("Acceso denegado a la configuración de ejecución.");
+          return;
+        }
         document.getElementById('subVistaCorrer').style.display = 'block';
         document.getElementById('btnMenuCorrer').classList.add('active');
       }
     }
 
+    // NUEVA LÓGICA: Consulta de contraseñas directo en el servidor de Supabase
     async function verificarAccesoEquipo() {
       const entrada = document.getElementById('passwordRol').value.trim();
 
-      if (entrada === CREDENCIALES.admin) {
-        rolSesionActual = "admin";
-      } else if (entrada === CREDENCIALES.moderador) {
-        rolSesionActual = "moderador";
-      } else {
-        alert("Credencial inválida para el equipo de desarrollo.");
+      if (!entrada) {
+        alert("Por favor introduce una clave.");
         return;
       }
 
-      document.getElementById('badgeRolActual').innerText = rolSesionActual.toUpperCase();
-      
-      ocultarTodo();
-      document.getElementById('panelGestion').classList.add('activa');
-      cambiarVistaGestion('editar');
-      
-      await jalarDatosDesdeAPI(true);
+      if (!supabaseClient) {
+        alert("Error de conexión con la base de datos.");
+        return;
+      }
+
+      try {
+        // Buscamos en la base de datos si existe algún rol con la contraseña ingresada
+        const { data, error } = await supabaseClient
+          .from(TABLA_CREDENCIALES)
+          .select('rol')
+          .eq('clave_acceso', entrada)
+          .single();
+
+        if (error || !data) {
+          alert("Credencial inválida para el equipo de desarrollo.");
+          return;
+        }
+
+        // Si la encuentra, asigna el rol correspondiente devuelto por el servidor
+        rolSesionActual = data.rol;
+        document.getElementById('badgeRolActual').innerText = rolSesionActual.toUpperCase();
+        
+        // Controlar visibilidad del botón de ejecución en la barra lateral según el rol obtenido
+        if (cannotViewConfig()) {
+          document.getElementById('btnMenuCorrer').style.display = 'none';
+        } else {
+          document.getElementById('btnMenuCorrer').style.display = 'block';
+        }
+
+        ocultarTodo();
+        document.getElementById('panelGestion').classList.add('activa');
+        cambiarVistaGestion('editar');
+        
+        await jalarDatosDesdeAPI(true);
+
+      } catch (err) {
+        alert("Error al verificar credenciales: " + err.message);
+      }
     }
 
     async function entrarUsuario() {
@@ -431,7 +462,7 @@
     }
 
     async function guardarConfiguracionEjecucion() {
-      if (rolSesionActual !== 'admin') {
+      if (cannotViewConfig()) {
         alert("Acceso Denegado: Los usuarios menores solo editan contenido, no alteran las secciones activas a ejecutar.");
         return;
       }
