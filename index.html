@@ -15,10 +15,10 @@
       box-sizing: border-box;
     }
 
-body {
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: linear-gradient(135deg, #ff85d5, #e79eff, #b8e4ff);
-  color: #4b3557;
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #1b1b2f;
+      color: white;
     }
 
     .pantalla {
@@ -38,24 +38,27 @@ body {
     }
 
     .card {
-     background: rgba(255,255,255,0.75);
-     backdrop-filter: blur(10px);
+      background: #23233a;
+      width: 100%;
+      max-width: 500px;
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     }
 
     h1 { color: #ffb6c1; margin-bottom: 15px; }
     h2 { color: #fffacd; margin-top: 25px; margin-bottom: 15px; }
     p { line-height: 1.7; margin-bottom: 10px; }
 
-button {
-  background: linear-gradient(135deg, #ff85d5, #e79eff);
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: 0.3s;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    button {
+      background: #ffb6c1;
+      color: black;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
     }
 
     button:hover {
@@ -93,7 +96,12 @@ button {
     .layout { display: flex; width: 100%; min-height: 100vh; }
 
     .sidebar {
-      background: linear-gradient(180deg, #ff85d5, #e79eff);
+      width: 280px;
+      background: #151521;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .logo { font-size: 1.6rem; font-weight: bold; color: #ffb6c1; margin-bottom: 40px; }
