@@ -108,8 +108,8 @@
     .badge-rol { font-size: 0.9rem; color: #BFFCC6; background: #FFC9DE; padding: 5px 10px; border-radius: 8px; margin-top: 5px; display: inline-block; }
 
     .menu { display: flex; flex-direction: column; gap: 12px; }
-    .menu button { width: 100%; text-align: left; background: #FFC9DE; color: white; }
-    .menu button:hover, .menu button.active { background: #ffb6c1; color: black; }
+    .menu button { width: 100%; text-align: left; background: #FFABAB; color: white; }
+    .menu button:hover, .menu button.active { background: #FFABAB; color: black; }
 
     .content { flex: 1; padding: 40px; overflow-y: auto; }
     .panel { background: #C5A3FF; padding: 30px; border-radius: 25px; margin-bottom: 25px; }
@@ -166,7 +166,7 @@
   <div id="inicio" class="pantalla activa centerBox">
     <div class="card">
       <h1>Proyecto PAEC</h1>
-      <h2 style="text-align:center; color:#fffacd;">Vida Sana y Lavanda</h2>
+      <h2 style="text-align:center; color:#463E8E;">Vida Sana y Lavanda</h2>
       <p style="text-align:center;"><strong>Equipo:</strong> Chavas Insanas</p>
       <div class="botones">
         <button onclick="entrarUsuario()" style="flex: 1;">Ver Proyecto</button>
@@ -194,7 +194,7 @@
           <div class="logo">GESTIÓN</div>
           <p>Nivel asignado:</p>
           <div id="badgeRolActual" class="badge-rol">Cargando...</div>
-          <hr style="margin: 20px 0; border-color: #23233a;">
+          <hr style="margin: 20px 0; border-color: #463E8E;">
           <div class="menu">
             <button id="btnMenuEditar" class="active" onclick="cambiarVistaGestion('editar')">Editar Fracciones</button>
             <button id="btnMenuCorrer" onclick="cannotViewConfig() ? this.style.display='none' : cambiarVistaGestion('correr')">Configurar Ejecución</button>
@@ -226,7 +226,7 @@
             
             <hr style="margin:30px 0; border-color: #2f2f4f;">
             
-            <button onclick="guardarConfiguracionEjecucion()" style="background-color: #fffacd; color: black; width: 100%;">Guardar Configuración de Ejecución</button>
+            <button onclick="guardarConfiguracionEjecucion()" style="background-color: #463E8E; color: black; width: 100%;">Guardar Configuración de Ejecución</button>
           </div>
         </div>
       </div>
@@ -513,7 +513,7 @@
         
         panelSeccion.innerHTML = `
           <h1>${fraccion.titulo}</h1>
-          <hr style="margin: 15px 0; border-color: #2f2f4f;">
+          <hr style="margin: 15px 0; border-color: #463E8E;">
           <p style="white-space: pre-wrap;">${fraccion.contenido || 'Sin descripción asignada por el equipo.'}</p>
         `;
 
