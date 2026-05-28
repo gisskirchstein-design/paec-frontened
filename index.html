@@ -17,7 +17,7 @@
 
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
-      background: #fcfce3;
+      background: #ea9ab2;
       color: #4a4a4a;
     }
 
@@ -47,7 +47,7 @@
     }
 
     h1 { color: #e27396; margin-bottom: 15px; }
-    h2 { color: #ea9ab2; margin-top: 25px; margin-bottom: 15px; }
+    h2 { color: #e27396; margin-top: 25px; margin-bottom: 15px; }
     p { line-height: 1.7; margin-bottom: 10px; }
 
     button {
@@ -63,13 +63,13 @@
 
     button:hover {
       transform: scale(1.05);
-      background: #ea9ab2;
+      background: #d86b8d;
     }
 
     button.secundario {
       background: #b3dee2;
       color: #4a4a4a;
-      border: 1px solid #ea9ab2;
+      border: 1px solid #e27396;
     }
 
     .botones {
@@ -86,7 +86,7 @@
       border-radius: 12px;
       margin-top: 10px;
       margin-bottom: 20px;
-      background: #fcfce3;
+      background: #fce3ef;
       color: #4a4a4a;
     }
 
@@ -104,19 +104,58 @@
       justify-content: space-between;
     }
 
-    .logo { font-size: 1.6rem; font-weight: bold; color: #e27396; margin-bottom: 40px; }
-    .badge-rol { font-size: 0.9rem; color: #4a4a4a; background: #fcfce3; padding: 5px 10px; border-radius: 8px; margin-top: 5px; display: inline-block; }
+    .logo { 
+      font-size: 1.6rem; 
+      font-weight: bold; 
+      color: #e27396; 
+      margin-bottom: 40px; 
+    }
 
-    .menu { display: flex; flex-direction: column; gap: 12px; }
-    .menu button { width: 100%; text-align: left; background: #ffffff; color: #4a4a4a; }
-    .menu button:hover, .menu button.active { background: #e27396; color: white; }
+    .badge-rol { 
+      font-size: 0.9rem; 
+      color: #4a4a4a; 
+      background: #fce3ef; 
+      padding: 5px 10px; 
+      border-radius: 8px; 
+      margin-top: 5px; 
+      display: inline-block; 
+    }
 
-    .content { flex: 1; padding: 40px; overflow-y: auto; }
-    .panel { background: #ffffff; padding: 30px; border-radius: 25px; margin-bottom: 25px; }
+    .menu { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 12px; 
+    }
+
+    .menu button { 
+      width: 100%; 
+      text-align: left; 
+      background: #ffffff; 
+      color: #4a4a4a; 
+    }
+
+    .menu button:hover, 
+    .menu button.active { 
+      background: #e27396; 
+      color: white; 
+    }
+
+    .content { 
+      flex: 1; 
+      padding: 40px; 
+      overflow-y: auto; 
+    }
+
+    .panel { 
+      background: #ffffff; 
+      padding: 30px; 
+      border-radius: 25px; 
+      margin-bottom: 25px; 
+    }
 
     /* FRACCIONES Y CONFIGURACIÓN */
     .fraccion-card {
-      background: #fcfce3;
+      background: #fce3ef;
       padding: 20px;
       border-radius: 15px;
       margin-bottom: 20px;
@@ -124,7 +163,7 @@
     }
     
     .bloqueado {
-      border-left: 5px solid #ea9ab2 !important;
+      border-left: 5px solid #b3dee2 !important;
       opacity: 0.6;
     }
 
@@ -132,7 +171,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #fcfce3;
+      background: #fce3ef;
       padding: 15px 20px;
       border-radius: 12px;
       margin-bottom: 10px;
@@ -144,20 +183,57 @@
       width: 50px;
       height: 26px;
     }
-    .switch input { opacity: 0; width: 0; height: 0; }
-    .slider {
-      position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
-      background-color: #ccc; transition: .4s; border-radius: 34px;
-    }
-    .slider:before {
-      position: absolute; content: ""; height: 18px; width: 18px; left: 4px; bottom: 4px;
-      background-color: white; transition: .4s; border-radius: 50%;
-    }
-    input:checked + .slider { background-color: #e27396; }
-    input:checked + .slider:before { transform: translateX(24px); }
 
-    .imagenes { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; }
-    .imagenes img { width: 200px; border-radius: 15px; object-fit: cover; }
+    .switch input { 
+      opacity: 0; 
+      width: 0; 
+      height: 0; 
+    }
+
+    .slider {
+      position: absolute; 
+      cursor: pointer; 
+      top: 0; 
+      left: 0; 
+      right: 0; 
+      bottom: 0;
+      background-color: #ccc; 
+      transition: .4s; 
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      position: absolute; 
+      content: ""; 
+      height: 18px; 
+      width: 18px; 
+      left: 4px; 
+      bottom: 4px;
+      background-color: white; 
+      transition: .4s; 
+      border-radius: 50%;
+    }
+
+    input:checked + .slider { 
+      background-color: #e27396; 
+    }
+
+    input:checked + .slider:before { 
+      transform: translateX(24px); 
+    }
+
+    .imagenes { 
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 15px; 
+      margin-top: 20px; 
+    }
+
+    .imagenes img { 
+      width: 200px; 
+      border-radius: 15px; 
+      object-fit: cover; 
+    }
   </style>
 </head>
 
@@ -166,11 +242,15 @@
   <div id="inicio" class="pantalla activa centerBox">
     <div class="card">
       <h1>Proyecto PAEC</h1>
-      <h2 style="text-align:center; color:#ea9ab2;">Vida Sana y Lavanda</h2>
+      <h2 style="text-align:center; color:#e27396;">Vida Sana y Lavanda</h2>
       <p style="text-align:center;"><strong>Equipo:</strong> Chavas Insanas</p>
+
       <div class="botones">
         <button onclick="entrarUsuario()" style="flex: 1;">Ver Proyecto</button>
-        <button onclick="mostrarLoginEquipo()" class="secundario" style="flex: 1;">Gestión / Equipo</button>
+
+        <button onclick="mostrarLoginEquipo()" class="secundario" style="flex: 1;">
+          Gestión / Equipo
+        </button>
       </div>
     </div>
   </div>
@@ -178,70 +258,116 @@
   <div id="loginEquipo" class="pantalla centerBox">
     <div class="card">
       <h1>Acceso al Sistema</h1>
-      <p>Introduce la contraseña de tu nivel de usuario para gestionar las fracciones o la ejecución.</p>
+
+      <p>
+        Introduce la contraseña de tu nivel de usuario para gestionar las fracciones o la ejecución.
+      </p>
+
       <input type="password" id="passwordRol" placeholder="Ingresa la credencial de acceso">
+
       <div class="botones">
         <button onclick="verificarAccesoEquipo()" style="flex: 1;">Entrar</button>
-        <button onclick="volverInicio()" class="secundario" style="flex: 1;">Regresar</button>
+
+        <button onclick="volverInicio()" class="secundario" style="flex: 1;">
+          Regresar
+        </button>
       </div>
     </div>
   </div>
 
   <div id="panelGestion" class="pantalla">
     <div class="layout">
+
       <div class="sidebar">
         <div>
           <div class="logo">GESTIÓN</div>
+
           <p>Nivel asignado:</p>
+
           <div id="badgeRolActual" class="badge-rol">Cargando...</div>
-          <hr style="margin: 20px 0; border-color: #ea9ab2;">
+
+          <hr style="margin: 20px 0; border-color: #e27396;">
+
           <div class="menu">
-            <button id="btnMenuEditar" class="active" onclick="cambiarVistaGestion('editar')">Editar Fracciones</button>
-            <button id="btnMenuCorrer" onclick="cannotViewConfig() ? this.style.display='none' : cambiarVistaGestion('correr')">Configurar Ejecución</button>
+            <button id="btnMenuEditar" class="active"
+              onclick="cambiarVistaGestion('editar')">
+              Editar Fracciones
+            </button>
+
+            <button id="btnMenuCorrer"
+              onclick="cannotViewConfig() ? this.style.display='none' : cambiarVistaGestion('correr')">
+              Configurar Ejecución
+            </button>
           </div>
         </div>
-        <button onclick="volverInicio()" class="secundario">Salir del Panel</button>
+
+        <button onclick="volverInicio()" class="secundario">
+          Salir del Panel
+        </button>
       </div>
 
       <div class="content">
+
         <div id="subVistaEditar" class="sub-vista-gestion">
           <div class="panel">
             <h1>Editor de Fracciones del API</h1>
-            <p>Modifica el contenido específico de las secciones asignadas a tu nivel jerárquico.</p>
+
+            <p>
+              Modifica el contenido específico de las secciones asignadas a tu nivel jerárquico.
+            </p>
+
             <div id="contenedorEditoresFracciones"></div>
           </div>
         </div>
 
         <div id="subVistaCorrer" class="sub-vista-gestion" style="display: none;">
           <div class="panel">
+
             <h1>Control de Ejecución (Módulos API)</h1>
-            <p>Activa o desactiva qué fracciones del proyecto se van a procesar y renderizar en la vista pública de usuario.</p>
+
+            <p>
+              Activa o desactiva qué fracciones del proyecto se van a procesar y renderizar en la vista pública de usuario.
+            </p>
+
             <div id="contenedorConfiguracionCorrer"></div>
-            
-            <hr style="margin:30px 0; border-color: #ea9ab2;">
-            
+
+            <hr style="margin:30px 0; border-color: #e27396;">
+
             <h2>Cargar Imagen a la Fracción de Lavanda</h2>
+
             <input type="file" id="imagenInput" accept="image/*" style="margin-top: 10px;">
+
             <button onclick="subirImagen()">Subir Imagen al API</button>
-            
-            <hr style="margin:30px 0; border-color: #ea9ab2;">
-            
-            <button onclick="guardarConfiguracionEjecucion()" style="background-color: #b3dee2; color: #4a4a4a; width: 100%;">Guardar Configuración de Ejecución</button>
+
+            <hr style="margin:30px 0; border-color: #e27396;">
+
+            <button onclick="guardarConfiguracionEjecucion()"
+              style="background-color: #b3dee2; color: #4a4a4a; width: 100%;">
+              Guardar Configuración de Ejecución
+            </button>
+
           </div>
         </div>
+
       </div>
     </div>
   </div>
 
   <div id="panelUsuario" class="pantalla">
     <div class="layout">
+
       <div class="sidebar">
         <div>
           <div class="logo">PAEC</div>
+
           <div class="menu" id="menuNavegacionUsuario"></div>
         </div>
-        <button onclick="volverInicio()" class="secundario">Regresar</button>
+
+        <button onclick="volverInicio()" class="secundario">
+          Regresar
+        </button>
       </div>
+
       <div class="content" id="contenedorContenidoUsuario"></div>
     </div>
   </div>
@@ -254,8 +380,8 @@
     const TABLA_CREDENCIALES = "credenciales_paec";
 
     let supabaseClient = null;
-    let rolSesionActual = "usuario"; 
-    let datosLocalesFracciones = []; 
+    let rolSesionActual = "usuario";
+    let datosLocalesFracciones = [];
 
     document.addEventListener("DOMContentLoaded", () => {
       try {
@@ -291,6 +417,7 @@
 
     function cambiarVistaGestion(vista) {
       document.querySelectorAll('.sub-vista-gestion').forEach(v => v.style.display = 'none');
+
       document.getElementById('btnMenuEditar').classList.remove('active');
       document.getElementById('btnMenuCorrer').classList.remove('active');
 
@@ -298,10 +425,12 @@
         document.getElementById('subVistaEditar').style.display = 'block';
         document.getElementById('btnMenuEditar').classList.add('active');
       } else if (vista === 'correr') {
+
         if (cannotViewConfig()) {
           alert("Acceso denegado a la configuración de ejecución.");
           return;
         }
+
         document.getElementById('subVistaCorrer').style.display = 'block';
         document.getElementById('btnMenuCorrer').classList.add('active');
       }
@@ -333,8 +462,10 @@
         }
 
         rolSesionActual = data.rol;
-        document.getElementById('badgeRolActual').innerText = rolSesionActual.toUpperCase();
-        
+
+        document.getElementById('badgeRolActual').innerText =
+          rolSesionActual.toUpperCase();
+
         if (cannotViewConfig()) {
           document.getElementById('btnMenuCorrer').style.display = 'none';
         } else {
@@ -342,9 +473,11 @@
         }
 
         ocultarTodo();
+
         document.getElementById('panelGestion').classList.add('activa');
+
         cambiarVistaGestion('editar');
-        
+
         await jalarDatosDesdeAPI(true);
 
       } catch (err) {
@@ -354,8 +487,11 @@
 
     async function entrarUsuario() {
       rolSesionActual = "usuario";
+
       ocultarTodo();
+
       document.getElementById('panelUsuario').classList.add('activa');
+
       await jalarDatosDesdeAPI(false);
     }
 
@@ -385,145 +521,258 @@
     }
 
     function construirPanelEdicionEstructural() {
-      const contenedor = document.getElementById('contenedorEditoresFracciones');
+      const contenedor =
+        document.getElementById('contenedorEditoresFracciones');
+
       contenedor.innerHTML = "";
 
-      const jerarquia = { "usuario": 1, "moderador": 2, "admin": 3 };
+      const jerarquia = {
+        "usuario": 1,
+        "moderador": 2,
+        "admin": 3
+      };
+
       const nivelPermisoUsuario = jerarquia[rolSesionActual];
 
       datosLocalesFracciones.forEach(fraccion => {
-        const nivelPermisoRequerido = jerarquia[fraccion.rol_minimo] || 1;
-        const tienePermisoDenegado = nivelPermisoUsuario < nivelPermisoRequerido;
+
+        const nivelPermisoRequerido =
+          jerarquia[fraccion.rol_minimo] || 1;
+
+        const tienePermisoDenegado =
+          nivelPermisoUsuario < nivelPermisoRequerido;
 
         const div = document.createElement('div');
-        div.className = `fraccion-card ${tienePermisoDenegado ? 'bloqueado' : ''}`;
+
+        div.className =
+          `fraccion-card ${tienePermisoDenegado ? 'bloqueado' : ''}`;
 
         div.innerHTML = `
-          <h3>${fraccion.titulo} <span style="font-size:0.8rem; color:#e27396;">[Clave: ${fraccion.clave_seccion}]</span></h3>
-          <p style="font-size:0.85rem; color:#ea9ab2;">Nivel mínimo requerido: <strong>${fraccion.rol_minimo.toUpperCase()}</strong></p>
-          
+          <h3>
+            ${fraccion.titulo}
+            <span style="font-size:0.8rem; color:#e27396;">
+              [Clave: ${fraccion.clave_seccion}]
+            </span>
+          </h3>
+
+          <p style="font-size:0.85rem; color:#d86b8d;">
+            Nivel mínimo requerido:
+            <strong>${fraccion.rol_minimo.toUpperCase()}</strong>
+          </p>
+
           <label>Título de la Sección</label>
-          <input type="text" id="input_tit_${fraccion.clave_seccion}" value="${fraccion.titulo}" ${tienePermisoDenegado ? 'disabled' : ''}>
-          
+
+          <input type="text"
+            id="input_tit_${fraccion.clave_seccion}"
+            value="${fraccion.titulo}"
+            ${tienePermisoDenegado ? 'disabled' : ''}>
+
           <label>Contenido / Texto Fraccionado</label>
-          <textarea id="txt_cont_${fraccion.clave_seccion}" ${tienePermisoDenegado ? 'disabled' : ''}>${fraccion.contenido || ''}</textarea>
-          
-          ${tienePermisoDenegado 
-            ? `<p style="color:#e27396; font-weight:bold; font-size:0.9rem;">Tu rol menor no tiene autorización para modificar esta sección.</p>`
-            : `<button onclick="actualizarFraccionEspecifica('${fraccion.clave_seccion}')">Guardar Fracción</button>`
+
+          <textarea
+            id="txt_cont_${fraccion.clave_seccion}"
+            ${tienePermisoDenegado ? 'disabled' : ''}>${fraccion.contenido || ''}</textarea>
+
+          ${tienePermisoDenegado
+            ? `<p style="color:#e27396; font-weight:bold; font-size:0.9rem;">
+                Tu rol menor no tiene autorización para modificar esta sección.
+              </p>`
+            : `<button onclick="actualizarFraccionEspecifica('${fraccion.clave_seccion}')">
+                Guardar Fracción
+              </button>`
           }
         `;
+
         contenedor.appendChild(div);
       });
     }
 
     function construirSegundaVistaControlCorrer() {
-      const contenedor = document.getElementById('contenedorConfiguracionCorrer');
+      const contenedor =
+        document.getElementById('contenedorConfiguracionCorrer');
+
       contenedor.innerHTML = "";
 
       datosLocalesFracciones.forEach(fraccion => {
+
         const div = document.createElement('div');
+
         div.className = "switch-container";
+
         div.innerHTML = `
           <div>
             <strong>${fraccion.titulo}</strong>
-            <div style="font-size:0.8rem; color:#e27396;">Segmento: ${fraccion.clave_seccion}</div>
+
+            <div style="font-size:0.8rem; color:#e27396;">
+              Segmento: ${fraccion.clave_seccion}
+            </div>
           </div>
+
           <label class="switch">
-            <input type="checkbox" id="switch_run_${fraccion.clave_seccion}" ${fraccion.activa ? 'checked' : ''}>
+            <input type="checkbox"
+              id="switch_run_${fraccion.clave_seccion}"
+              ${fraccion.activa ? 'checked' : ''}>
+
             <span class="slider"></span>
           </label>
         `;
+
         contenedor.appendChild(div);
       });
     }
 
     async function actualizarFraccionEspecifica(clave) {
-      const nuevoTitulo = document.getElementById(`input_tit_${clave}`).value;
-      const nuevoContenido = document.getElementById(`txt_cont_${clave}`).value;
+
+      const nuevoTitulo =
+        document.getElementById(`input_tit_${clave}`).value;
+
+      const nuevoContenido =
+        document.getElementById(`txt_cont_${clave}`).value;
 
       try {
+
         const { error } = await supabaseClient
           .from(TABLA)
-          .update({ titulo: nuevoTitulo, contenido: nuevoContenido })
+          .update({
+            titulo: nuevoTitulo,
+            contenido: nuevoContenido
+          })
           .eq('clave_seccion', clave);
 
         if (error) throw error;
 
         alert(`Fracción [${clave}] actualizada exitosamente en el API.`);
+
         await jalarDatosDesdeAPI(true);
+
       } catch (err) {
         alert("Error al actualizar la fracción: " + err.message);
       }
     }
 
     async function guardarConfiguracionEjecucion() {
+
       if (cannotViewConfig()) {
-        alert("Acceso Denegado: Los usuarios menores solo editan contenido, no alteran las secciones activas a ejecutar.");
+        alert("Acceso Denegado.");
         return;
       }
 
       try {
-        const promesasActualizacion = datosLocalesFracciones.map(fraccion => {
-          const estaActivo = document.getElementById(`switch_run_${fraccion.clave_seccion}`).checked;
-          return supabaseClient
-            .from(TABLA)
-            .update({ activa: estaActivo })
-            .eq('clave_seccion', fraccion.clave_seccion);
-        });
+
+        const promesasActualizacion =
+          datosLocalesFracciones.map(fraccion => {
+
+            const estaActivo =
+              document.getElementById(
+                `switch_run_${fraccion.clave_seccion}`
+              ).checked;
+
+            return supabaseClient
+              .from(TABLA)
+              .update({ activa: estaActivo })
+              .eq('clave_seccion', fraccion.clave_seccion);
+          });
 
         await Promise.all(promesasActualizacion);
-        alert("Configuración de ejecución guardada. El flujo del usuario ha sido recalculado.");
+
+        alert("Configuración de ejecución guardada.");
+
         await jalarDatosDesdeAPI(true);
 
       } catch (err) {
-        alert("Error al inyectar cambios de ejecución: " + err.message);
+        alert("Error al inyectar cambios: " + err.message);
       }
     }
 
     function construirVistaUsuarioPublico() {
-      const menuNavegacion = document.getElementById('menuNavegacionUsuario');
-      const contenedorContenido = document.getElementById('contenedorContenidoUsuario');
+
+      const menuNavegacion =
+        document.getElementById('menuNavegacionUsuario');
+
+      const contenedorContenido =
+        document.getElementById('contenedorContenidoUsuario');
 
       menuNavegacion.innerHTML = "";
       contenedorContenido.innerHTML = "";
 
-      const fraccionesCorriendo = datosLocalesFracciones.filter(f => f.activa === true);
+      const fraccionesCorriendo =
+        datosLocalesFracciones.filter(f => f.activa === true);
 
       if (fraccionesCorriendo.length === 0) {
-        contenedorContenido.innerHTML = "<h1>Próximamente</h1><p>El administrador no ha desplegado ninguna sección para ejecución en este momento.</p>";
+
+        contenedorContenido.innerHTML = `
+          <h1>Próximamente</h1>
+          <p>
+            El administrador no ha desplegado ninguna sección.
+          </p>
+        `;
+
         return;
       }
 
       fraccionesCorriendo.forEach((fraccion) => {
+
         const btnMenu = document.createElement('button');
-        btnMenu.innerText = fraccion.titulo.split(" ")[0] + " " + fraccion.clave_seccion.toUpperCase();
+
+        btnMenu.innerText =
+          fraccion.titulo.split(" ")[0] +
+          " " +
+          fraccion.clave_seccion.toUpperCase();
+
         btnMenu.onclick = () => {
-          document.getElementById(`render_sec_${fraccion.clave_seccion}`).scrollIntoView({ behavior: 'smooth' });
+          document.getElementById(
+            `render_sec_${fraccion.clave_seccion}`
+          ).scrollIntoView({
+            behavior: 'smooth'
+          });
         };
+
         menuNavegacion.appendChild(btnMenu);
 
         const panelSeccion = document.createElement('div');
+
         panelSeccion.className = "panel";
-        panelSeccion.id = `render_sec_${fraccion.clave_seccion}`;
-        
+
+        panelSeccion.id =
+          `render_sec_${fraccion.clave_seccion}`;
+
         panelSeccion.innerHTML = `
           <h1>${fraccion.titulo}</h1>
-          <hr style="margin: 15px 0; border-color: #ea9ab2;">
-          <p style="white-space: pre-wrap;">${fraccion.contenido || 'Sin descripción asignada por el equipo.'}</p>
+
+          <hr style="margin: 15px 0; border-color: #e27396;">
+
+          <p style="white-space: pre-wrap;">
+            ${fraccion.contenido || 'Sin descripción asignada por el equipo.'}
+          </p>
         `;
 
         if (fraccion.url_imagen) {
+
           panelSeccion.innerHTML += `
-            <h3 style="margin-top:20px;">Registro Visual Guardado</h3>
+            <h3 style="margin-top:20px;">
+              Registro Visual Guardado
+            </h3>
+
             <div class="imagenes">
-              <img src="${fraccion.url_imagen}" alt="Progreso" style="max-width:100%; width:350px; border-radius:15px; border: 2px solid #e27396;">
+              <img src="${fraccion.url_imagen}"
+                alt="Progreso"
+                style="max-width:100%;
+                width:350px;
+                border-radius:15px;
+                border: 2px solid #e27396;">
             </div>
           `;
+
         } else if (fraccion.clave_seccion === 'lavanda') {
+
           panelSeccion.innerHTML += `
-            <h3 style="margin-top:20px;">Registro Visual</h3>
-            <p style="color:#ea9ab2; font-size:0.9rem;">No se ha subido ninguna foto para esta fracción aún.</p>
+            <h3 style="margin-top:20px;">
+              Registro Visual
+            </h3>
+
+            <p style="color:#d86b8d; font-size:0.9rem;">
+              No se ha subido ninguna foto para esta fracción aún.
+            </p>
           `;
         }
 
@@ -532,7 +781,9 @@
     }
 
     function subirImagen() {
+
       const input = document.getElementById('imagenInput');
+
       const archivo = input.files[0];
 
       if (!archivo) {
@@ -541,20 +792,23 @@
       }
 
       if (archivo.size > 1.5 * 1024 * 1024) {
-        alert("La imagen es muy pesada. Intenta con una de menos de 1.5 MB.");
+        alert("La imagen es muy pesada.");
         return;
       }
 
       const lector = new FileReader();
+
       lector.onload = async function (e) {
+
         const base64Image = e.target.result;
 
         if (!supabaseClient) {
-          alert("No hay conexión con el API para guardar la foto.");
+          alert("No hay conexión con el API.");
           return;
         }
 
         try {
+
           const { error } = await supabaseClient
             .from(TABLA)
             .update({ url_imagen: base64Image })
@@ -563,15 +817,17 @@
           if (error) throw error;
 
           alert("Imagen guardada permanentemente en el API.");
-          await jalarDatosDesdeAPI(true); 
+
+          await jalarDatosDesdeAPI(true);
 
         } catch (err) {
           alert("Error al subir al API: " + err.message);
         }
       }
+
       lector.readAsDataURL(archivo);
     }
   </script>
-</body>
 
+</body>
 </html>
