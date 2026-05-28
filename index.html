@@ -17,7 +17,7 @@
 
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
-      background: #FFABAB;
+      background: #1b1b2f;
       color: white;
     }
 
@@ -38,7 +38,7 @@
     }
 
     .card {
-      background: #C5A3FF;
+      background: #23233a;
       width: 100%;
       max-width: 500px;
       padding: 40px;
@@ -46,12 +46,12 @@
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     }
 
-    h1 { color: #463E8E; margin-bottom: 15px; }
-    h2 { color: #463E8E; margin-top: 25px; margin-bottom: 15px; }
-    p { line-height: 1.7; margin-bottom: 10px; color:463E8E; }
+    h1 { color: #ffb6c1; margin-bottom: 15px; }
+    h2 { color: #fffacd; margin-top: 25px; margin-bottom: 15px; }
+    p { line-height: 1.7; margin-bottom: 10px; }
 
     button {
-      background: #FFCBC1;
+      background: #ffb6c1;
       color: black;
       border: none;
       padding: 12px 20px;
@@ -67,9 +67,9 @@
     }
 
     button.secundario {
-      background: #FFCBC1;
-      color: black;
-      border: 1px solid #463E8E;
+      background: #2f2f4f;
+      color: white;
+      border: 1px solid #ffb6c1;
     }
 
     .botones {
@@ -86,8 +86,8 @@
       border-radius: 12px;
       margin-top: 10px;
       margin-bottom: 20px;
-      background: #FFC9DE;
-      color: black;
+      background: #2f2f4f;
+      color: white;
     }
 
     textarea { resize: none; height: 100px; }
@@ -97,26 +97,26 @@
 
     .sidebar {
       width: 280px;
-      background: #FFABAB;
+      background: #151521;
       padding: 30px 20px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
 
-    .logo { font-size: 1.6rem; font-weight: bold; color: #463E8E; margin-bottom: 40px; }
-    .badge-rol { font-size: 0.9rem; color: #463E8E; background: #C5A3FF; padding: 5px 10px; border-radius: 8px; margin-top: 5px; display: inline-block; }
+    .logo { font-size: 1.6rem; font-weight: bold; color: #ffb6c1; margin-bottom: 40px; }
+    .badge-rol { font-size: 0.9rem; color: #fffacd; background: #23233a; padding: 5px 10px; border-radius: 8px; margin-top: 5px; display: inline-block; }
 
     .menu { display: flex; flex-direction: column; gap: 12px; }
-    .menu button { width: 100%; text-align: left; background: #C5A3FF; color: white; }
-    .menu button:hover, .menu button.active { background: #C5A3FF; color: black; }
+    .menu button { width: 100%; text-align: left; background: #23233a; color: white; }
+    .menu button:hover, .menu button.active { background: #ffb6c1; color: black; }
 
     .content { flex: 1; padding: 40px; overflow-y: auto; }
-    .panel { background: #C5A3FF; padding: 30px; border-radius: 25px; margin-bottom: 25px; }
+    .panel { background: #23233a; padding: 30px; border-radius: 25px; margin-bottom: 25px; }
 
     /* FRACCIONES Y CONFIGURACIÓN */
     .fraccion-card {
-      background: #FFBEBC;
+      background: #2f2f4f;
       padding: 20px;
       border-radius: 15px;
       margin-bottom: 20px;
@@ -132,7 +132,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #FFABAB;
+      background: #2f2f4f;
       padding: 15px 20px;
       border-radius: 12px;
       margin-bottom: 10px;
@@ -166,7 +166,7 @@
   <div id="inicio" class="pantalla activa centerBox">
     <div class="card">
       <h1>Proyecto PAEC</h1>
-      <h2 style="text-align:center; color:#463E8E;">Vida Sana y Lavanda</h2>
+      <h2 style="text-align:center; color:#fffacd;">Vida Sana y Lavanda</h2>
       <p style="text-align:center;"><strong>Equipo:</strong> Chavas Insanas</p>
       <div class="botones">
         <button onclick="entrarUsuario()" style="flex: 1;">Ver Proyecto</button>
@@ -194,7 +194,7 @@
           <div class="logo">GESTIÓN</div>
           <p>Nivel asignado:</p>
           <div id="badgeRolActual" class="badge-rol">Cargando...</div>
-          <hr style="margin: 20px 0; border-color: #463E8E;">
+          <hr style="margin: 20px 0; border-color: #23233a;">
           <div class="menu">
             <button id="btnMenuEditar" class="active" onclick="cambiarVistaGestion('editar')">Editar Fracciones</button>
             <button id="btnMenuCorrer" onclick="cannotViewConfig() ? this.style.display='none' : cambiarVistaGestion('correr')">Configurar Ejecución</button>
@@ -226,7 +226,7 @@
             
             <hr style="margin:30px 0; border-color: #2f2f4f;">
             
-            <button onclick="guardarConfiguracionEjecucion()" style="background-color: #463E8E; color: black; width: 100%;">Guardar Configuración de Ejecución</button>
+            <button onclick="guardarConfiguracionEjecucion()" style="background-color: #fffacd; color: black; width: 100%;">Guardar Configuración de Ejecución</button>
           </div>
         </div>
       </div>
@@ -513,7 +513,7 @@
         
         panelSeccion.innerHTML = `
           <h1>${fraccion.titulo}</h1>
-          <hr style="margin: 15px 0; border-color: #463E8E;">
+          <hr style="margin: 15px 0; border-color: #2f2f4f;">
           <p style="white-space: pre-wrap;">${fraccion.contenido || 'Sin descripción asignada por el equipo.'}</p>
         `;
 
