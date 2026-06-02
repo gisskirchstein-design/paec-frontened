@@ -333,11 +333,24 @@
 
             <hr style="margin:30px 0; border-color: #e27396;">
 
-            <h2>Cargar Imagen a la Fracción de Lavanda</h2>
+           <h2>Cargar Imagen a la Fracción de Lavanda</h2>
 
-            <input type="file" id="imagenInput" accept="image/*" style="margin-top: 10px;">
+<input type="file" id="imagenInput" accept="image/*" style="margin-top: 10px;">
 
-            <button onclick="subirImagen()">Subir Imagen al API</button>
+<div class="botones">
+  <button onclick="subirImagen()">
+    Subir Imagen al API
+  </button>
+
+  <button
+    onclick="eliminarImagen()"
+    class="secundario"
+    style="background:#e27396;color:white;">
+    Eliminar Imagen
+  </button>
+</div>
+
+<hr style="margin:30px 0; border-color: #e27396;">
 
             <hr style="margin:30px 0; border-color: #e27396;">
 
@@ -353,19 +366,6 @@
     </div>
   </div>
   <input type="file" id="imagenInput" accept="image/*" style="margin-top: 10px;">
-
-<div class="botones">
-  <button onclick="subirImagen()">
-    Subir Imagen al API
-  </button>
-
-  <button
-    onclick="eliminarImagen()"
-    class="secundario"
-    style="background:#e27396;color:white;">
-    Eliminar Imagen
-  </button>
-</div>
 
   <div id="panelUsuario" class="pantalla">
     <div class="layout">
