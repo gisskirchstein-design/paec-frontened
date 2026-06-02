@@ -790,32 +790,7 @@
         alert("Por favor, selecciona una imagen primero.");
         return;
       }
-
-      async function eliminarImagen() {
-
-  if (!confirm("¿Seguro que deseas eliminar la imagen de Lavanda?")) {
-    return;
-  }
-
-  try {
-
-    const { error } = await supabaseClient
-      .from(TABLA)
-      .update({
-        url_imagen: null
-      })
-      .eq('clave_seccion', 'lavanda');
-
-    if (error) throw error;
-
-    alert("Imagen eliminada correctamente.");
-
-    await jalarDatosDesdeAPI(true);
-
-  } catch (err) {
-    alert("Error al eliminar la imagen: " + err.message);
-  }
-}
+      
 
       if (archivo.size > 1.5 * 1024 * 1024) {
         alert("La imagen es muy pesada.");
@@ -853,6 +828,31 @@
 
       lector.readAsDataURL(archivo);
     }
+    async function eliminarImagen() {
+
+  if (!confirm("¿Seguro que deseas eliminar la imagen de Lavanda?")) {
+    return;
+  }
+
+  try {
+
+    const { error } = await supabaseClient
+      .from(TABLA)
+      .update({
+        url_imagen: null
+      })
+      .eq('clave_seccion', 'lavanda');
+
+    if (error) throw error;
+
+    alert("Imagen eliminada correctamente.");
+
+    await jalarDatosDesdeAPI(true);
+
+  } catch (err) {
+    alert("Error al eliminar la imagen: " + err.message);
+  }
+}
   </script>
 
 </body>
