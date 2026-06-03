@@ -728,6 +728,67 @@
 
         const btnMenu = document.createElement('button');
 
+        if (fraccion.clave_seccion === 'producto') {
+
+  const panelProducto = document.createElement('div');
+
+  panelProducto.className = "panel";
+
+  panelProducto.id = "render_sec_producto";
+
+  panelProducto.innerHTML = `
+    <h1>${fraccion.titulo}</h1>
+
+    <div style="
+      background:#fce3ef;
+      border-radius:20px;
+      padding:25px;
+      text-align:center;
+      margin-top:15px;
+    ">
+
+      <h2 style="color:#e27396;">
+        🌿 Producto Destacado
+      </h2>
+
+      ${
+        fraccion.url_imagen
+          ? `
+            <img
+              src="${fraccion.url_imagen}"
+              alt="Producto"
+              style="
+                width:300px;
+                max-width:100%;
+                border-radius:15px;
+                margin:20px 0;
+                border:3px solid #e27396;
+              ">
+          `
+          : ''
+      }
+
+      <p style="
+        white-space:pre-wrap;
+        font-size:1.05rem;
+      ">
+        ${fraccion.contenido}
+      </p>
+
+      <button style="
+        margin-top:20px;
+        background:#e27396;
+      ">
+        Solicitar Información
+      </button>
+
+    </div>
+  `;
+
+  contenedorContenido.appendChild(panelProducto);
+
+  return;
+}
         btnMenu.innerText =
           fraccion.titulo.split(" ")[0] +
           " " +
