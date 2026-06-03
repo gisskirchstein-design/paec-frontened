@@ -767,6 +767,20 @@
           `
           : ''
       }
+      ${fraccion.url_video ? `
+<div style="margin-top:20px;">
+  <iframe
+    width="100%"
+    height="400"
+    src="${fraccion.url_video}"
+    title="Video del producto"
+    frameborder="0"
+    allowfullscreen
+    style="border-radius:15px;">
+  </iframe>
+</div>
+` 
+        : ''}
 
       <p style="
         white-space:pre-wrap;
