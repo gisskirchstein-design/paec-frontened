@@ -334,24 +334,11 @@
 
             <hr style="margin:30px 0; border-color: #e27396;">
 
-           <h2>Cargar Imagen a la Fracción de Lavanda</h2>
+            <h2>Cargar Imagen a la Fracción de Lavanda</h2>
 
-<input type="file" id="imagenInput" accept="image/*" style="margin-top: 10px;">
+            <input type="file" id="imagenInput" accept="image/*" style="margin-top: 10px;">
 
-<div class="botones">
-  <button onclick="subirImagen()">
-    Subir Imagen al API
-  </button>
-
-  <button
-    onclick="eliminarImagen()"
-    class="secundario"
-    style="background:#e27396;color:white;">
-    Eliminar Imagen
-  </button>
-</div>
-
-<hr style="margin:30px 0; border-color: #e27396;">
+            <button onclick="subirImagen()">Subir Imagen al API</button>
 
             <hr style="margin:30px 0; border-color: #e27396;">
 
@@ -366,6 +353,19 @@
       </div>
     </div>
   </div>
+
+<div class="botones">
+  <button onclick="subirImagen()">
+    Subir Imagen al API
+  </button>
+
+  <button
+    onclick="eliminarImagen()"
+    class="secundario"
+    style="background:#e27396;color:white;">
+    Eliminar Imagen
+  </button>
+</div>
 
   <div id="panelUsuario" class="pantalla">
     <div class="layout">
@@ -836,6 +836,17 @@
             ${fraccion.contenido || 'Sin descripción asignada por el equipo.'}
           </p>
         `;
+        if (fraccion.clave_seccion === "cronograma") {
+  panelSeccion.innerHTML += `
+    <div class="imagenes">
+      <img src="cronograma/imagen1.png">
+      <img src="cronograma/imagen2.png">
+      <img src="cronograma/imagen3.png">
+      <img src="cronograma/imagen4.png">
+      <img src="cronograma/imagen5.png">
+    </div>
+  `;
+}
 
         if (fraccion.url_imagen) {
 
