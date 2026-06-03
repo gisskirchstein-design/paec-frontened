@@ -746,15 +746,7 @@
       text-align:center;
       margin-top:15px;
     ">
-      panelSeccion.innerHTML += `
-    <div class="imagenes">
-      <img src="cronograma/imagen2.png">
-      <img src="cronograma/imagen3.png">
-      <img src="cronograma/imagen4.png">
-      <img src="cronograma/imagen5.png">
-    </div>
-  `;
-}
+
 
       <h2 style="color:#e27396;">
         🌿 Producto Destacado
@@ -845,6 +837,17 @@
             ${fraccion.contenido || 'Sin descripción asignada por el equipo.'}
           </p>
         `;
+        if (fraccion.clave_seccion === "cronograma") {
+  panelSeccion.innerHTML += `
+    <div class="imagenes">
+      <img src="cronograma/imagen2.png">
+      <img src="cronograma/imagen3.png">
+      <img src="cronograma/imagen4.png">
+      <img src="cronograma/imagen5.png">
+    </div>
+  `;
+}
+
 
         if (fraccion.url_imagen) {
 
