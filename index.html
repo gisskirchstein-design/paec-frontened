@@ -242,7 +242,6 @@
   <div id="inicio" class="pantalla activa centerBox">
     <div class="card">
       <h1>Proyecto PAEC</h1>
-      <img src=https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/Gemini_Generated_Image_vu5hhgvu5hhgvu5h.png alt="Logo PAEC" style="width:120px; display:block; margin: 10px auto;">
       <h2 style="text-align:center; color:#e27396;">Vida Sana y Lavanda</h2>
       <p style="text-align:center;"><strong>Equipo:</strong> Chavas Insanas</p>
 
@@ -353,6 +352,7 @@
       </div>
     </div>
   </div>
+  <input type="file" id="imagenInput" accept="image/*" style="margin-top: 10px;">
 
 <div class="botones">
   <button onclick="subirImagen()">
@@ -728,83 +728,6 @@
 
         const btnMenu = document.createElement('button');
 
-        if (fraccion.clave_seccion === 'producto') {
-
-  const panelProducto = document.createElement('div');
-
-  panelProducto.className = "panel";
-
-  panelProducto.id = "render_sec_producto";
-
-  panelProducto.innerHTML = `
-    <h1>${fraccion.titulo}</h1>
-
-    <div style="
-      background:#fce3ef;
-      border-radius:20px;
-      padding:25px;
-      text-align:center;
-      margin-top:15px;
-    ">
-
-      <h2 style="color:#e27396;">
-        🌿 Producto Destacado
-      </h2>
-
-      ${
-        fraccion.url_imagen
-          ? `
-            <img
-              src="${fraccion.url_imagen}"
-              alt="Producto"
-              style="
-                width:300px;
-                max-width:100%;
-                border-radius:15px;
-                margin:20px 0;
-                border:3px solid #e27396;
-              ">
-          `
-          : ''
-      }
-      ${fraccion.url_video ? `
-<div style="margin-top:20px;">
-  <iframe
-    width="100%"
-    height="400"
-    src="https://www.youtube.com/watch?v=JdUXToxRZKQ"
-    title="Video del producto"
-    frameborder="0"
-    allowfullscreen
-    style="border-radius:15px;">
-  </iframe>
-</div>
-` 
-        : ''}
-
-      <p style="
-        white-space:pre-wrap;
-        font-size:1.05rem;
-      ">
-        ${fraccion.contenido}
-      </p>
-
-      <button style="
-        margin-top:20px;
-        background:#e27396;
-      ">
-        Solicitar Información
-      </button>
-
-    </div>
-  `;
-
-  contenedorContenido.appendChild(panelProducto);
-        const btnMenu = document.createElement('button');
-
-
-  return;
-}
         btnMenu.innerText =
           fraccion.titulo.split(" ")[0] +
           " " +
@@ -836,16 +759,6 @@
             ${fraccion.contenido || 'Sin descripción asignada por el equipo.'}
           </p>
         `;
-        if (fraccion.clave_seccion === "cronograma") {
-  panelSeccion.innerHTML += `
-    <div class="imagenes">
-      <img src="cronograma/imagen2.png">
-      <img src="cronograma/imagen3.png">
-      <img src="cronograma/imagen4.png">
-      <img src="cronograma/imagen5.png">
-    </div>
-  `;
-}
 
         if (fraccion.url_imagen) {
 
