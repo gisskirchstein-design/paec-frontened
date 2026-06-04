@@ -221,19 +221,18 @@
     input:checked + .slider:before {
       transform: translateX(24px);
     }
+.imagenes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+}
 
-    .imagenes {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin-top: 20px;
-    }
-
-    .imagenes img {
-      width: 200px;
-      border-radius: 15px;
-      object-fit: cover;
-    }
+.imagenes img {
+  width: 200px;
+  border-radius: 15px;
+  object-fit: cover;
+}
   </style>
 </head>
 
@@ -962,31 +961,33 @@ panelSeccion.innerHTML = `
     ${fraccion.contenido || 'Sin descripción asignada por el equipo.'}
   </p>
 `;
-
 if (fraccion.clave_seccion === "cronograma") {
   panelSeccion.innerHTML += `
     <div class="imagenes">
+
       <a href="cronograma/imagen1.png" target="_blank">
-        <img src="cronograma/imagen1.png">
+        <img src="cronograma/imagen1.png" alt="Cronograma 1">
       </a>
 
       <a href="cronograma/imagen2.png" target="_blank">
-        <img src="cronograma/imagen2.png">
+        <img src="cronograma/imagen2.png" alt="Cronograma 2">
       </a>
 
       <a href="cronograma/imagen3.png" target="_blank">
-        <img src="cronograma/imagen3.png">
+        <img src="cronograma/imagen3.png" alt="Cronograma 3">
       </a>
 
       <a href="cronograma/imagen4.png" target="_blank">
-        <img src="cronograma/imagen4.png">
+        <img src="cronograma/imagen4.png" alt="Cronograma 4">
       </a>
 
       <a href="cronograma/imagen5.png" target="_blank">
-        <img src="cronograma/imagen5.png">
+        <img src="cronograma/imagen5.png" alt="Cronograma 5">
       </a>
+
     </div>
   `;
+}
 }if (fraccion.url_imagen) {
           panelSeccion.innerHTML += `
             <h3 style="margin-top:20px;">
