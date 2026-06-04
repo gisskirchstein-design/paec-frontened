@@ -729,13 +729,17 @@
           panelProducto.className = "panel";
           panelProducto.id = "render_sec_producto";
 
-          // Arreglo optimizado únicamente con tus 4 imágenes nuevas del Storage
+          // Las 4 imágenes para el carrusel superior con flechas
           const misImagenesProducto = [
             "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/imagen1.png",
             "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/imagen2.png",
             "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/imagen3.png",
             "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/imagen4.png"
           ];
+
+          // Imágenes de la carta interactiva (Sobre y Panquecitos)
+          const imgSobre = "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/ChatGPT%20Image%203%20jun%202026,%2007_19_06%20p.m..png";
+          const imgPanquecitos = "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/ChatGPT%20Image%203%20jun%202026,%2007_18_55%20p.m..png";
 
           let indiceActual = 0;
 
@@ -810,9 +814,34 @@
                 ">❯</button>
               </div>
 
-              <p id="indicador_carrusel" style="font-size: 0.9rem; color: #e27396; font-weight: bold; margin-top: 10px;">
+              <p id="indicador_carrusel" style="font-size: 0.9rem; color: #e27396; font-weight: bold; margin-top: 10px; margin-bottom: 30px;">
                 Imagen 1 de 4
               </p>
+
+              <hr style="border: 1px dashed #e27396; margin: 25px 0;">
+
+              <h3 style="color:#e27396; margin-bottom: 10px;">✉️ Abre tu sorpresa</h3>
+              <p style="font-size:0.9rem; color:#6a6a6a; margin-bottom:15px;">Haz clic en la imagen para abrir el sobre</p>
+              
+              <div style="display: flex; justify-content: center; margin-bottom: 25px;">
+                <img 
+                  id="img_interactiva_sobre"
+                  src="${imgSobre}" 
+                  alt="Sobre Sorpresa" 
+                  style="
+                    max-width: 350px; 
+                    width: 100%; 
+                    height: auto; 
+                    border-radius: 15px; 
+                    cursor: pointer; 
+                    border: 2px dashed #e27396;
+                    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+                    transition: transform 0.2s;
+                  "
+                  onmouseover="this.style.transform='scale(1.02)'"
+                  onmouseout="this.style.transform='scale(1)'"
+                >
+              </div>
 
               ${fraccion.url_video ? `
               <div style="margin-top:20px;">
@@ -833,6 +862,7 @@
             </div>
           `;
 
+          // Controladores del Carrusel con Flechas
           const imgCarrusel = panelProducto.querySelector('#img_carrusel_producto');
           const btnPrev = panelProducto.querySelector('#btn_prev_prod');
           const btnNext = panelProducto.querySelector('#btn_next_prod');
@@ -861,6 +891,19 @@
               indiceActual = misImagenesProducto.length - 1;
             }
             actualizarImagenCarrusel();
+          };
+
+          // Controlador de la Carta Interactiva (Toggle al hacer clic)
+          const imgInteractiva = panelProducto.querySelector('#img_interactiva_sobre');
+          let sobreAbierto = false;
+
+          imgInteractiva.onclick = () => {
+            sobreAbierto = !sobreAbierto;
+            if (sobreAbierto) {
+              imgInteractiva.src = imgPanquecitos;
+            } else {
+              imgInteractiva.src = imgSobre;
+            }
           };
 
           contenedorContenido.appendChild(panelProducto);
@@ -999,7 +1042,7 @@
 
         if (error) throw error;
 
-        alert("Imagen eliminada correctamente.");
+        alert("Imagen '$archivo' eliminada correctamente.");
         await jalarDatosDesdeAPI(true);
 
       } catch (err) {
