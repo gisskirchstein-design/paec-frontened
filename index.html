@@ -161,7 +161,7 @@
       margin-bottom: 20px;
       border-left: 5px solid #e27396;
     }
-   
+    
     .bloqueado {
       border-left: 5px solid #b3dee2 !important;
       opacity: 0.6;
@@ -242,7 +242,7 @@
   <div id="inicio" class="pantalla activa centerBox">
     <div class="card">
       <h1>Proyecto PAEC</h1>
-      <img src=https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/ChatGPT%20Image%203%20jun%202026,%2007_18_46%20p.m..png alt="Logo PAEC" style="width:140px; display:block; margin: 20px auto;">
+      <img src="https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/ChatGPT%20Image%203%20jun%202026,%2007_18_46%20p.m..png" alt="Logo PAEC" style="width:140px; display:block; margin: 20px auto;">
       <h2 style="text-align:center; color:#e27396;">Vida Sana y Lavanda</h2>
       <p style="text-align:center;"><strong>Equipo:</strong> Chavas Insanas</p>
 
@@ -334,24 +334,22 @@
 
             <hr style="margin:30px 0; border-color: #e27396;">
 
-           <h2>Cargar Imagen a la Fracción de Lavanda</h2>
+            <h2>Cargar Imagen a la Fracción de Lavanda</h2>
 
-<input type="file" id="imagenInput" accept="image/*" style="margin-top: 10px;">
+            <input type="file" id="imagenInput" accept="image/*" style="margin-top: 10px;">
 
-<div class="botones">
-  <button onclick="subirImagen()">
-    Subir Imagen al API
-  </button>
+            <div class="botones">
+              <button onclick="subirImagen()">
+                Subir Imagen al API
+              </button>
 
-  <button
-    onclick="eliminarImagen()"
-    class="secundario"
-    style="background:#e27396;color:white;">
-    Eliminar Imagen
-  </button>
-</div>
-
-<hr style="margin:30px 0; border-color: #e27396;">
+              <button
+                onclick="eliminarImagen()"
+                class="secundario"
+                style="background:#e27396;color:white;">
+                Eliminar Imagen
+              </button>
+            </div>
 
             <hr style="margin:30px 0; border-color: #e27396;">
 
@@ -726,85 +724,116 @@
 
       fraccionesCorriendo.forEach((fraccion) => {
 
-        const btnMenu = document.createElement('button');
-
         if (fraccion.clave_seccion === 'producto') {
+          const panelProducto = document.createElement('div');
+          panelProducto.className = "panel";
+          panelProducto.id = "render_sec_producto";
 
-  const panelProducto = document.createElement('div');
+          // URLs añadidas e integradas perfectamente
+          const urlSobreMorado = "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/sobree.png";
+          const urlPresionaSobre = "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/presiona.png";
+          const urlPanquecito = "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/lav&bread.png";
+          const urlInfoPanque = "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/info.png";
 
-  panelProducto.className = "panel";
+          panelProducto.innerHTML = `
+            <h1>${fraccion.titulo}</h1>
 
-  panelProducto.id = "render_sec_producto";
+            <div style="
+              background:#fce3ef;
+              border-radius:20px;
+              padding:25px;
+              text-align:center;
+              margin-top:15px;
+            ">
+              <h2 style="color:#e27396; margin-bottom: 20px;">
+                🌿 ¡Una Sorpresa Para Ti!
+              </h2>
 
-  panelProducto.innerHTML = `
-    <h1>${fraccion.titulo}</h1>
-
-    <div style="
-      background:#fce3ef;
-      border-radius:20px;
-      padding:25px;
-      text-align:center;
-      margin-top:15px;
-    ">
-
-
-      <h2 style="color:#e27396;">
-        🌿 Producto Destacado
-      </h2>
-
-      ${
-        fraccion.url_imagen
-          ? `
-            <img
-              src="${fraccion.url_imagen}"
-              alt="Producto"
-              style="
-                width:300px;
-                max-width:100%;
-                border-radius:15px;
-                margin:20px 0;
-                border:3px solid #e27396;
+              <div style="
+                display: flex; 
+                justify-content: center; 
+                align-items: center; 
+                gap: 20px; 
+                flex-wrap: wrap;
+                margin: 20px 0;
               ">
-          `
-          : ''
-      }
-${fraccion.url_video ? `
-<div style="margin-top:20px;">
-  <video
-    width="100%"
-    controls
-    style="border-radius:15px;">
-    <source
-      src="https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/video/WhatsApp%20Video%202026-06-02%20at%203.58.08%20PM.mp4"
-      type="video/mp4">
-    Tu navegador no soporta videos.
-  </video>
-</div>
-` : ''}
+                <img 
+                  id="img_izquierda_producto"
+                  src="${urlSobreMorado}" 
+                  alt="Sobre Sorpresa" 
+                  style="
+                    width: 250px; 
+                    max-width: 100%; 
+                    border-radius: 15px; 
+                    border: 3px solid #e27396;
+                    cursor: pointer;
+                    transition: transform 0.3s ease;
+                  "
+                  onmouseover="this.style.transform='scale(1.05)'"
+                  onmouseout="this.style.transform='scale(1.0)'"
+                >
 
-      <p style="
-        white-space:pre-wrap;
-        font-size:1.05rem;
-      ">
-        ${fraccion.contenido}
-      </p>
+                <img 
+                  id="img_derecha_producto"
+                  src="${urlPresionaSobre}" 
+                  alt="Instrucción" 
+                  style="
+                    width: 250px; 
+                    max-width: 100%; 
+                    border-radius: 15px; 
+                    border: 3px solid #e27396;
+                  "
+                >
+              </div>
 
-      <button style="
-        margin-top:20px;
-        background:#e27396;
-      ">
-        Solicitar Información
-      </button>
+              ${fraccion.url_video ? `
+              <div style="margin-top:20px;">
+                <video width="100%" controls style="border-radius:15px;">
+                  <source src="https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/video/WhatsApp%20Video%202026-06-02%20at%203.58.08%20PM.mp4" type="video/mp4">
+                  Tu navegador no soporta videos.
+                </video>
+              </div>
+              ` : ''}
 
-    </div>
-  `;
+              <p style="white-space:pre-wrap; font-size:1.05rem; margin-top: 20px;">
+                ${fraccion.contenido}
+              </p>
 
-  contenedorContenido.appendChild(panelProducto);
+              <button style="margin-top:20px; background:#e27396;">
+                Solicitar Información
+              </button>
+            </div>
+          `;
+
+          // Lógica del evento click para conmutar las imágenes
+          const imgIzquierda = panelProducto.querySelector('#img_izquierda_producto');
+          const imgDerecha = panelProducto.querySelector('#img_derecha_producto');
+
+          imgIzquierda.onclick = () => {
+            if (imgIzquierda.src === urlSobreMorado || imgIzquierda.src.endsWith('sobree.png')) {
+              imgIzquierda.src = urlPanquecito;
+              imgDerecha.src = urlInfoPanque;
+            } else {
+              imgIzquierda.src = urlSobreMorado;
+              imgDerecha.src = urlPresionaSobre;
+            }
+          };
+
+          contenedorContenido.appendChild(panelProducto);
+          
+          const btnMenu = document.createElement('button');
+          btnMenu.innerText = "PRODUCTO PROD";
+          btnMenu.onclick = () => {
+            document.getElementById("render_sec_producto").scrollIntoView({
+              behavior: 'smooth'
+            });
+          };
+          menuNavegacion.appendChild(btnMenu);
+
+          return;
+        }
+
         const btnMenu = document.createElement('button');
-
-
-  return;
-}
         btnMenu.innerText =
           fraccion.titulo.split(" ")[0] +
           " " +
@@ -821,40 +850,33 @@ ${fraccion.url_video ? `
         menuNavegacion.appendChild(btnMenu);
 
         const panelSeccion = document.createElement('div');
-
         panelSeccion.className = "panel";
-
-        panelSeccion.id =
-          `render_sec_${fraccion.clave_seccion}`;
+        panelSeccion.id = `render_sec_${fraccion.clave_seccion}`;
 
         panelSeccion.innerHTML = `
           <h1>${fraccion.titulo}</h1>
-
           <hr style="margin: 15px 0; border-color: #e27396;">
-
           <p style="white-space: pre-wrap;">
             ${fraccion.contenido || 'Sin descripción asignada por el equipo.'}
           </p>
         `;
-        if (fraccion.clave_seccion === "cronograma") {
-  panelSeccion.innerHTML += `
-    <div class="imagenes">
-      <img src="cronograma/imagen2.png">
-      <img src="cronograma/imagen3.png">
-      <img src="cronograma/imagen4.png">
-      <img src="cronograma/imagen5.png">
-    </div>
-  `;
-}
 
+        if (fraccion.clave_seccion === "cronograma") {
+          panelSeccion.innerHTML += `
+            <div class="imagenes">
+              <img src="cronograma/imagen2.png">
+              <img src="cronograma/imagen3.png">
+              <img src="cronograma/imagen4.png">
+              <img src="cronograma/imagen5.png">
+            </div>
+          `;
+        }
 
         if (fraccion.url_imagen) {
-
           panelSeccion.innerHTML += `
             <h3 style="margin-top:20px;">
               Registro Visual Guardado
             </h3>
-
             <div class="imagenes">
               <img src="${fraccion.url_imagen}"
                 alt="Progreso"
@@ -864,14 +886,11 @@ ${fraccion.url_video ? `
                 border: 2px solid #e27396;">
             </div>
           `;
-
         } else if (fraccion.clave_seccion === 'lavanda') {
-
           panelSeccion.innerHTML += `
             <h3 style="margin-top:20px;">
               Registro Visual
             </h3>
-
             <p style="color:#d86b8d; font-size:0.9rem;">
               No se ha subido ninguna foto para esta fracción aún.
             </p>
@@ -883,26 +902,21 @@ ${fraccion.url_video ? `
     }
 
     function subirImagen() {
-
       const input = document.getElementById('imagenInput');
-
       const archivo = input.files[0];
 
       if (!archivo) {
         alert("Por favor, selecciona una imagen primero.");
         return;
       }
-     
-
+      
       if (archivo.size > 1.5 * 1024 * 1024) {
         alert("La imagen es muy pesada.");
         return;
       }
 
       const lector = new FileReader();
-
       lector.onload = async function (e) {
-
         const base64Image = e.target.result;
 
         if (!supabaseClient) {
@@ -911,7 +925,6 @@ ${fraccion.url_video ? `
         }
 
         try {
-
           const { error } = await supabaseClient
             .from(TABLA)
             .update({ url_imagen: base64Image })
@@ -920,41 +933,35 @@ ${fraccion.url_video ? `
           if (error) throw error;
 
           alert("Imagen guardada permanentemente en el API.");
-
           await jalarDatosDesdeAPI(true);
 
         } catch (err) {
           alert("Error al subir al API: " + err.message);
         }
       }
-
       lector.readAsDataURL(archivo);
     }
+
     async function eliminarImagen() {
+      if (!confirm("¿Seguro que deseas eliminar la imagen de Lavanda?")) {
+        return;
+      }
 
-  if (!confirm("¿Seguro que deseas eliminar la imagen de Lavanda?")) {
-    return;
-  }
+      try {
+        const { error } = await supabaseClient
+          .from(TABLA)
+          .update({ url_imagen: null })
+          .eq('clave_seccion', 'lavanda');
 
-  try {
+        if (error) throw error;
 
-    const { error } = await supabaseClient
-      .from(TABLA)
-      .update({
-        url_imagen: null
-      })
-      .eq('clave_seccion', 'lavanda');
+        alert("Imagen eliminated correctamente.");
+        await jalarDatosDesdeAPI(true);
 
-    if (error) throw error;
-
-    alert("Imagen eliminada correctamente.");
-
-    await jalarDatosDesdeAPI(true);
-
-  } catch (err) {
-    alert("Error al eliminar la imagen: " + err.message);
-  }
-}
+      } catch (err) {
+        alert("Error al eliminar la imagen: " + err.message);
+      }
+    }
   </script>
 
 </body>
