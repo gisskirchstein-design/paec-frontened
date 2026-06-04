@@ -653,7 +653,7 @@
 
         if (error) throw error;
 
-        alert(`Fracción [${clave}] actualizada exitosamente en el API.`);
+        alert(`Fracción [${clave}] updated exitosamente en el API.`);
 
         await jalarDatosDesdeAPI(true);
 
@@ -729,7 +729,6 @@
           panelProducto.className = "panel";
           panelProducto.id = "render_sec_producto";
 
-          // URLs añadidas e integradas perfectamente
           const urlSobreMorado = "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/sobree.png";
           const urlPresionaSobre = "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/presiona.png";
           const urlPanquecito = "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/lav&bread.png";
@@ -805,7 +804,6 @@
             </div>
           `;
 
-          // Lógica del evento click para conmutar las imágenes
           const imgIzquierda = panelProducto.querySelector('#img_izquierda_producto');
           const imgDerecha = panelProducto.querySelector('#img_derecha_producto');
 
@@ -872,97 +870,3 @@
           `;
         }
 
-        if (fraccion.url_imagen) {
-          panelSeccion.innerHTML += `
-            <h3 style="margin-top:20px;">
-              Registro Visual Guardado
-            </h3>
-            <div class="imagenes">
-              <img src="${fraccion.url_imagen}"
-                alt="Progreso"
-                style="max-width:100%;
-                width:350px;
-                border-radius:15px;
-                border: 2px solid #e27396;">
-            </div>
-          `;
-        } else if (fraccion.clave_seccion === 'lavanda') {
-          panelSeccion.innerHTML += `
-            <h3 style="margin-top:20px;">
-              Registro Visual
-            </h3>
-            <p style="color:#d86b8d; font-size:0.9rem;">
-              No se ha subido ninguna foto para esta fracción aún.
-            </p>
-          `;
-        }
-
-        contenedorContenido.appendChild(panelSeccion);
-      });
-    }
-
-    function subirImagen() {
-      const input = document.getElementById('imagenInput');
-      const archivo = input.files[0];
-
-      if (!archivo) {
-        alert("Por favor, selecciona una imagen primero.");
-        return;
-      }
-      
-      if (archivo.size > 1.5 * 1024 * 1024) {
-        alert("La imagen es muy pesada.");
-        return;
-      }
-
-      const lector = new FileReader();
-      lector.onload = async function (e) {
-        const base64Image = e.target.result;
-
-        if (!supabaseClient) {
-          alert("No hay conexión con el API.");
-          return;
-        }
-
-        try {
-          const { error } = await supabaseClient
-            .from(TABLA)
-            .update({ url_imagen: base64Image })
-            .eq('clave_seccion', 'lavanda');
-
-          if (error) throw error;
-
-          alert("Imagen guardada permanentemente en el API.");
-          await jalarDatosDesdeAPI(true);
-
-        } catch (err) {
-          alert("Error al subir al API: " + err.message);
-        }
-      }
-      lector.readAsDataURL(archivo);
-    }
-
-    async function eliminarImagen() {
-      if (!confirm("¿Seguro que deseas eliminar la imagen de Lavanda?")) {
-        return;
-      }
-
-      try {
-        const { error } = await supabaseClient
-          .from(TABLA)
-          .update({ url_imagen: null })
-          .eq('clave_seccion', 'lavanda');
-
-        if (error) throw error;
-
-        alert("Imagen eliminated correctamente.");
-        await jalarDatosDesdeAPI(true);
-
-      } catch (err) {
-        alert("Error al eliminar la imagen: " + err.message);
-      }
-    }
-  </script>
-
-</body>
-</html>
