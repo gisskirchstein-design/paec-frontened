@@ -413,6 +413,7 @@
     }
 
     function volverInicio() {
+      clearTimeout(window.carruselTimer); // Limpiar timer si existía
       ocultarTodo();
       document.getElementById('inicio').classList.add('activa');
     }
@@ -729,11 +730,15 @@
           panelProducto.className = "panel";
           panelProducto.id = "render_sec_producto";
 
-          // URLs añadidas e integradas perfectamente
-          const urlSobreMorado = "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/sobree.png";
-          const urlPresionaSobre = "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/presiona.png";
-          const urlPanquecito = "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/lav&bread.png";
-          const urlInfoPanque = "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/info.png";
+          // Lista de tus 4 imágenes subidas a Supabase Storage
+          const misImagenesProducto = [
+            "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/imagen1.png",
+            "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/imagen2.png",
+            "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/imagen3.png",
+            "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/imagen4.png"
+          ];
+
+          let indiceActual = 0;
 
           panelProducto.innerHTML = `
             <h1>${fraccion.titulo}</h1>
@@ -746,45 +751,69 @@
               margin-top:15px;
             ">
               <h2 style="color:#e27396; margin-bottom: 20px;">
-                🌿 ¡Una Sorpresa Para Ti!
+                🌿 Conoce Nuestro Producto Innovador
               </h2>
 
               <div style="
+                position: relative;
                 display: flex; 
                 justify-content: center; 
                 align-items: center; 
-                gap: 20px; 
-                flex-wrap: wrap;
-                margin: 20px 0;
+                max-width: 450px;
+                margin: 20px auto;
               ">
-                <img 
-                  id="img_izquierda_producto"
-                  src="${urlSobreMorado}" 
-                  alt="Sobre Sorpresa" 
-                  style="
-                    width: 250px; 
-                    max-width: 100%; 
-                    border-radius: 15px; 
-                    border: 3px solid #e27396;
-                    cursor: pointer;
-                    transition: transform 0.3s ease;
-                  "
-                  onmouseover="this.style.transform='scale(1.05)'"
-                  onmouseout="this.style.transform='scale(1.0)'"
-                >
+                <button id="btn_prev_prod" style="
+                  position: absolute;
+                  left: -15px;
+                  background: rgba(226, 115, 150, 0.9);
+                  color: white;
+                  border-radius: 50%;
+                  width: 40px;
+                  height: 40px;
+                  padding: 0;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  font-size: 1.2rem;
+                  z-index: 10;
+                  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                ">❮</button>
 
                 <img 
-                  id="img_derecha_producto"
-                  src="${urlPresionaSobre}" 
-                  alt="Instrucción" 
+                  id="img_carrusel_producto"
+                  src="${misImagenesProducto[indiceActual]}" 
+                  alt="Galería Producto" 
                   style="
-                    width: 250px; 
-                    max-width: 100%; 
+                    width: 100%; 
+                    height: auto;
                     border-radius: 15px; 
                     border: 3px solid #e27396;
+                    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+                    transition: opacity 0.3s ease;
                   "
                 >
+
+                <button id="btn_next_prod" style="
+                  position: absolute;
+                  right: -15px;
+                  background: rgba(226, 115, 150, 0.9);
+                  color: white;
+                  border-radius: 50%;
+                  width: 40px;
+                  height: 40px;
+                  padding: 0;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  font-size: 1.2rem;
+                  z-index: 10;
+                  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                ">❯</button>
               </div>
+
+              <p id="indicador_carrusel" style="font-size: 0.9rem; color: #e27396; font-weight: bold; margin-top: 10px;">
+                Imagen 1 de 4
+              </p>
 
               ${fraccion.url_video ? `
               <div style="margin-top:20px;">
@@ -805,18 +834,38 @@
             </div>
           `;
 
-          // Lógica del evento click para conmutar las imágenes
-          const imgIzquierda = panelProducto.querySelector('#img_izquierda_producto');
-          const imgDerecha = panelProducto.querySelector('#img_derecha_producto');
+          // Capturar los elementos del carrusel recien creados
+          const imgCarrusel = panelProducto.querySelector('#img_carrusel_producto');
+          const btnPrev = panelProducto.querySelector('#btn_prev_prod');
+          const btnNext = panelProducto.querySelector('#btn_next_prod');
+          const indicador = panelProducto.querySelector('#indicador_carrusel');
 
-          imgIzquierda.onclick = () => {
-            if (imgIzquierda.src === urlSobreMorado || imgIzquierda.src.endsWith('sobree.png')) {
-              imgIzquierda.src = urlPanquecito;
-              imgDerecha.src = urlInfoPanque;
-            } else {
-              imgIzquierda.src = urlSobreMorado;
-              imgDerecha.src = urlPresionaSobre;
+          // Función para actualizar la imagen y el texto indicador
+          const actualizarImagenCarrusel = () => {
+            imgCarrusel.style.opacity = 0.3; // Efecto sutil de parpadeo al cambiar
+            setTimeout(() => {
+              imgCarrusel.src = misImagenesProducto[indiceActual];
+              imgCarrusel.style.opacity = 1;
+              indicador.innerText = `Imagen ${indiceActual + 1} de 4`;
+            }, 150);
+          };
+
+          // Evento Flecha Derecha (Avanzar) - Infinito
+          btnNext.onclick = () => {
+            indiceActual++;
+            if (indiceActual >= misImagenesProducto.length) {
+              indiceActual = 0; // Regresa al inicio
             }
+            actualizarImagenCarrusel();
+          };
+
+          // Evento Flecha Izquierda (Retroceder) - Infinito
+          btnPrev.onclick = () => {
+            indiceActual--;
+            if (indiceActual < 0) {
+              indiceActual = misImagenesProducto.length - 1; // Se va a la última
+            }
+            actualizarImagenCarrusel();
           };
 
           contenedorContenido.appendChild(panelProducto);
