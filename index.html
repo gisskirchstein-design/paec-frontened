@@ -413,7 +413,6 @@
     }
 
     function volverInicio() {
-      clearTimeout(window.carruselTimer); // Limpiar timer si existía
       ocultarTodo();
       document.getElementById('inicio').classList.add('activa');
     }
@@ -654,7 +653,7 @@
 
         if (error) throw error;
 
-        alert(`Fracción [${clave}] actualizada exitosamente en el API.`);
+        alert(`Fracción [${clave}] updated exitosamente en el API.`);
 
         await jalarDatosDesdeAPI(true);
 
@@ -730,7 +729,7 @@
           panelProducto.className = "panel";
           panelProducto.id = "render_sec_producto";
 
-          // Lista de tus 4 imágenes subidas a Supabase Storage
+          // Arreglo optimizado únicamente con tus 4 imágenes nuevas del Storage
           const misImagenesProducto = [
             "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/imagen1.png",
             "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/imagen2.png",
@@ -834,15 +833,13 @@
             </div>
           `;
 
-          // Capturar los elementos del carrusel recien creados
           const imgCarrusel = panelProducto.querySelector('#img_carrusel_producto');
           const btnPrev = panelProducto.querySelector('#btn_prev_prod');
           const btnNext = panelProducto.querySelector('#btn_next_prod');
           const indicador = panelProducto.querySelector('#indicador_carrusel');
 
-          // Función para actualizar la imagen y el texto indicador
           const actualizarImagenCarrusel = () => {
-            imgCarrusel.style.opacity = 0.3; // Efecto sutil de parpadeo al cambiar
+            imgCarrusel.style.opacity = 0.3;
             setTimeout(() => {
               imgCarrusel.src = misImagenesProducto[indiceActual];
               imgCarrusel.style.opacity = 1;
@@ -850,20 +847,18 @@
             }, 150);
           };
 
-          // Evento Flecha Derecha (Avanzar) - Infinito
           btnNext.onclick = () => {
             indiceActual++;
             if (indiceActual >= misImagenesProducto.length) {
-              indiceActual = 0; // Regresa al inicio
+              indiceActual = 0;
             }
             actualizarImagenCarrusel();
           };
 
-          // Evento Flecha Izquierda (Retroceder) - Infinito
           btnPrev.onclick = () => {
             indiceActual--;
             if (indiceActual < 0) {
-              indiceActual = misImagenesProducto.length - 1; // Se va a la última
+              indiceActual = misImagenesProducto.length - 1;
             }
             actualizarImagenCarrusel();
           };
@@ -1004,7 +999,7 @@
 
         if (error) throw error;
 
-        alert("Imagen eliminated correctamente.");
+        alert("Imagen eliminada correctamente.");
         await jalarDatosDesdeAPI(true);
 
       } catch (err) {
