@@ -257,6 +257,34 @@
       margin-top: 15px;
       font-size: 0.95rem;
     }
+    .visor {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+  justify-content: center;
+  align-items: center;
+}
+
+.visor img {
+  max-width: 95%;
+  max-height: 90%;
+  border-radius: 10px;
+}
+
+.cerrar {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: white;
+  font-size: 40px;
+  cursor: pointer;
+  font-weight: bold;
+}
   </style>
 </head>
 
@@ -1009,13 +1037,25 @@
 
         if (fraccion.clave_seccion === "cronograma") {
           panelSeccion.innerHTML += `
-            <div class="imagenes">
-              <a href="cronograma/imagen1.png" target="_blank"><img src="cronograma/imagen1.png"></a>
-              <a href="cronograma/imagen2.png" target="_blank"><img src="cronograma/imagen2.png"></a>
-              <a href="cronograma/imagen3.png" target="_blank"><img src="cronograma/imagen3.png"></a>
-              <a href="cronograma/imagen4.png" target="_blank"><img src="cronograma/imagen4.png"></a>
-              <a href="cronograma/imagen5.png" target="_blank"><img src="cronograma/imagen5.png"></a>
-            </div>
+            <div class="cronograma">
+
+  <img src="cronograma/imagen2.png"
+       alt="Cronograma 2"
+       onclick="abrirVisor(this.src)"
+
+  <img src="cronograma/imagen3.png"
+       alt="Cronograma 3"
+       onclick="abrirVisor(this.src)"
+
+  <img src="cronograma/imagen4.png"
+       alt="Cronograma 4"
+       onclick="abrirVisor(this.src)"
+       
+  <img src="cronograma/imagen5.png"
+       alt="Cronograma 5"
+       onclick="abrirVisor(this.src)"
+
+</div>
           `;
         }
 
@@ -1130,7 +1170,24 @@
         alert("Error al eliminar la imagen: " + err.message);
       }
     }
+    function abrirVisor(src) {
+  document.getElementById("imagenGrande").src = src;
+  document.getElementById("visor").style.display = "flex";
+}
+
+function cerrarVisor() {
+  document.getElementById("visor").style.display = "none";
+}
   </script>
 
+  <div id="visor" class="visor" onclick="cerrarVisor()">
+  <span class="cerrar">&times;</span>
+
+  <img
+    id="imagenGrande"
+    src=""
+    alt=""
+    onclick="event.stopPropagation()">
+</div>
 </body>
 </html>
