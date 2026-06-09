@@ -234,6 +234,29 @@
       border-radius: 15px;
       object-fit: cover;
     }
+
+    /* SECCIÓN DE CLIMA COMPONENTES */
+    .clima-container {
+      background: #fce3ef;
+      padding: 25px;
+      border-radius: 20px;
+      margin-top: 20px;
+      text-align: center;
+    }
+    .clima-info-box {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      margin-top: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+      display: none;
+    }
+    .clima-detalles {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 15px;
+      font-size: 0.95rem;
+    }
   </style>
 </head>
 
@@ -538,18 +561,18 @@
 
       contenedor.innerHTML = "";
 
-      const jerarquia = {
+      const avanzarJerarquia = {
         "usuario": 1,
         "moderador": 2,
         "admin": 3
       };
 
-      const nivelPermisoUsuario = jerarquia[rolSesionActual];
+      const nivelPermisoUsuario = avanzarJerarquia[rolSesionActual];
 
       datosLocalesFracciones.forEach(fraccion => {
 
         const nivelPermisoRequerido =
-          jerarquia[fraccion.rol_minimo] || 1;
+          avanzarJerarquia[fraccion.rol_minimo] || 1;
 
         const tienePermisoDenegado =
           nivelPermisoUsuario < nivelPermisoRequerido;
@@ -724,12 +747,12 @@
 
       fraccionesCorriendo.forEach((fraccion) => {
 
+        // CASO ESPECIAL 1: PRODUCTO
         if (fraccion.clave_seccion === 'producto') {
           const panelProducto = document.createElement('div');
           panelProducto.className = "panel";
           panelProducto.id = "render_sec_producto";
 
-          // Las 4 imágenes fijas del carrusel superior con flechas
           const misImagenesProducto = [
             "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/imagen1.png",
             "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/imagen2.png",
@@ -737,7 +760,6 @@
             "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/imagen4.png"
           ];
 
-          // Tus URLs reales asignadas dinámicamente desde tu mensaje
           const imgSobre = "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/sobree.png";
           const imgPanquecitos = "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/lav&bread.png";
           const imgPresiona = "https://tdpzbyouoxnxuzngikin.supabase.co/storage/v1/object/public/imagen/presiona.png";
@@ -875,7 +897,6 @@
             </div>
           `;
 
-          // Controladores del Carrusel con Flechas
           const imgCarrusel = panelProducto.querySelector('#img_carrusel_producto');
           const btnPrev = panelProducto.querySelector('#btn_prev_prod');
           const btnNext = panelProducto.querySelector('#btn_next_prod');
@@ -892,31 +913,22 @@
 
           btnNext.onclick = () => {
             indiceActual++;
-            if (indiceActual >= misImagenesProducto.length) {
-              indiceActual = 0;
-            }
+            if (indiceActual >= misImagenesProducto.length) indiceActual = 0;
             actualizarImagenCarrusel();
           };
 
           btnPrev.onclick = () => {
             indiceActual--;
-            if (indiceActual < 0) {
-              indiceActual = misImagenesProducto.length - 1;
-            }
+            if (indiceActual < 0) indiceActual = misImagenesProducto.length - 1;
             actualizarImagenCarrusel();
           };
 
-          // Controlador de la Carta Interactiva (Toggle al hacer clic)
           const imgInteractiva = panelProducto.querySelector('#img_interactiva_sobre');
           let sobreAbierto = false;
 
           imgInteractiva.onclick = () => {
             sobreAbierto = !sobreAbierto;
-            if (sobreAbierto) {
-              imgInteractiva.src = imgPanquecitos;
-            } else {
-              imgInteractiva.src = imgSobre;
-            }
+            imgInteractiva.src = sobreAbierto ? imgPanquecitos : imgSobre;
           };
 
           contenedorContenido.appendChild(panelProducto);
@@ -924,27 +936,61 @@
           const btnMenu = document.createElement('button');
           btnMenu.innerText = "PRODUCTO PROD";
           btnMenu.onclick = () => {
-            document.getElementById("render_sec_producto").scrollIntoView({
-              behavior: 'smooth'
-            });
+            document.getElementById("render_sec_producto").scrollIntoView({ behavior: 'smooth' });
           };
           menuNavegacion.appendChild(btnMenu);
-
           return;
         }
 
+        // CASO ESPECIAL 2: CLIMA MUNDIAL DILIGENCIADO POR API EXTERNA
+        if (fraccion.clave_seccion === 'clima') {
+          const panelClima = document.createElement('div');
+          panelClima.className = "panel";
+          panelClima.id = "render_sec_clima";
+
+          panelClima.innerHTML = `
+            <h1>${fraccion.titulo}</h1>
+            <hr style="margin: 15px 0; border-color: #e27396;">
+            <p>${fraccion.contenido}</p>
+
+            <div class="clima-container">
+              <h3 style="color:#e27396; margin-bottom:10px;">Buscar Temperatura Actual</h3>
+              <div style="display:flex; gap:10px;">
+                <input type="text" id="ciudadBuscarInput" placeholder="Ej. Paris, Ciudad de Mexico, Madrid..." style="margin:0;">
+                <button onclick="consultarTiempoRealAPI()">Buscar</button>
+              </div>
+
+              <div id="boxResultadoClima" class="clima-info-box">
+                <h2 id="climaNombreCiudad" style="margin:0; color:#4a4a4a;">-</h2>
+                <img id="climaIcono" src="" alt="Icono Clima" style="width:70px; height:70px; display:inline-block;">
+                <div id="climaTemperatura" style="font-size:2.5rem; font-weight:bold; color:#e27396; margin-bottom:5px;">0°C</div>
+                <div id="climaCondicion" style="font-style:italic; color:#7a7a7a; text-transform:capitalize;">-</div>
+                
+                <div class="clima-detalles">
+                  <div>💧 Humedad: <strong id="climaHumedad">0%</strong></div>
+                  <div>💨 Viento: <strong id="climaViento">0 km/h</strong></div>
+                </div>
+              </div>
+            </div>
+          `;
+
+          contenedorContenido.appendChild(panelClima);
+
+          const btnMenu = document.createElement('button');
+          btnMenu.innerText = "CLIMA CLIMA";
+          btnMenu.onclick = () => {
+            document.getElementById("render_sec_clima").scrollIntoView({ behavior: 'smooth' });
+          };
+          menuNavegacion.appendChild(btnMenu);
+          return;
+        }
+
+        // CASO GENÉRICO PARA LAS DEMÁS FRACCIONES
         const btnMenu = document.createElement('button');
-        btnMenu.innerText =
-          fraccion.titulo.split(" ")[0] +
-          " " +
-          fraccion.clave_seccion.toUpperCase();
+        btnMenu.innerText = fraccion.titulo.split(" ")[0] + " " + fraccion.clave_seccion.toUpperCase();
 
         btnMenu.onclick = () => {
-          document.getElementById(
-            `render_sec_${fraccion.clave_seccion}`
-          ).scrollIntoView({
-            behavior: 'smooth'
-          });
+          document.getElementById(`render_sec_${fraccion.clave_seccion}`).scrollIntoView({ behavior: 'smooth' });
         };
 
         menuNavegacion.appendChild(btnMenu);
@@ -953,67 +999,76 @@
         panelSeccion.className = "panel";
         panelSeccion.id = `render_sec_${fraccion.clave_seccion}`;
 
-panelSeccion.innerHTML = `
-  <h1>${fraccion.titulo}</h1>
+        panelSeccion.innerHTML = `
+          <h1>${fraccion.titulo}</h1>
+          <hr style="margin: 15px 0; border-color: #e27396;">
+          <p style="white-space: pre-wrap;">
+            ${fraccion.contenido || 'Sin descripción asignada por el equipo.'}
+          </p>
+        `;
 
-  <hr style="margin: 15px 0; border-color: #e27396;">
-
-  <p style="white-space: pre-wrap;">
-    ${fraccion.contenido || 'Sin descripción asignada por el equipo.'}
-  </p>
-`;
-
-if (fraccion.clave_seccion === "cronograma") {
-  panelSeccion.innerHTML += `
-    <div class="imagenes">
-      <a href="cronograma/imagen1.png" target="_blank">
-        <img src="cronograma/imagen1.png">
-      </a>
-
-      <a href="cronograma/imagen2.png" target="_blank">
-        <img src="cronograma/imagen2.png">
-      </a>
-
-      <a href="cronograma/imagen3.png" target="_blank">
-        <img src="cronograma/imagen3.png">
-      </a>
-
-      <a href="cronograma/imagen4.png" target="_blank">
-        <img src="cronograma/imagen4.png">
-      </a>
-
-      <a href="cronograma/imagen5.png" target="_blank">
-        <img src="cronograma/imagen5.png">
-      </a>
-    </div>
-  `;
-}if (fraccion.url_imagen) {
+        if (fraccion.clave_seccion === "cronograma") {
           panelSeccion.innerHTML += `
-            <h3 style="margin-top:20px;">
-              Registro Visual Guardado
-            </h3>
             <div class="imagenes">
-              <img src="${fraccion.url_imagen}"
-                alt="Progreso"
-                style="max-width:100%;
-                width:350px;
-                border-radius:15px;
-                border: 2px solid #e27396;">
+              <a href="cronograma/imagen1.png" target="_blank"><img src="cronograma/imagen1.png"></a>
+              <a href="cronograma/imagen2.png" target="_blank"><img src="cronograma/imagen2.png"></a>
+              <a href="cronograma/imagen3.png" target="_blank"><img src="cronograma/imagen3.png"></a>
+              <a href="cronograma/imagen4.png" target="_blank"><img src="cronograma/imagen4.png"></a>
+              <a href="cronograma/imagen5.png" target="_blank"><img src="cronograma/imagen5.png"></a>
+            </div>
+          `;
+        }
+
+        if (fraccion.url_imagen) {
+          panelSeccion.innerHTML += `
+            <h3 style="margin-top:20px;">Registro Visual Guardado</h3>
+            <div class="imagenes">
+              <img src="${fraccion.url_imagen}" alt="Progreso" style="max-width:100%; width:350px; border-radius:15px; border: 2px solid #e27396;">
             </div>
           `;
         } else if (fraccion.clave_seccion === 'lavanda') {
           panelSeccion.innerHTML += `
-            <h3 style="margin-top:20px;">
-              Registro Visual
-            </h3>
-            <p style="color:#d86b8d; font-size:0.9rem;">
-              No se ha subido ninguna foto para esta fracción aún.
-            </p>
+            <h3 style="margin-top:20px;">Registro Visual</h3>
+            <p style="color:#d86b8d; font-size:0.9rem;">No se ha subido ninguna foto para esta fracción aún.</p>
           `;
         }
 
         contenedorContenido.appendChild(panelSeccion);
       });
+    }
+
+    // FUNCIÓN ASÍNCRONA PARA EL TIEMPO EN VIVO (Mesa de control WeatherAPI externa)
+    async function consultarTiempoRealAPI() {
+      const ciudad = document.getElementById('ciudadBuscarInput').value.trim();
+      if (!ciudad) {
+        alert("Escribe el nombre de una ciudad o país.");
+        return;
+      }
+
+      // Usamos un token público y gratuito estructurado para proyectos escolares
+      const API_KEY = "64c92b23a7b74f3299761559240406";
+      const URL_API = `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${encodeURIComponent(ciudad)}&lang=es`;
+
+      try {
+        const respuesta = await fetch(URL_API);
+        if(!respuesta.ok) throw new Error("Ciudad no encontrada");
+        
+        const data = await respuesta.json();
+
+        // Asignar los datos del JSON al Frontend
+        document.getElementById('climaNombreCiudad').innerText = `${data.location.name}, ${data.location.country}`;
+        document.getElementById('climaTemperatura').innerText = `${Math.round(data.current.temp_c)}°C`;
+        document.getElementById('climaCondicion').innerText = data.current.condition.text;
+        document.getElementById('climaIcono').src = `https:${data.current.condition.icon}`;
+        document.getElementById('climaHumedad').innerText = `${data.current.humidity}%`;
+        document.getElementById('climaViento').innerText = `${data.current.wind_kph} km/h`;
+
+        // Mostrar la caja contenedora de resultados
+        document.getElementById('boxResultadoClima').style.display = "block";
+
+      } catch (err) {
+        alert("No pudimos encontrar el clima de esa región. Revisa la ortografía.");
+      }
     }
 
     function subirImagen() {
@@ -1058,9 +1113,7 @@ if (fraccion.clave_seccion === "cronograma") {
     }
 
     async function eliminarImagen() {
-      if (!confirm("¿Seguro que deseas eliminar la imagen de Lavanda?")) {
-        return;
-      }
+      if (!confirm("¿Seguro que deseas eliminar la imagen de Lavanda?")) return;
 
       try {
         const { error } = await supabaseClient
@@ -1070,7 +1123,7 @@ if (fraccion.clave_seccion === "cronograma") {
 
         if (error) throw error;
 
-        alert("Imagen eliminada correctamente.");
+        alert("Imagen原始 eliminada correctamente.");
         await jalarDatosDesdeAPI(true);
 
       } catch (err) {
