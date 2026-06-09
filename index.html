@@ -235,35 +235,6 @@
       object-fit: cover;
     }
 
-.modal-imagen {
-  display: none;
-  position: fixed;
-  z-index: 99999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.9);
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-imagen img {
-  max-width: 95%;
-  max-height: 90%;
-  border-radius: 15px;
-}
-
-.cerrar-modal {
-  position: absolute;
-  top: 20px;
-  right: 35px;
-  font-size: 45px;
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
-}
-
     /* SECCIÓN DE CLIMA COMPONENTES */
     .clima-container {
       background: #fce3ef;
@@ -970,6 +941,8 @@
           menuNavegacion.appendChild(btnMenu);
           return;
         }
+
+        // CASO ESPECIAL 2: CLIMA MUNDIAL DILIGENCIADO POR API EXTERNA
         if (fraccion.clave_seccion === 'clima') {
           const panelClima = document.createElement('div');
           panelClima.className = "panel";
@@ -1022,25 +995,30 @@
 
         menuNavegacion.appendChild(btnMenu);
 
-       panelSeccion.innerHTML = `
-  <h1>${fraccion.titulo}</h1>
-  <hr style="margin: 15px 0; border-color: #e27396;">
-  <p style="white-space: pre-wrap;">
-    ${fraccion.contenido || 'Sin descripción asignada por el equipo.'}
-  </p>
-`;
+        const panelSeccion = document.createElement('div');
+        panelSeccion.className = "panel";
+        panelSeccion.id = `render_sec_${fraccion.clave_seccion}`;
 
-if (fraccion.clave_seccion === "cronograma") {
-  panelSeccion.innerHTML += `
-    <div class="imagenes">
-      <img src="cronograma/imagen1.png" onclick="abrirImagen(this.src)">
-      <img src="cronograma/imagen2.png" onclick="abrirImagen(this.src)">
-      <img src="cronograma/imagen3.png" onclick="abrirImagen(this.src)">
-      <img src="cronograma/imagen4.png" onclick="abrirImagen(this.src)">
-      <img src="cronograma/imagen5.png" onclick="abrirImagen(this.src)">
-    </div>
-  `;
-}
+        panelSeccion.innerHTML = `
+          <h1>${fraccion.titulo}</h1>
+          <hr style="margin: 15px 0; border-color: #e27396;">
+          <p style="white-space: pre-wrap;">
+            ${fraccion.contenido || 'Sin descripción asignada por el equipo.'}
+          </p>
+        `;
+
+        if (fraccion.clave_seccion === "cronograma") {
+          panelSeccion.innerHTML += `
+            <div class="imagenes">
+              <a href="cronograma/imagen1.png" target="_blank"><img src="cronograma/imagen1.png"></a>
+              <a href="cronograma/imagen2.png" target="_blank"><img src="cronograma/imagen2.png"></a>
+              <a href="cronograma/imagen3.png" target="_blank"><img src="cronograma/imagen3.png"></a>
+              <a href="cronograma/imagen4.png" target="_blank"><img src="cronograma/imagen4.png"></a>
+              <a href="cronograma/imagen5.png" target="_blank"><img src="cronograma/imagen5.png"></a>
+            </div>
+          `;
+        }
+
         if (fraccion.url_imagen) {
           panelSeccion.innerHTML += `
             <h3 style="margin-top:20px;">Registro Visual Guardado</h3>
@@ -1152,30 +1130,7 @@ if (fraccion.clave_seccion === "cronograma") {
         alert("Error al eliminar la imagen: " + err.message);
       }
     }
-      function abrirImagen(src) {
-  document.getElementById("imagenExpandida").src = src;
-  document.getElementById("modalImagen").style.display = "flex";
-}
-
-function cerrarImagen() {
-  document.getElementById("modalImagen").style.display = "none";
-}
-
-document.addEventListener("click", function(e) {
-  const modal = document.getElementById("modalImagen");
-
-  if (e.target === modal) {
-    cerrarImagen();
-  }
-});
-      
   </script>
-  
-  <div id="modalImagen" class="modal-imagen">
-  <span class="cerrar-modal" onclick="cerrarImagen()">✕</span>
-
-  <img id="imagenExpandida" src="">
-</div>
 
 </body>
 </html>
