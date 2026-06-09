@@ -234,17 +234,19 @@
       border-radius: 15px;
       object-fit: cover;
     }
-    .cronograma img {
-      width: 200px;
-      border-radius: 15px;
-      cursor: pointer;
-    }  
+   .cronograma {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
 
-    .cronograma {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
+.cronograma img {
+  width: 200px;
+  height: auto;
+  border-radius: 15px;
+  cursor: pointer;
+}
 
     /* SECCIÓN DE CLIMA COMPONENTES */
     .clima-container {
@@ -1046,30 +1048,29 @@
           </p>
         `;
 
-        if (fraccion.clave_seccion === "cronograma") {
-          panelSeccion.innerHTML += `
-            <div class="cronograma">
+       if (fraccion.clave_seccion === "cronograma") {
+  panelSeccion.innerHTML += `
+    <div class="cronograma">
 
-  <img src="cronograma/imagen2.png"
-       alt="Cronograma 2"
-       onclick="abrirVisor(this.src)"
+      <img src="cronograma/imagen2.png"
+           alt="Cronograma 2"
+           onclick="abrirVisor(this.src)">
 
-  <img src="cronograma/imagen3.png"
-       alt="Cronograma 3"
-       onclick="abrirVisor(this.src)"
+      <img src="cronograma/imagen3.png"
+           alt="Cronograma 3"
+           onclick="abrirVisor(this.src)">
 
-  <img src="cronograma/imagen4.png"
-       alt="Cronograma 4"
-       onclick="abrirVisor(this.src)"
-       
-  <img src="cronograma/imagen5.png"
-       alt="Cronograma 5"
-       onclick="abrirVisor(this.src)"
+      <img src="cronograma/imagen4.png"
+           alt="Cronograma 4"
+           onclick="abrirVisor(this.src)">
 
-</div>
-          `;
-        }
+      <img src="cronograma/imagen5.png"
+           alt="Cronograma 5"
+           onclick="abrirVisor(this.src)">
 
+    </div>
+  `;
+}
         if (fraccion.url_imagen) {
           panelSeccion.innerHTML += `
             <h3 style="margin-top:20px;">Registro Visual Guardado</h3>
