@@ -1016,6 +1016,13 @@
           `;
 
           contenedorContenido.appendChild(panelClima);
+          setTimeout(() => {
+  cargarClimaAutomatico();
+}, 500);
+
+setInterval(() => {
+  cargarClimaAutomatico();
+}, 300000);
 
           const btnMenu = document.createElement('button');
           btnMenu.innerText = "CLIMA CLIMA";
@@ -1091,6 +1098,42 @@
 
     // FUNCIÓN ASÍNCRONA PARA EL TIEMPO EN VIVO (Mesa de control WeatherAPI externa)
     async function consultarTiempoRealAPI() {
+      async function cargarClimaAutomatico() {
+
+  const ciudad = "Queretaro";
+
+  const apiKey = "TU_API_KEY";
+
+  const url =
+  `https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&appid=${apiKey}&units=metric&lang=es`;
+
+  try {
+
+    const respuesta = await fetch(url);
+    const data = await respuesta.json();
+
+    document.getElementById("autoCiudad").innerText =
+      `${data.name}, ${data.sys.country}`;
+
+    document.getElementById("autoTemp").innerText =
+      `${Math.round(data.main.temp)}°C`;
+
+    document.getElementById("autoDescripcion").innerText =
+      data.weather[0].description;
+
+    document.getElementById("autoHumedad").innerText =
+      `${data.main.humidity}%`;
+
+    document.getElementById("autoViento").innerText =
+      `${Math.round(data.wind.speed * 3.6)} km/h`;
+
+    document.getElementById("autoIcono").src =
+      `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+
+  } catch(error) {
+    console.error(error);
+  }
+}
       const ciudad = document.getElementById('ciudadBuscarInput').value.trim();
       if (!ciudad) {
         alert("Escribe el nombre de una ciudad o país.");
