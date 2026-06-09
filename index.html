@@ -1022,15 +1022,15 @@
 
         menuNavegacion.appendChild(btnMenu);
 
-        const panelSeccion = document.createElement('div');
-        panelSeccion.className = "panel";
-        panelSeccion.id = `render_sec_${fraccion.clave_seccion}`;
+       panelSeccion.innerHTML = `
+  <h1>${fraccion.titulo}</h1>
+  <hr style="margin: 15px 0; border-color: #e27396;">
+  <p style="white-space: pre-wrap;">
+    ${fraccion.contenido || 'Sin descripción asignada por el equipo.'}
+  </p>
+`;
 
-        panelSeccion.innerHTML = `
-          <h1>${fraccion.titulo}</h1>
-          <hr style="margin: 15px 0; border-color: #e27396;">
-          <p style="white-space: pre-wrap;">
-          if (fraccion.clave_seccion === "cronograma") {
+if (fraccion.clave_seccion === "cronograma") {
   panelSeccion.innerHTML += `
     <div class="imagenes">
       <img src="cronograma/imagen1.png" onclick="abrirImagen(this.src)">
