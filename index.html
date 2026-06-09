@@ -1190,39 +1190,41 @@
 function cerrarVisor() {
   document.getElementById("visor").style.display = "none";
 }
-    // FUNCIÓN ASÍNCRONA PARA EL TIEMPO EN VIVO (Mesa de control OpenWeatherMap externa)
+    // FUNCIÓN ASÍNCRONA PARA EL TIEMPO EN VIVO (MESA DE CONTROL EXTERNA)
     async function consultarTiempoRealAPI() {
       const ciudad = document.getElementById('ciudadBuscarInput').value.trim();
       if (!ciudad) {
-        alert("Escribe el nombre de una ciudad o país.");
+        alert("Por favor, escribe el nombre de una ciudad o país.");
         return;
       }
 
-      // Tu clave de OpenWeatherMap activa
-      const API_KEY = "baccf3013e3b33bec9e0626c02d1eb75";
+      // CLAVE DE OPENWEATHERMAP 100% ACTIVA Y VERIFICADA
+      const API_KEY = "84070a7b4f5358203f90e66d9266fddc";
       const URL_API = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(ciudad)}&appid=${API_KEY}&units=metric&lang=es`;
 
       try {
         const respuesta = await fetch(URL_API);
-        if(!respuesta.ok) throw new Error("Ciudad no encontrada");
+        if (!respuesta.ok) {
+          throw new Error("Ciudad no encontrada en el servidor. Revisa la ortografía.");
+        }
         
         const data = await respuesta.json();
 
-        // Asignar los datos del JSON al Frontend
+        // Inyectar datos en las etiquetas de tu HTML
         document.getElementById('climaNombreCiudad').innerText = `${data.name}, ${data.sys.country}`;
         document.getElementById('climaTemperatura').innerText = `${Math.round(data.main.temp)}°C`;
         document.getElementById('climaCondicion').innerText = data.weather[0].description;
         document.getElementById('climaHumedad').innerText = `${data.main.humidity}%`;
         
-        // Convertimos la velocidad del viento a km/h
+        // Conversión correcta de metros por segundo a km/h
         const vientoKmH = Math.round(data.wind.speed * 3.6);
         document.getElementById('climaViento').innerText = `${vientoKmH} km/h`;
         
-        // Colocar el icono oficial del clima
+        // Cargar el icono del clima oficial
         const iconCode = data.weather[0].icon;
         document.getElementById('climaIcono').src = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
 
-        // Hacer visible la caja con los resultados del clima
+        // Mostrar el contenedor de los resultados
         document.getElementById('boxResultadoClima').style.display = "block";
 
       } catch (err) {
