@@ -1190,6 +1190,46 @@
 function cerrarVisor() {
   document.getElementById("visor").style.display = "none";
 }
+    // FUNCIÓN ASÍNCRONA PARA EL TIEMPO EN VIVO (Mesa de control OpenWeatherMap externa)
+    async function consultarTiempoRealAPI() {
+      const ciudad = document.getElementById('ciudadBuscarInput').value.trim();
+      if (!ciudad) {
+        alert("Escribe el nombre de una ciudad o país.");
+        return;
+      }
+
+      // Tu clave de OpenWeatherMap activa
+      const API_KEY = "baccf3013e3b33bec9e0626c02d1eb75";
+      const URL_API = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(ciudad)}&appid=${API_KEY}&units=metric&lang=es`;
+
+      try {
+        const respuesta = await fetch(URL_API);
+        if(!respuesta.ok) throw new Error("Ciudad no encontrada");
+        
+        const data = await respuesta.json();
+
+        // Asignar los datos del JSON al Frontend
+        document.getElementById('climaNombreCiudad').innerText = `${data.name}, ${data.sys.country}`;
+        document.getElementById('climaTemperatura').innerText = `${Math.round(data.main.temp)}°C`;
+        document.getElementById('climaCondicion').innerText = data.weather[0].description;
+        document.getElementById('climaHumedad').innerText = `${data.main.humidity}%`;
+        
+        // Convertimos la velocidad del viento a km/h
+        const vientoKmH = Math.round(data.wind.speed * 3.6);
+        document.getElementById('climaViento').innerText = `${vientoKmH} km/h`;
+        
+        // Colocar el icono oficial del clima
+        const iconCode = data.weather[0].icon;
+        document.getElementById('climaIcono').src = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+
+        // Hacer visible la caja con los resultados del clima
+        document.getElementById('boxResultadoClima').style.display = "block";
+
+      } catch (err) {
+        alert("Error al consultar el clima: " + err.message);
+        document.getElementById('boxResultadoClima').style.display = "none";
+      }
+    }
   </script>
 
   <div id="visor" class="visor" onclick="cerrarVisor()">
